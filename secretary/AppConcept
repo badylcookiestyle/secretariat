@@ -9,6 +9,7 @@ There'll be a sidebar with 3 options which will make user able
 to switch between app views
 
 DB solution is simpler to implement, but I'm not sure if I'll make it that way.
+$more -btn will open additional window with informations
 ***** remember about validation *****
 ---------- Main view ---------------------
 It'll be divided into 2 sections
@@ -17,7 +18,11 @@ data section and form section
 
 		<--- data section --->
 		<--- filters --->
-		<-- ??? data from db/file??? -- >
+		<-- ??? data from db/file??? 
+		<-- record -- ><-- record --><-- edit btn --><-- delete btn --><--$more btn --> 
+		
+		-- >
+		
 		<--- /data section --->
 
 ---------- Upload view -------------------
