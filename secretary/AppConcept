@@ -1,0 +1,19 @@
+﻿http://wklejto.pl/927337
+I'll create 4 classes 1 abstract class 3 inheritative classes
+teacher,student,employee
+I'll make uploading/exporting txt file
+Probably I'll export txt file into db
+
+There'll be a sidebar with 3 options which will make user able
+to switch between app views
+
+---------- Main view ---------------------
+It'll be divided into 2 sections
+
+data section and form section
+
+---------- Upload view -------------------
+I think that there'll be a simple form
+
+---------- Options view ------------------
+I'll think about it later
