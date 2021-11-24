@@ -4,7 +4,10 @@ using System.Text;
 
 namespace secretary
 {
-    class Employee
+    public class Employee : Person
     {
+        public string jobPosition;
+        public string jobDescription;
+        public string dateOfEmployment;
     }
 }

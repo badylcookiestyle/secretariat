@@ -4,7 +4,11 @@ using System.Text;
 
 namespace secretary
 {
-    class Teacher 
+    public class Teacher : Person
     {
+        //   public string classTutor;
+        // public string[] taughtSubjects;
+        //daty w których uczy wraz z godzinami
+        public string dateOfEmployment;
     }
 }

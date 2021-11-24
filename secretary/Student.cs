@@ -4,7 +4,9 @@ using System.Text;
 
 namespace secretary
 {
-    class Student
+   public class Student : Person
     {
+        public string currentClass;
+        public string[] groups;
     }
 }

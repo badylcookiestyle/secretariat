@@ -7,16 +7,17 @@ namespace secretary
 {
     public abstract class Person
     {
-        public string name;
-        public string secondName;
-        public string surname;
-        public string maidenName;
-        public string fathersName;
-        public string mothersName;
-        public DateTime birthDate;
-        public string[] pesel= new string[11];
+        public char personType;
+        public string firstName { get; set; }
+        public string secondName { get; set; }
+        public string lastname { get; set; }
+        public string maidenName { get; set; }
+        public string fathersName { get; set; }
+        public string mothersName { get; set; }
+        public DateTime birthDate { get; set; }
+        public string[] pesel = new string[11];
         public string imagePath;
-        public char gender;
+        public enum gender {M,F};
         
     }
 }
