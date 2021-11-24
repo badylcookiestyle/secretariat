@@ -26,7 +26,7 @@ data section and form section
 		<-- record -- ><-- record --><-- edit btn --><-- delete btn --><--$more btn --> 
 		
 		-- >
-		
+		<--- Raport button ---> It'll open additional window with raport generator
 		<--- /data section --->
 		<--- form section --->
 			User will be able to switch between 3 forms
@@ -34,6 +34,8 @@ data section and form section
 			-Teacher
 			-Employee
 		</--- form section --->
+
+
 ---------- Upload view -------------------
 I think that there'll be a simple form 
 

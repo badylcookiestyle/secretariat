@@ -4,7 +4,7 @@ using System.Text;
 
 namespace secretary
 {
-    class Teacher
+    class Teacher 
     {
     }
 }
