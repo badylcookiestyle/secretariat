@@ -3,14 +3,16 @@
 I'll create 4 classes 1 abstract class 3 inheritative classes
 teacher,student,employee
 I'll make uploading/exporting txt file
+
 Probably I'll export txt file into db
+DB solution is simpler to implement, but I'm not sure if I'll make it that way it could be to easy ;-;.
 
 There'll be a sidebar with 3 options which will make user able
 to switch between app views
 
-!!! Remember about lesson struct then list of lessons then option to add another lesson!!!
 
-DB solution is simpler to implement, but I'm not sure if I'll make it that way.
+
+
 $more -btn will open additional window with informations
 ***** remember about validation *****
 ---------- Main view ---------------------
@@ -37,3 +39,8 @@ I think that there'll be a simple form
 
 ---------- Options view ------------------
 I'll think about it later
+
+
+
+
+!!! Remember about lesson struct then list of lessons then option to add another lesson!!!
