@@ -22,7 +22,7 @@ namespace secretary
     {
         public MainWindow()
         {
-            InitializeComponent();
+          //  InitializeComponent();
         }
     }
 }
