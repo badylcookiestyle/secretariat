@@ -3,35 +3,104 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-
+   xmlns:local="clr-namespace:Secretary"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None">
+        Title="MainWindow" Height="600" Width="1250" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None">
+    <Window.Resources>
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" StrokeDashArray="1 2" SnapsToDevicePixels="true" StrokeThickness="1" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <Style x:Key="SidebarBtnStyle" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#7B6CF6"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#7B6CF6"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#7B6CF6"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#7B6CF6"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid Background="#393E46">
-        <Grid x:Name="sideBar" Background="#232931" HorizontalAlignment="Left" Width="135">
-            <StackPanel>
-                <ListView FontSize="20" Foreground="White" BorderBrush="Transparent" Background="Transparent" FontWeight="Bold">
-                    <ListViewItem Height="50">
-                        <StackPanel Orientation="Horizontal">
-                         
-                            <TextBlock Margin="10 0 0 0" Text="Main"  />
-                        </StackPanel>
-                    </ListViewItem>
-                    <ListViewItem Height="50">
-                        <StackPanel Orientation="Horizontal">
-                           
-                            <TextBlock Margin="10 0 0 0" Text="option 2"  />
-                        </StackPanel>
-                    </ListViewItem>
-                    <ListViewItem Height="50">
-                        <StackPanel Orientation="Horizontal">
-                     
-                            <TextBlock Margin="10 0 0 0" Text="option 3" />
-                        </StackPanel>
-                    </ListViewItem>
-                     
-                   
-                </ListView>
+        <Grid   Background="#222831">
+
+            <StackPanel Width="90" HorizontalAlignment="Left" Background="#574B90">
+                <Button  Style="{DynamicResource SidebarBtnStyle}" x:Name="MainViewBtn" Height="90"  BorderBrush="Transparent" Background="Transparent" Margin="0,30,0,0" Foreground="White" MouseEnter="MainViewMouseEntr" MouseLeave="MainViewMouse_Lv">
+
+                    <Image Source="/assets/images/main.png" Margin="15,15,15,15"  />
+                </Button>
+                <Button MouseEnter="DataViewMouseEntr" MouseLeave="DataViewMouse_Lv" Style="{DynamicResource SidebarBtnStyle}" x:Name="DataViewBtn" Height="90"  BorderBrush="Transparent" Background="Transparent"  >
+                    <Image Source="/assets/images/upload.png" Margin="15,15,15,15"  />
+                    
+                </Button>
+                <Button  MouseEnter="OptionsMouseEntr" MouseLeave="OptionsMouse_Lv" Style="{DynamicResource SidebarBtnStyle}" x:Name="OptionsViewBtn" Height="90"  BorderBrush="Transparent" Background="Transparent">
+                    <Image Source="/assets/images/preference.png" Margin="15,15,15,15"  ></Image>
+                </Button>
             </StackPanel>
+            <Grid   Height="25" VerticalAlignment="Top" Background="#0e171e" MouseLeftButtonDown="WindowDrag_MouseLeftButtonDown">
+                <DockPanel HorizontalAlignment="Right">
+                    <Button    x:Name="minimalizeBtn" Height="25" Width="25" BorderBrush="Transparent" Background="Transparent" Click="minimalizeBtn_Click"   >
+                        <Image Source="/assets/images/minimalizer.png"></Image>
+                    </Button>
+                    <Button  x:Name="crossBtn" Height="25" Width="25" BorderBrush="Transparent" Background="Transparent" Click="closeBtn_Click">
+                        <Image Source="/assets/images/cross.png"></Image>
+                        
+                    </Button>
+                </DockPanel>
+
+                <Popup x:Name="popup_uc"
+                   AllowsTransparency="True"
+                   HorizontalOffset="10"
+                   VerticalOffset="10">
+
+                    <Grid>
+                        <local:HoverCloud x:Name="Header" Foreground="#E0FFFF"/>
+                    </Grid>
+                </Popup>
+
+            </Grid>
         </Grid>
     </Grid>
 </Window>

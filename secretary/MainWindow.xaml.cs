@@ -12,8 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Controls.Primitives;
 
-namespace secretary
+namespace Secretary
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -22,7 +23,65 @@ namespace secretary
     {
         public MainWindow()
         {
-          //  InitializeComponent();
+            InitializeComponent();
+        }
+
+        private void MainViewMouseEntr(object sender, MouseEventArgs e)
+        {
+            popup_uc.PlacementTarget = MainViewBtn;
+            popup_uc.Placement = PlacementMode.Right;
+            popup_uc.IsOpen = true;
+            Header.PopupText.Text = "Home";
+        }
+        private void OptionsMouseEntr(object sender, MouseEventArgs e)
+        {
+            popup_uc.PlacementTarget = OptionsViewBtn;
+            popup_uc.Placement = PlacementMode.Right;
+            popup_uc.IsOpen = true;
+            Header.PopupText.Text = "Options";
+        }
+        private void DataViewMouseEntr(object sender, MouseEventArgs e)
+        {
+            popup_uc.PlacementTarget = DataViewBtn;
+            popup_uc.Placement = PlacementMode.Right;
+            popup_uc.IsOpen = true;
+            Header.PopupText.Text = "Upload data";
+        }
+
+        private void MainViewMouse_Lv(object sender, MouseEventArgs e)
+        {
+            
+            popup_uc.Visibility = Visibility.Collapsed;
+            popup_uc.IsOpen = false;
+        }
+        
+        private void DataViewMouse_Lv(object sender, MouseEventArgs e)
+        {
+            popup_uc.Visibility = Visibility.Collapsed;
+            popup_uc.IsOpen = false;
+        }
+
+        private void OptionsMouse_Lv(object sender, MouseEventArgs e)
+        {
+            popup_uc.Visibility = Visibility.Collapsed;
+            popup_uc.IsOpen = false;
+        }
+
+        void closeBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.MainWindow.Close();
+        }
+
+        private void minimalizeBtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+        
+      
+
+        private void WindowDrag_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
         }
     }
 }
