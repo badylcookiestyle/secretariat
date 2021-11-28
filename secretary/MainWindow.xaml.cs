@@ -13,7 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Controls.Primitives;
-
+ 
+using secretary.viewModels;
 namespace Secretary
 {
     /// <summary>
@@ -26,21 +27,21 @@ namespace Secretary
             InitializeComponent();
         }
 
-        private void MainViewMouseEntr(object sender, MouseEventArgs e)
+        private void MainViewMouse_Entr(object sender, MouseEventArgs e)
         {
             popup_uc.PlacementTarget = MainViewBtn;
             popup_uc.Placement = PlacementMode.Right;
             popup_uc.IsOpen = true;
             Header.PopupText.Text = "Home";
         }
-        private void OptionsMouseEntr(object sender, MouseEventArgs e)
+        private void OptionsMouse_Entr(object sender, MouseEventArgs e)
         {
             popup_uc.PlacementTarget = OptionsViewBtn;
             popup_uc.Placement = PlacementMode.Right;
             popup_uc.IsOpen = true;
             Header.PopupText.Text = "Options";
         }
-        private void DataViewMouseEntr(object sender, MouseEventArgs e)
+        private void DataViewMouse_Entr(object sender, MouseEventArgs e)
         {
             popup_uc.PlacementTarget = DataViewBtn;
             popup_uc.Placement = PlacementMode.Right;
@@ -67,18 +68,29 @@ namespace Secretary
             popup_uc.IsOpen = false;
         }
 
-        void closeBtn_Click(object sender, RoutedEventArgs e)
+        void CloseBtn_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.MainWindow.Close();
         }
 
-        private void minimalizeBtn_Click(object sender, RoutedEventArgs e)
+        private void MinimalizeBtn_Click(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
         }
         
-      
+      private void MainViewBtn_Click(object sender,RoutedEventArgs e)
+        {
+               DataContext = new MainViewModel();
+        }
+        private void DataViewBtn_Click(object sender, RoutedEventArgs e)
+        {
+            DataContext = new DataViewModel();
 
+        }
+        private void OptionsViewBtn_Click(object sender, RoutedEventArgs e)
+        {
+            DataContext = new OptionsViewModel();
+        }
         private void WindowDrag_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             DragMove();

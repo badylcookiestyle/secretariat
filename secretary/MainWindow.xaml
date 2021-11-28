@@ -3,7 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-   xmlns:local="clr-namespace:Secretary"
+        xmlns:local="clr-namespace:Secretary"
+        xmlns:viewmodels="clr-namespace:secretary.viewModels"
+        xmlns:views="clr-namespace:secretary.views"
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="1250" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None">
     <Window.Resources>
@@ -62,29 +64,43 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style TargetType="Border" x:Key="RoundMe">
+            <Setter Property="CornerRadius" Value="4"/>
+        </Style>
+        <DataTemplate x:Name="DataViewTemplate" DataType="{x:Type viewmodels:DataViewModel}">
+            <views:DataView DataContext="{Binding}"/>
+        </DataTemplate>
+        <DataTemplate x:Name="MainViewTemplate" DataType="{x:Type viewmodels:MainViewModel}">
+            <views:MainView DataContext="{Binding}"/>
+        </DataTemplate>
+        <DataTemplate x:Name="OptionsViewTemplate" DataType="{x:Type viewmodels:OptionsViewModel}">
+            <views:OptionsView DataContext="{Binding}"/>
+        </DataTemplate>
     </Window.Resources>
     <Grid Background="#393E46">
-        <Grid   Background="#222831">
-
+        
+        <Grid  x:Name="mainGrid" Background="#222831">
+             
+            <ContentControl   Content="{Binding}"></ContentControl>
             <StackPanel Width="90" HorizontalAlignment="Left" Background="#574B90">
-                <Button  Style="{DynamicResource SidebarBtnStyle}" x:Name="MainViewBtn" Height="90"  BorderBrush="Transparent" Background="Transparent" Margin="0,30,0,0" Foreground="White" MouseEnter="MainViewMouseEntr" MouseLeave="MainViewMouse_Lv">
+                <Button  Click="MainViewBtn_Click" Style="{DynamicResource SidebarBtnStyle}" x:Name="MainViewBtn" Height="90"  BorderBrush="Transparent" Background="Transparent" Margin="0,30,0,0" Foreground="White" MouseEnter="MainViewMouse_Entr" MouseLeave="MainViewMouse_Lv">
 
                     <Image Source="/assets/images/main.png" Margin="15,15,15,15"  />
                 </Button>
-                <Button MouseEnter="DataViewMouseEntr" MouseLeave="DataViewMouse_Lv" Style="{DynamicResource SidebarBtnStyle}" x:Name="DataViewBtn" Height="90"  BorderBrush="Transparent" Background="Transparent"  >
+                <Button  Click="DataViewBtn_Click" MouseEnter="DataViewMouse_Entr" MouseLeave="DataViewMouse_Lv" Style="{DynamicResource SidebarBtnStyle}" x:Name="DataViewBtn" Height="90"  BorderBrush="Transparent" Background="Transparent"  >
                     <Image Source="/assets/images/upload.png" Margin="15,15,15,15"  />
                     
                 </Button>
-                <Button  MouseEnter="OptionsMouseEntr" MouseLeave="OptionsMouse_Lv" Style="{DynamicResource SidebarBtnStyle}" x:Name="OptionsViewBtn" Height="90"  BorderBrush="Transparent" Background="Transparent">
+                <Button Click="OptionsViewBtn_Click"  MouseEnter="OptionsMouse_Entr" MouseLeave="OptionsMouse_Lv" Style="{DynamicResource SidebarBtnStyle}" x:Name="OptionsViewBtn" Height="90"  BorderBrush="Transparent" Background="Transparent">
                     <Image Source="/assets/images/preference.png" Margin="15,15,15,15"  ></Image>
                 </Button>
             </StackPanel>
             <Grid   Height="25" VerticalAlignment="Top" Background="#0e171e" MouseLeftButtonDown="WindowDrag_MouseLeftButtonDown">
                 <DockPanel HorizontalAlignment="Right">
-                    <Button    x:Name="minimalizeBtn" Height="25" Width="25" BorderBrush="Transparent" Background="Transparent" Click="minimalizeBtn_Click"   >
+                    <Button    x:Name="MinimalizeBtn" Height="25" Width="25" BorderBrush="Transparent" Background="Transparent" Click="MinimalizeBtn_Click"   >
                         <Image Source="/assets/images/minimalizer.png"></Image>
                     </Button>
-                    <Button  x:Name="crossBtn" Height="25" Width="25" BorderBrush="Transparent" Background="Transparent" Click="closeBtn_Click">
+                    <Button  x:Name="crossBtn" Height="25" Width="25" BorderBrush="Transparent" Background="Transparent" Click="CloseBtn_Click">
                         <Image Source="/assets/images/cross.png"></Image>
                         
                     </Button>
