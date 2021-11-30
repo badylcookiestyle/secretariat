@@ -8,6 +8,6 @@ namespace secretary
     {
         public string jobPosition;
         public string jobDescription;
-        public string dateOfEmployment;
+        public DateTime dateOfEmployment;
     }
 }

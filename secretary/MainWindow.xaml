@@ -106,7 +106,7 @@
                     </Button>
                 </DockPanel>
 
-                <Popup x:Name="popup_uc"
+                <Popup x:Name="hoverCloud"
                    AllowsTransparency="True"
                    HorizontalOffset="10"
                    VerticalOffset="10">

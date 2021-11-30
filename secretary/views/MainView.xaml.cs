@@ -19,6 +19,8 @@ namespace secretary.views
     public partial class MainView : UserControl
     {
         string currentForm = "Student";
+        bool isBeingEdited = false;
+        List<object> persons = new List<object>();
         public MainView()
         {
             InitializeComponent();
@@ -61,6 +63,100 @@ namespace secretary.views
             formEmployee.Visibility = Visibility.Visible;
 
             currentForm = "Employee";
+        }
+        private void addTeacher()
+        {
+            char gender = comboBoxGender.SelectedItem.ToString() == "Male" ? 'M' : 'F';
+
+            Teacher newTeacher = new Teacher();
+
+            newTeacher.firstName = textBoxFname.Text;
+            newTeacher.secondName = textBoxFname.Text;
+            newTeacher.lastname = textBoxLname.Text;
+            newTeacher.maidenName = textBoxMaiName.Text;
+            newTeacher.fathersName = textBoxFthName.Text;
+            newTeacher.mothersName = textBoxMthName.Text;
+            newTeacher.birthDate = datePickerBirthDate.SelectedDate.Value.Date;
+            newTeacher.pesel = new []{ textBoxPesel.Text};
+            newTeacher.imagePath = "pathhh";
+            newTeacher.gender = gender;
+            newTeacher.dateOfEmployment = TdatePickerEmployment.SelectedDate.Value.Date;
+
+            persons.Add(newTeacher);
+
+        }
+        private void addStudent()
+        {
+            char gender = comboBoxGender.SelectedItem.ToString() == "Male" ? 'M' : 'F';
+
+            Student newStudent = new Student();
+
+            newStudent.firstName = textBoxFname.Text;
+            newStudent.secondName = textBoxFname.Text;
+            newStudent.lastname = textBoxLname.Text;
+            newStudent.maidenName = textBoxMaiName.Text;
+            newStudent.fathersName = textBoxFthName.Text;
+            newStudent.mothersName = textBoxMthName.Text;
+            newStudent.birthDate = datePickerBirthDate.SelectedDate.Value.Date;
+            newStudent.pesel = new[] { textBoxPesel.Text };
+            newStudent.imagePath = "pathhh";
+            newStudent.gender = gender;
+            newStudent.currentClass = textBoxCurrentClass.Text;
+
+            persons.Add(newStudent);
+
+        }
+        private void addEmployee()
+        {
+            char gender = comboBoxGender.SelectedItem.ToString() == "Male" ? 'M' : 'F';
+
+            Employee newEmployee = new Employee();
+
+            newEmployee.firstName = textBoxFname.Text;
+            newEmployee.secondName = textBoxFname.Text;
+            newEmployee.lastname = textBoxLname.Text;
+            newEmployee.maidenName = textBoxMaiName.Text;
+            newEmployee.fathersName = textBoxFthName.Text;
+            newEmployee.mothersName = textBoxMthName.Text;
+            newEmployee.birthDate = datePickerBirthDate.SelectedDate.Value.Date;
+            newEmployee.pesel = new[] { textBoxPesel.Text };
+            newEmployee.imagePath = "pathhh";
+            newEmployee.gender = gender;
+            newEmployee.jobPosition = textBoxJobPosition.Text;
+            newEmployee.jobDescription = textBoxJobPosition.Text;
+            newEmployee.dateOfEmployment = EdatePickerEmployment.SelectedDate.Value.Date;
+
+            persons.Add(newEmployee);
+        }
+        private void submitPerson_Click(object sender, RoutedEventArgs e)
+        {
+            if (isBeingEdited == false)
+            {
+                switch (currentForm)
+                {
+                    case "Student":
+                        addStudent();
+                        break;
+                    case "Teacher":
+                        addTeacher();
+                        break;
+                    case "Employee":
+                        addTeacher();
+                        break;
+                }
+            }
+            var kek=" ";
+            foreach (Object person in persons)
+            {
+                var currentPerson = person;
+                var nameOfProperty = "firstName";
+                var propertyInfo = currentPerson.GetType().GetProperty(nameOfProperty);
+
+                var value = propertyInfo.GetValue(currentPerson, null);
+                kek += "\n" + value;
+            }
+
+            label1.Content =kek;
         }
     }
 }

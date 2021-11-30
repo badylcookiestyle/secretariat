@@ -114,15 +114,16 @@
                 </Grid>
                 <Grid Height="18">
                     <Label Foreground="White" Margin="90,-5,0,0">Job Position</Label>
-                    <TextBox  x:Name="jobPosition"   HorizontalAlignment="Left"  Width="90"/>
+                    <TextBox  x:Name="textBoxJobPosition"   HorizontalAlignment="Left"  Width="90"/>
                 </Grid>
                 <Grid Height="18">
                     <Label Foreground="White" Margin="90,-5,0,0">Job description</Label>
-                    <TextBox  x:Name="jobDescription"   HorizontalAlignment="Left"  Width="90"/>
+                    <TextBox  x:Name="textBoxJobDescription"   HorizontalAlignment="Left"  Width="90"/>
                 </Grid>
                
             </StackPanel>
-            <Button   Height="20"   Content="Submit" Margin="-460,0,30,30" HorizontalAlignment="Right" VerticalAlignment="Bottom"></Button>
+            <Button   x:Name="submitPerson" Height="20"   Content="Add" Margin="-460,0,30,30" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="submitPerson_Click"></Button>
         </DockPanel>
+        <Label x:Name="label1"  Content="Label" HorizontalAlignment="Left" Margin="536,238,0,0" VerticalAlignment="Top"/>
     </Grid>
 </UserControl>

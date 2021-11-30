@@ -1,1 +1,16 @@
-﻿Planowanie i przeprowadzanie testów będzie tutaj ;-;
+﻿First test 28.11.2021 20:00
+=== test goals === 
+- checking if mvvc is working
+- checking if navbar is working
+- checking if form switcher is working
+- checking if form switcher is working
+- detecting some bugs
+=== test results === 
+28.11.2021 20:10
+- everything is working, I should make form validation in the future
+
+Second test 28.11.2021 21:25
+=== test goals ===
+- checking if functions responsible for adding elements to persons list works
+=== test results ===
+- everything is working, I haven't implement form validation yet

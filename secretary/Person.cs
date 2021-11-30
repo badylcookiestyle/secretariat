@@ -17,7 +17,7 @@ namespace secretary
         public DateTime birthDate { get; set; }
         public string[] pesel = new string[11];
         public string imagePath;
-        public enum gender {M,F};
+        public char gender;
         
     }
 }

@@ -9,6 +9,6 @@ namespace secretary
         //   public string classTutor;
         // public string[] taughtSubjects;
         //daty w których uczy wraz z godzinami
-        public string dateOfEmployment;
+        public DateTime dateOfEmployment;
     }
 }

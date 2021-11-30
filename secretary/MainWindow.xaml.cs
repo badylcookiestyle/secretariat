@@ -27,60 +27,48 @@ namespace Secretary
             InitializeComponent();
         }
 
+        private void displayCloud(string btnDesc,System.Windows.UIElement curView) {
+            hoverCloud.PlacementTarget = curView;
+            hoverCloud.Placement = PlacementMode.Right;
+            hoverCloud.IsOpen = true;
+            Header.PopupText.Text = btnDesc;
+        }
+
         private void MainViewMouse_Entr(object sender, MouseEventArgs e)
         {
-            popup_uc.PlacementTarget = MainViewBtn;
-            popup_uc.Placement = PlacementMode.Right;
-            popup_uc.IsOpen = true;
-            Header.PopupText.Text = "Home";
+            displayCloud("Home", MainViewBtn);
         }
         private void OptionsMouse_Entr(object sender, MouseEventArgs e)
         {
-            popup_uc.PlacementTarget = OptionsViewBtn;
-            popup_uc.Placement = PlacementMode.Right;
-            popup_uc.IsOpen = true;
-            Header.PopupText.Text = "Options";
+            displayCloud("Options", OptionsViewBtn);
         }
         private void DataViewMouse_Entr(object sender, MouseEventArgs e)
         {
-            popup_uc.PlacementTarget = DataViewBtn;
-            popup_uc.Placement = PlacementMode.Right;
-            popup_uc.IsOpen = true;
-            Header.PopupText.Text = "Upload data";
+            displayCloud("Upload data", DataViewBtn);
         }
 
         private void MainViewMouse_Lv(object sender, MouseEventArgs e)
         {
             
-            popup_uc.Visibility = Visibility.Collapsed;
-            popup_uc.IsOpen = false;
+            hoverCloud.Visibility = Visibility.Collapsed;
+            hoverCloud.IsOpen = false;
         }
         
         private void DataViewMouse_Lv(object sender, MouseEventArgs e)
         {
-            popup_uc.Visibility = Visibility.Collapsed;
-            popup_uc.IsOpen = false;
+            hoverCloud.Visibility = Visibility.Collapsed;
+            hoverCloud.IsOpen = false;
         }
 
         private void OptionsMouse_Lv(object sender, MouseEventArgs e)
         {
-            popup_uc.Visibility = Visibility.Collapsed;
-            popup_uc.IsOpen = false;
+            hoverCloud.Visibility = Visibility.Collapsed;
+            hoverCloud.IsOpen = false;
         }
-
-        void CloseBtn_Click(object sender, RoutedEventArgs e)
+        //Navbar btns
+        private void MainViewBtn_Click(object sender,RoutedEventArgs e)
         {
-            Application.Current.MainWindow.Close();
-        }
-
-        private void MinimalizeBtn_Click(object sender, RoutedEventArgs e)
-        {
-            this.WindowState = WindowState.Minimized;
-        }
-        
-      private void MainViewBtn_Click(object sender,RoutedEventArgs e)
-        {
-               DataContext = new MainViewModel();
+           DataContext = new MainViewModel();
         }
         private void DataViewBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -90,6 +78,16 @@ namespace Secretary
         private void OptionsViewBtn_Click(object sender, RoutedEventArgs e)
         {
             DataContext = new OptionsViewModel();
+        }
+        //Basic window stuff
+        void CloseBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.MainWindow.Close();
+        }
+
+        private void MinimalizeBtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
         }
         private void WindowDrag_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
