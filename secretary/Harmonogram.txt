@@ -14,3 +14,10 @@ Second test 28.11.2021 21:25
 - checking if functions responsible for adding elements to persons list works
 === test results ===
 - everything is working, I haven't implement form validation yet
+
+Third test 30.11.2021 21:35
+=== test goals ===
+- checking if Sqlitedb is workings
+- checking if insert methods in dbHelper class are working
+=== test results ===
+- everything is working, I haven't implement form validation yet

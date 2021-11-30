@@ -10,6 +10,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using secretary.dbHelper;
+//using dbhelper;
 
 namespace secretary.views
 {
@@ -20,12 +22,12 @@ namespace secretary.views
     {
         string currentForm = "Student";
         bool isBeingEdited = false;
-        List<object> persons = new List<object>();
+       
         public MainView()
         {
             InitializeComponent();
         }
-
+      
         private void TeacherFormBtn_Click(object sender, RoutedEventArgs e)
         {
             TeacherFormBtn.Foreground = new SolidColorBrush(Colors.Purple);
@@ -82,7 +84,7 @@ namespace secretary.views
             newTeacher.gender = gender;
             newTeacher.dateOfEmployment = TdatePickerEmployment.SelectedDate.Value.Date;
 
-            persons.Add(newTeacher);
+            DbHelper.insertTeacher(newTeacher);
 
         }
         private void addStudent()
@@ -103,8 +105,8 @@ namespace secretary.views
             newStudent.gender = gender;
             newStudent.currentClass = textBoxCurrentClass.Text;
 
-            persons.Add(newStudent);
-
+            //  persons.Add(newStudent);
+            DbHelper.insertStudent(newStudent);
         }
         private void addEmployee()
         {
@@ -126,7 +128,7 @@ namespace secretary.views
             newEmployee.jobDescription = textBoxJobPosition.Text;
             newEmployee.dateOfEmployment = EdatePickerEmployment.SelectedDate.Value.Date;
 
-            persons.Add(newEmployee);
+            DbHelper.insertEmployee(newEmployee);
         }
         private void submitPerson_Click(object sender, RoutedEventArgs e)
         {
@@ -145,18 +147,7 @@ namespace secretary.views
                         break;
                 }
             }
-            var kek=" ";
-            foreach (Object person in persons)
-            {
-                var currentPerson = person;
-                var nameOfProperty = "firstName";
-                var propertyInfo = currentPerson.GetType().GetProperty(nameOfProperty);
-
-                var value = propertyInfo.GetValue(currentPerson, null);
-                kek += "\n" + value;
-            }
-
-            label1.Content =kek;
+          
         }
     }
 }

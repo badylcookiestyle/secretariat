@@ -13,8 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Controls.Primitives;
- 
+
 using secretary.viewModels;
+using secretary;
 namespace Secretary
 {
     /// <summary>
@@ -27,12 +28,15 @@ namespace Secretary
             InitializeComponent();
         }
 
+        //  SQLiteConnection sql;
+      
         private void displayCloud(string btnDesc,System.Windows.UIElement curView) {
             hoverCloud.PlacementTarget = curView;
             hoverCloud.Placement = PlacementMode.Right;
             hoverCloud.IsOpen = true;
             Header.PopupText.Text = btnDesc;
         }
+
 
         private void MainViewMouse_Entr(object sender, MouseEventArgs e)
         {
@@ -65,10 +69,12 @@ namespace Secretary
             hoverCloud.Visibility = Visibility.Collapsed;
             hoverCloud.IsOpen = false;
         }
-        //Navbar btns
+        //Navbar btns listeners
         private void MainViewBtn_Click(object sender,RoutedEventArgs e)
         {
            DataContext = new MainViewModel();
+         
+
         }
         private void DataViewBtn_Click(object sender, RoutedEventArgs e)
         {
