@@ -17,7 +17,7 @@ namespace secretary.dbHelper
         {
             sqlConnection = new SQLiteConnection("Data Source=db.db;Version=3;New=False");
         }
-
+        
         public static void sendQuery(string queryString)
         {
             connectToDb();
@@ -27,12 +27,12 @@ namespace secretary.dbHelper
             sqlQuery.CommandText = queryString;
             sqlQuery.ExecuteNonQuery();
 
-
+            
 
             sqlConnection.Close();
         }
 
-        public static void reloadDbData()
+        public static DataTable reloadDbData()
         {
             connectToDb();
 
@@ -44,6 +44,7 @@ namespace secretary.dbHelper
             dataTable = dataSet.Tables[0];
 
             sqlConnection.Close();
+            return dataTable;
         }
 
         public static void insertStudent(Student newStudent)

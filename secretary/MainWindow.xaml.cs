@@ -26,6 +26,7 @@ namespace Secretary
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new MainViewModel();
         }
 
         //  SQLiteConnection sql;

@@ -7,123 +7,146 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="1200">
     <Grid Margin="90,0,0,0" Background="Transparent">
-        <DataGrid HorizontalAlignment="Left" Width="600" Margin="15,30,30,30" Height="400" x:Name="DataGrid"/>
-        <DockPanel Background="Transparent" HorizontalAlignment="Right" Width="460" Margin="30,60,30,30" >
 
-            <StackPanel Background="Transparent" VerticalAlignment="Top" Height="25" Width="460">
+        <DataGrid HorizontalAlignment="Left" Width="1750" Margin="15,90,30,30" Height="600" x:Name="DataGrid1" GridLinesVisibility="Horizontal" Focusable="False" RowBackground="#00B41616" Background="#00F0F0F0" Foreground="White" HorizontalGridLinesBrush="White" VerticalGridLinesBrush="White" HeadersVisibility="Column" RowHeight="22" ColumnHeaderHeight="30" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+            <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="Background" Value="#574B90"></Setter>
+                    <Setter Property="Padding" Value="20 0 20 0"></Setter>
+                </Style>
+            </DataGrid.ColumnHeaderStyle>
+            <DataGrid.RowHeaderStyle>
+                <Style TargetType="DataGridRowHeader">
+                    <Setter Property="Background" Value="#574B90"></Setter>
+                    <Setter Property="Height" Value="40"></Setter>
+                </Style>
+            </DataGrid.RowHeaderStyle>
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
 
-                <Button x:Name="TeacherFormBtn" Foreground="White" VerticalAlignment="Top" Content="T" Height="20" Width="20" HorizontalAlignment="Left" Click="TeacherFormBtn_Click">
-                    <Button.Template>
-                        <ControlTemplate TargetType="{x:Type Button}">
-                            <Grid Height="20" Width="20">
-                                <Ellipse  />
-                                <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Grid>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
-                <Button  x:Name="StudentFormBtn" Margin="25,-20,0,0"  Foreground="Purple" VerticalAlignment="Top" Content="S" Height="20" Width="20" HorizontalAlignment="Left" Click="StudentFormBtn_Click">
-                    <Button.Template>
-                        <ControlTemplate TargetType="{x:Type Button}">
-                            <Grid Height="20" Width="20">
-                                <Ellipse />
-                                <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Grid>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
-                <Button x:Name="EmployeeFormBtn" Margin="50,-20,0,0" Foreground="White" VerticalAlignment="Top" Content="E" Height="20" Width="20" HorizontalAlignment="Left" Click="EmployeeFormBtn_Click">
-                    <Button.Template>
-                        <ControlTemplate TargetType="{x:Type Button}">
-                            <Grid Height="20" Width="20">
-                                <Ellipse  />
-                                <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Grid>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
-            </StackPanel>
-            <StackPanel x:Name="topPanel"  Background="Transparent" VerticalAlignment="Top"   Margin="-460,25,0,0" Height="180" Width="460">
-                <Grid Height="18">
-                    <Label Foreground="White" Margin="90,-5,0,0">Name</Label>
-                    <TextBox  x:Name="textBoxFname"  HorizontalAlignment="Left"  Width="90"/>
-                   
-                </Grid>
+                    <Setter Property="Height" Value="60"></Setter>
+                    <Setter Property="Padding" Value="10"></Setter>
+                </Style>
+            </DataGrid.CellStyle>
+        </DataGrid>
+        <Expander Padding="-100,0,0,0" Foreground="White" Header="Expander" HorizontalAlignment="Left" Height="460" Width="460" Margin="768,53,0,0" VerticalAlignment="Top"  >
+            <DockPanel Background="#39315e" HorizontalAlignment="Right" Width="460" Margin="30,0,30,30" >
+                <StackPanel Background="Transparent" VerticalAlignment="Top" Height="25" Width="460">
 
-                <Grid Height="18">
-                    <Label Foreground="White" Margin="90,-5,0,0">Second name</Label>
-                    <TextBox  x:Name="textBoxSname"  HorizontalAlignment="Left"  Width="90"/>
-                </Grid>
-                <Grid Height="18">
-                    <Label Foreground="White" Margin="90,-5,0,0">Last name</Label>
-                    <TextBox  x:Name="textBoxLname"  HorizontalAlignment="Left"  Width="90"/>
-                </Grid>
-                <Grid Height="18">
-                    <Label Foreground="White" Margin="90,-5,0,0">Maiden name</Label>
-                    <TextBox  x:Name="textBoxMaiName"  HorizontalAlignment="Left"  Width="90"/>
-                </Grid>
-                <Grid Height="18">
-                    <Label Foreground="White" Margin="90,-5,0,0">Fathers Name</Label>
-                    <TextBox  x:Name="textBoxFthName"  HorizontalAlignment="Left"  Width="90"/>
-                </Grid>
-                <Grid Height="18">
-                    <Label Foreground="White" Margin="90,-5,0,0">Mothers Name</Label>
-                    <TextBox  x:Name="textBoxMthName"  HorizontalAlignment="Left"  Width="90"/>
-                </Grid>
-                <Grid Height="25">
-                    <Label Foreground="White" Margin="90,-5,0,0">Birth Date</Label>
-                    <DatePicker  x:Name="datePickerBirthDate"  HorizontalAlignment="Left"  Width="90"/>
+                    <Button x:Name="TeacherFormBtn" Foreground="White" VerticalAlignment="Top" Content="T" Height="20" Width="20" HorizontalAlignment="Left" Click="TeacherFormBtn_Click">
+                        <Button.Template>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Grid Height="20" Width="20">
+                                    <Ellipse  />
+                                    <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <Button  x:Name="StudentFormBtn" Margin="25,-20,0,0"  Foreground="Purple" VerticalAlignment="Top" Content="S" Height="20" Width="20" HorizontalAlignment="Left" Click="StudentFormBtn_Click">
+                        <Button.Template>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Grid Height="20" Width="20">
+                                    <Ellipse />
+                                    <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <Button x:Name="EmployeeFormBtn" Margin="50,-20,0,0" Foreground="White" VerticalAlignment="Top" Content="E" Height="20" Width="20" HorizontalAlignment="Left" Click="EmployeeFormBtn_Click">
+                        <Button.Template>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Grid Height="20" Width="20">
+                                    <Ellipse  />
+                                    <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </StackPanel>
+                <StackPanel x:Name="topPanel"  Background="Transparent" VerticalAlignment="Top"   Margin="-460,25,0,0" Height="180" Width="460">
+                    <Grid Height="18">
+                        <Label Foreground="White" Margin="90,-5,0,0">Name</Label>
+                        <TextBox  x:Name="textBoxFname"  HorizontalAlignment="Left"  Width="90"/>
 
-                </Grid>
-                <Grid Height="18">
-                    <Label Foreground="White" Margin="90,-5,0,0">Pesel</Label>
-                    <TextBox  x:Name="textBoxPesel"   HorizontalAlignment="Left"  Width="90"/>
-                </Grid>
-                <Grid Height="18">
-                    <Label Foreground="White" Margin="90,-5,0,0">Name</Label>
-                    <ComboBox  x:Name="comboBoxGender"  HorizontalAlignment="Left"  Width="90">
-                        <ComboBoxItem>Male</ComboBoxItem>
-                        <ComboBoxItem>Female</ComboBoxItem>
-                    </ComboBox>
+                    </Grid>
 
-                </Grid>
-            </StackPanel>
-            <StackPanel x:Name="formTeacher"  Visibility="Hidden" Background="Transparent" Height="90" Width="460" VerticalAlignment="Bottom" Margin="-460,0,0,69">
-                <Label Foreground="White" Margin="0,-5,0,0">????classTutor????</Label>
-                <Label Foreground="White" Margin="0,-5,0,0">???? taught subjects????</Label>
-                <Grid Height="18">
-                    <Label Foreground="White" Margin="90,-5,0,0">Date of Employment</Label>
-                    <DatePicker  x:Name="TdatePickerEmployment"   HorizontalAlignment="Left"  Width="90"/>
-                </Grid>
+                    <Grid Height="18">
+                        <Label Foreground="White" Margin="90,-5,0,0">Second name</Label>
+                        <TextBox  x:Name="textBoxSname"  HorizontalAlignment="Left"  Width="90"/>
+                    </Grid>
+                    <Grid Height="18">
+                        <Label Foreground="White" Margin="90,-5,0,0">Last name</Label>
+                        <TextBox  x:Name="textBoxLname"  HorizontalAlignment="Left"  Width="90"/>
+                    </Grid>
+                    <Grid Height="18">
+                        <Label Foreground="White" Margin="90,-5,0,0">Maiden name</Label>
+                        <TextBox  x:Name="textBoxMaiName"  HorizontalAlignment="Left"  Width="90"/>
+                    </Grid>
+                    <Grid Height="18">
+                        <Label Foreground="White" Margin="90,-5,0,0">Fathers Name</Label>
+                        <TextBox  x:Name="textBoxFthName"  HorizontalAlignment="Left"  Width="90"/>
+                    </Grid>
+                    <Grid Height="18">
+                        <Label Foreground="White" Margin="90,-5,0,0">Mothers Name</Label>
+                        <TextBox  x:Name="textBoxMthName"  HorizontalAlignment="Left"  Width="90"/>
+                    </Grid>
+                    <Grid Height="25">
+                        <Label Foreground="White" Margin="90,-5,0,0">Birth Date</Label>
+                        <DatePicker  x:Name="datePickerBirthDate"  HorizontalAlignment="Left"  Width="90"/>
 
-            </StackPanel>
-            <StackPanel x:Name="formStudent"   Background="Transparent" Height="90" Width="460" VerticalAlignment="Bottom"  Margin="-460,0,0,69">
-                <Grid Height="18">
-                    <Label Foreground="White" Margin="0,-5,0,0">??? groups???</Label>
-                  
-                </Grid>
-                <Grid Height="20">
-                    <Label Foreground="White" Margin="90,-5,0,0">group</Label>
-                    <TextBox  x:Name="textBoxCurrentClass"   HorizontalAlignment="Left"  Width="90"/>
-                </Grid>
-            </StackPanel>
-            <StackPanel  Visibility="Hidden" x:Name="formEmployee" Background="Transparent" Height="90" Width="460"   VerticalAlignment="Bottom" Margin="-460,0,0,69">
-                <Grid Height="18">
-                    <Label Foreground="White" Margin="90,-5,0,0">Date of Employment</Label>
-                    <DatePicker  x:Name="EdatePickerEmployment"   HorizontalAlignment="Left"  Width="90"/>
-                </Grid>
-                <Grid Height="18">
-                    <Label Foreground="White" Margin="90,-5,0,0">Job Position</Label>
-                    <TextBox  x:Name="textBoxJobPosition"   HorizontalAlignment="Left"  Width="90"/>
-                </Grid>
-                <Grid Height="18">
-                    <Label Foreground="White" Margin="90,-5,0,0">Job description</Label>
-                    <TextBox  x:Name="textBoxJobDescription"   HorizontalAlignment="Left"  Width="90"/>
-                </Grid>
-               
-            </StackPanel>
-            <Button   x:Name="submitPerson" Height="20"   Content="Add" Margin="-460,0,30,30" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="submitPerson_Click"></Button>
-        </DockPanel>
-        <Label x:Name="label1"  Content="Label" HorizontalAlignment="Left" Margin="536,238,0,0" VerticalAlignment="Top"/>
+                    </Grid>
+                    <Grid Height="18">
+                        <Label Foreground="White" Margin="90,-5,0,0">Pesel</Label>
+                        <TextBox  x:Name="textBoxPesel"   HorizontalAlignment="Left"  Width="90"/>
+                    </Grid>
+                    <Grid Height="18">
+                        <Label Foreground="White" Margin="90,-5,0,0">Name</Label>
+                        <ComboBox  x:Name="comboBoxGender"  HorizontalAlignment="Left"  Width="90">
+                            <ComboBoxItem>Male</ComboBoxItem>
+                            <ComboBoxItem>Female</ComboBoxItem>
+                        </ComboBox>
+
+                    </Grid>
+                </StackPanel>
+                <StackPanel x:Name="formTeacher"  Visibility="Hidden" Background="Transparent" Height="90" Width="460" VerticalAlignment="Bottom" Margin="-460,0,0,69">
+                    <Label Foreground="White" Margin="0,-5,0,0">????classTutor????</Label>
+                    <Label Foreground="White" Margin="0,-5,0,0">???? taught subjects????</Label>
+                    <Grid Height="18">
+                        <Label Foreground="White" Margin="90,-5,0,0">Date of Employment</Label>
+                        <DatePicker  x:Name="TdatePickerEmployment"   HorizontalAlignment="Left"  Width="90"/>
+                    </Grid>
+
+                </StackPanel>
+                <StackPanel x:Name="formStudent"   Background="Transparent" Height="90" Width="460" VerticalAlignment="Bottom"  Margin="-460,0,0,69">
+                    <Grid Height="18">
+                        <Label Foreground="White" Margin="0,-5,0,0">??? groups???</Label>
+
+                    </Grid>
+                    <Grid Height="20">
+                        <Label Foreground="White" Margin="90,-5,0,0">group</Label>
+                        <TextBox  x:Name="textBoxCurrentClass"   HorizontalAlignment="Left"  Width="90"/>
+                    </Grid>
+                </StackPanel>
+                <StackPanel  Visibility="Hidden" x:Name="formEmployee" Background="Transparent" Height="90" Width="460"   VerticalAlignment="Bottom" Margin="-460,0,0,69">
+                    <Grid Height="18">
+                        <Label Foreground="White" Margin="90,-5,0,0">Date of Employment</Label>
+                        <DatePicker  x:Name="EdatePickerEmployment"   HorizontalAlignment="Left"  Width="90"/>
+                    </Grid>
+                    <Grid Height="18">
+                        <Label Foreground="White" Margin="90,-5,0,0">Job Position</Label>
+                        <TextBox  x:Name="textBoxJobPosition"   HorizontalAlignment="Left"  Width="90"/>
+                    </Grid>
+                    <Grid Height="18">
+                        <Label Foreground="White" Margin="90,-5,0,0">Job description</Label>
+                        <TextBox  x:Name="textBoxJobDescription"   HorizontalAlignment="Left"  Width="90"/>
+                    </Grid>
+
+                </StackPanel>
+                <Button   x:Name="submitPerson" Height="20"   Content="Add" Margin="-460,0,30,30" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="submitPerson_Click"></Button>
+            </DockPanel>
+            
+        </Expander>
+
     </Grid>
 </UserControl>
