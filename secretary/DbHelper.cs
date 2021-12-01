@@ -32,43 +32,40 @@ namespace secretary.dbHelper
             sqlConnection.Close();
         }
 
-        public static DataTable reloadDbData()
+        public static DataTable basicSelect(string curTable)
         {
             connectToDb();
 
             sqlConnection.Open();
             sqlQuery = sqlConnection.CreateCommand();
-            dbAdapter = new SQLiteDataAdapter("SELECT * FROM Persons", sqlConnection);
+            
+            dbAdapter = new SQLiteDataAdapter("SELECT * FROM "+curTable, sqlConnection);
             dataSet.Reset();
             dbAdapter.Fill(dataSet);
             dataTable = dataSet.Tables[0];
 
             sqlConnection.Close();
+
             return dataTable;
         }
 
         public static void insertStudent(Student newStudent)
         {
-            string newStudentString = "INSERT INTO Persons(type,firstName,secondName,lastName,maidenName,fathersName,mothersName,birthDate,pesel,imagePath,gender,jobPosition,jobDesc,dateOfEmployment,currentClass,groups) " +
-                "VALUES('s','"+newStudent.firstName+ "','" + newStudent.secondName+ "','" + newStudent.lastname+ "','" + newStudent.maidenName+ "','" + newStudent.fathersName+ "','" + newStudent.mothersName+ "','" + newStudent.birthDate.ToString()+ "','" + newStudent.pesel+ "','" + newStudent.imagePath+ "','g','jb','jd','d','cc','g');";
+            string newStudentString = "INSERT INTO students(first_name,second_name,last_name,maiden_name,fathers_name,mothers_name,birth_date,pesel,image_path,gender,current_class,groups) VALUES('" + newStudent.firstName + "','" + newStudent.secondName + "','" + newStudent.lastname + "','" + newStudent.maidenName + "','" + newStudent.fathersName + "','" + newStudent.mothersName + "','"+newStudent.birthDate.ToString()+"','" + newStudent.pesel + "','" + newStudent.imagePath + "','" + newStudent.gender + "','" + newStudent.currentClass + "','" + newStudent.groups + "');";
 
             sendQuery(newStudentString);
         }
 
         public static void insertTeacher(Teacher newTeacher)
         {
-
-            string newTeacherString = "INSERT INTO Persons(type,firstName,secondName,lastName,maidenName,fathersName,mothersName,birthDate,pesel,imagePath,gender,jobPosition,jobDesc,dateOfEmployment,currentClass,groups) " +
-                "VALUES('s','" + newTeacher.firstName + "','" + newTeacher.secondName + "','" + newTeacher.lastname + "','" + newTeacher.maidenName + "','" + newTeacher.fathersName + "','" + newTeacher.mothersName + "','" + newTeacher.birthDate.ToString() + "','" + newTeacher.pesel + "','" + newTeacher.imagePath + "','g','jb','" + newTeacher.dateOfEmployment + "','d','cc','g');";
-
+            string newTeacherString = "INSERT INTO teachers(first_name,second_name,last_name,maiden_name,fathers_name,mothers_name,birth_date,pesel,image_path,gender,date_of_employment,class_tutor,taught_subjects) VALUES('" + newTeacher.firstName + "','" + newTeacher.secondName + "','" + newTeacher.lastname + "','" + newTeacher.maidenName + "','" + newTeacher.fathersName + "','" + newTeacher.mothersName + "','" + newTeacher.birthDate.ToString() + "','" + newTeacher.pesel + "','" + newTeacher.imagePath + "','" + newTeacher.gender + "','" + newTeacher.dateOfEmployment + "','class_tutor stuff','subjects');";
             sendQuery(newTeacherString);
         }
 
         public static void insertEmployee(Employee newEmployee)
         {
 
-            string newEmployeeString = "INSERT INTO Persons(type,firstName,secondName,lastName,maidenName,fathersName,mothersName,birthDate,pesel,imagePath,gender,jobPosition,jobDesc,dateOfEmployment,currentClass,groups) " +
-                "VALUES('s','" + newEmployee.firstName + "','" + newEmployee.secondName + "','" + newEmployee.lastname + "','" + newEmployee.maidenName + "','" + newEmployee.fathersName + "','" + newEmployee.mothersName + "','" + newEmployee.birthDate.ToString() + "','" + newEmployee.pesel + "','" + newEmployee.imagePath + "','g','jb','" + newEmployee.dateOfEmployment + "','d','cc','g');";
+            string newEmployeeString = "INSERT INTO employees(first_name,second_name,last_name,maiden_name,fathers_name,mothers_name,birth_date,pesel,image_path,gender,date_of_employment,class_tutor,taught_subjects) VALUES('" + newEmployee.firstName + "','" + newEmployee.secondName + "','" + newEmployee.lastname + "','" + newEmployee.maidenName + "','" + newEmployee.fathersName + "','" + newEmployee.mothersName + "','" + newEmployee.birthDate.ToString() + "','" + newEmployee.pesel + "','" + newEmployee.imagePath + "','" + newEmployee.gender + "','" + newEmployee.dateOfEmployment + "','"+newEmployee.jobDescription+"','"+newEmployee.jobPosition+"','tenure');";
 
             sendQuery(newEmployeeString);
         }

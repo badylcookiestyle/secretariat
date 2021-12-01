@@ -26,7 +26,9 @@ namespace Secretary
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainViewModel();
+      //      DataContext = new MainViewModel();
+
+
         }
 
         //  SQLiteConnection sql;
@@ -36,6 +38,7 @@ namespace Secretary
             hoverCloud.Placement = PlacementMode.Right;
             hoverCloud.IsOpen = true;
             Header.PopupText.Text = btnDesc;
+            
         }
 
 

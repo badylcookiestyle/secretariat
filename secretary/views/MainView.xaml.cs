@@ -21,12 +21,19 @@ namespace secretary.views
     public partial class MainView : UserControl
     {
         string currentForm = "Student";
+        string currentTable = "students";
         bool isBeingEdited = false;
 
         public MainView()
         {
             InitializeComponent();
-            DataGrid1.ItemsSource = DbHelper.reloadDbData().DefaultView;
+            DataGridColumn col = new DataGridTextColumn();
+            col.Header = "delete";
+           
+            DataGrid1.ItemsSource = DbHelper.basicSelect("students").DefaultView;
+       
+            //var amountOfColumns = DataGrid1.Columns.Count;
+            //DataGrid1.Columns[amountOfColumns + 1].Name = "fa";
         }
 
         private void TeacherFormBtn_Click(object sender, RoutedEventArgs e)
@@ -87,7 +94,7 @@ namespace secretary.views
              newTeacher.dateOfEmployment = TdatePickerEmployment.SelectedDate.Value.Date;
 
              DbHelper.insertTeacher(newTeacher);
-             DataGrid1.ItemsSource = DbHelper.reloadDbData().DefaultView;
+             DataGrid1.ItemsSource = DbHelper.basicSelect("teachers").DefaultView;
 
          }
          private void addStudent()
@@ -103,14 +110,14 @@ namespace secretary.views
              newStudent.fathersName = textBoxFthName.Text;
              newStudent.mothersName = textBoxMthName.Text;
              newStudent.birthDate = datePickerBirthDate.SelectedDate.Value.Date;
-             newStudent.pesel = new[] { textBoxPesel.Text };
+             newStudent.pesel = new string[] { textBoxPesel.Text };
              newStudent.imagePath = "pathhh";
              newStudent.gender = gender;
              newStudent.currentClass = textBoxCurrentClass.Text;
 
              //  persons.Add(newStudent);
              DbHelper.insertStudent(newStudent);
-             DataGrid1.ItemsSource = DbHelper.reloadDbData().DefaultView;
+             DataGrid1.ItemsSource = DbHelper.basicSelect("students").DefaultView;
          }
          private void addEmployee()
          {
@@ -133,7 +140,7 @@ namespace secretary.views
              newEmployee.dateOfEmployment = EdatePickerEmployment.SelectedDate.Value.Date;
 
              DbHelper.insertEmployee(newEmployee);
-             DataGrid1.ItemsSource = DbHelper.reloadDbData().DefaultView;
+             DataGrid1.ItemsSource = DbHelper.basicSelect("employees").DefaultView;
          }
          private void submitPerson_Click(object sender, RoutedEventArgs e)
          {

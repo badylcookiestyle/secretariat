@@ -29,7 +29,8 @@
                 </Style>
             </DataGrid.CellStyle>
         </DataGrid>
-        <Expander Padding="-100,0,0,0" Foreground="White" Header="Expander" HorizontalAlignment="Left" Height="460" Width="460" Margin="768,53,0,0" VerticalAlignment="Top"  >
+        <Expander Padding="-100,0,0,0"  Foreground="White" Header="Expander" HorizontalAlignment="Left" Height="460" Width="460" Margin="768,53,0,0" VerticalAlignment="Top"  >
+            
             <DockPanel Background="#39315e" HorizontalAlignment="Right" Width="460" Margin="30,0,30,30" >
                 <StackPanel Background="Transparent" VerticalAlignment="Top" Height="25" Width="460">
 
@@ -147,6 +148,14 @@
             </DockPanel>
             
         </Expander>
+        <StackPanel Margin="60">
+            
+            <RadioButton  Foreground="White">Teachers</RadioButton>
+            <RadioButton  Foreground="White">Students</RadioButton>
+            <RadioButton  Foreground="White">Emp</RadioButton>
+        </StackPanel>
+        <Button Content="Button" Height="25" Width="25" Margin="650,-320,300,373" RenderTransformOrigin="5,0.773"/>
+        <TextBox Text="TextBox" TextWrapping="Wrap"  Margin="517,-320,300,372" Height="25" Width="90" />
 
     </Grid>
 </UserControl>
