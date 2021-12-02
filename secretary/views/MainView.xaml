@@ -36,10 +36,8 @@
             <RadioButton x:Name="employeeRadio" Click="EmployeeRadioBtn_Click"  Foreground="White">Emp</RadioButton>
 
         </StackPanel>
-        <Button Content="Button" Height="25" Width="25" Margin="650,-320,300,373" Click="SearchBtn_Click" RenderTransformOrigin="5,0.773"/>
-        <TextBox Text="TextBox" x:Name="textBoxSearcher" TextWrapping="Wrap"  Margin="517,-320,300,372" Height="25" Width="90" />
-        <ComboBox x:Name="comboBoxSelectField"  Margin="517,-270,300,372" Height="25"  Width="90"/>
-        <Expander Padding="-200,5,0,0"  Foreground="White" Header="add new persons" HorizontalAlignment="Left" Height="460" Width="460" Margin="768,53,0,0" VerticalAlignment="Top"  >
+      
+        <Expander Padding="-200,5,0,0"  Foreground="White" Header="add new persons" HorizontalAlignment="Left" Height="460" Width="460" Margin="668,53,0,0" VerticalAlignment="Top"  >
             
             <DockPanel Background="#39315e" HorizontalAlignment="Right" Width="460" Margin="0,0,30,30" >
                 <StackPanel Margin="10,0,0,0" Background="Transparent" VerticalAlignment="Top" Height="25" Width="460">
@@ -75,7 +73,7 @@
                         </Button.Template>
                     </Button>
                 </StackPanel>
-                <StackPanel    x:Name="topPanel"  Background="Transparent" VerticalAlignment="Top"   Margin="-440,30,0,0" Height="180" Width="460">
+                <StackPanel    x:Name="topPanel"  Background="Transparent" VerticalAlignment="Top"   Margin="-440,30,0,0" Height="260" Width="460">
                     <Grid Height="26">
                         <Label Foreground="White" Margin="90,-5,0,0">Name</Label>
                         <TextBox  x:Name="textBoxFname"  HorizontalAlignment="Left"  Width="90"/>
@@ -112,7 +110,7 @@
                         <TextBox  x:Name="textBoxPesel"   HorizontalAlignment="Left"  Width="90"/>
                     </Grid>
                     <Grid Height="26">
-                        <Label Foreground="White" Margin="90,-5,0,0">Name</Label>
+                        <Label Foreground="White" Margin="90,-5,0,0">Gender</Label>
                         <ComboBox  x:Name="comboBoxGender"  HorizontalAlignment="Left"  Width="90">
                             <ComboBoxItem>Male</ComboBoxItem>
                             <ComboBoxItem>Female</ComboBoxItem>
@@ -120,7 +118,24 @@
 
                     </Grid>
                 </StackPanel>
-                <StackPanel x:Name="formTeacher"  Visibility="Hidden" Background="Transparent" Height="90" Width="460" VerticalAlignment="Bottom"  Margin="-440,0,0,0">
+                <StackPanel x:Name="formTeacher"  Visibility="Hidden" Background="Transparent" Height="120" Width="460" VerticalAlignment="Bottom"  Margin="-440,0,0,0">
+                    <Grid Height="26">
+                        <Label Foreground="White" Margin="0,-150,30,150" HorizontalAlignment="Right">Add new subject to timetable</Label>
+                        <TextBox Margin="200,-250,0,0" x:Name="textboxLesson" Width="90" Height="30"></TextBox>
+                        <DatePicker  Margin="0,-250,0,0" Width="30" Height="30" x:Name="datepickerLesson"></DatePicker>
+                        <Button Content="+"  x:Name="addLessonBtn" Height="25" Width="25"  Margin="0,-250,25,0" HorizontalAlignment="Right" Click="addLessonBtn_Click"  />
+                        <Button Content="-"  x:Name="deleteLessonBtn" Height="25" Width="25"  Margin="0,-250,50,0" HorizontalAlignment="Right" Click="deleteLessonBtn_Click"   />
+                        <ListView x:Name="lessonsListView" Width="180" HorizontalAlignment="Right" Margin="0,-80,25,0">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="name" DisplayMemberBinding="{Binding name}"/>
+                                    <GridViewColumn Header="lessonTime" DisplayMemberBinding="{Binding lessonTime}"/>
+                                   
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+
+                    </Grid>
                     <Grid Height="26">
                         <Label Foreground="White" Margin="90,-5,0,0">tutor?</Label>
                         <TextBox  x:Name="textBoxTutor"   HorizontalAlignment="Left"  Width="90"/>
@@ -133,6 +148,8 @@
                         <Label Foreground="White" Margin="90,-5,0,0">Date of Employment</Label>
                         <DatePicker  x:Name="TdatePickerEmployment"   HorizontalAlignment="Left"  Width="90"/>
                     </Grid>
+
+                
 
                 </StackPanel>
                 <StackPanel x:Name="formStudent"   Background="Transparent" Height="90" Width="460" VerticalAlignment="Bottom"   Margin="-440,0,0,0">
@@ -165,7 +182,9 @@
             </DockPanel>
             
         </Expander>
-        
 
+        <Button Content="Button" Height="25" Width="25" Margin="650,-320,300,373" Click="SearchBtn_Click" RenderTransformOrigin="5,0.773"/>
+        <TextBox Text="TextBox" x:Name="textBoxSearcher" TextWrapping="Wrap"  Margin="517,-320,300,372" Height="25" Width="90" />
+        <ComboBox x:Name="comboBoxSelectField"  Margin="517,-270,300,372" Height="25"  Width="90"/>
     </Grid>
 </UserControl>

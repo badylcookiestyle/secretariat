@@ -89,7 +89,7 @@ namespace secretary.dbHelper
 
         public static void insertTeacher(Teacher newTeacher)
         {
-            string newTeacherString = "INSERT INTO teachers(first_name,second_name,last_name,maiden_name,fathers_name,mothers_name,birth_date,pesel,image_path,gender,date_of_employment,class_tutor,taught_subjects) VALUES('" + newTeacher.firstName + "','" + newTeacher.secondName + "','" + newTeacher.lastname + "','" + newTeacher.maidenName + "','" + newTeacher.fathersName + "','" + newTeacher.mothersName + "','" + newTeacher.birthDate.ToString() + "','" + newTeacher.pesel + "','" + newTeacher.imagePath + "','" + newTeacher.gender + "','" + newTeacher.dateOfEmployment + "','class_tutor stuff','subjects');";
+            string newTeacherString = "INSERT INTO teachers(first_name,second_name,last_name,maiden_name,fathers_name,mothers_name,birth_date,pesel,image_path,gender,date_of_employment,class_tutor,taught_subjects) VALUES('" + newTeacher.firstName + "','" + newTeacher.secondName + "','" + newTeacher.lastname + "','" + newTeacher.maidenName + "','" + newTeacher.fathersName + "','" + newTeacher.mothersName + "','" + newTeacher.birthDate.ToString() + "','" + newTeacher.pesel + "','" + newTeacher.imagePath + "','" + newTeacher.gender + "','" + newTeacher.dateOfEmployment + "','"+newTeacher.classTutor+"','"+newTeacher.taughtSubjects+"');";
             sendQuery(newTeacherString);
         }
 

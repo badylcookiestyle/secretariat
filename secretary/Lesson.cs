@@ -6,7 +6,7 @@ namespace secretary
 {
     public class Lesson
     {
-        public string name;
-        public DateTime lessonTime;
+        public string name { get; set; }
+        public DateTime lessonTime { get; set; }
     }
 }

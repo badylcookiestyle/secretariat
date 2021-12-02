@@ -14,7 +14,7 @@ using secretary.dbHelper;
 using System.Data;
 using System.Data.SQLite;
 //using dbhelper;
-
+using System.Text.Json;
 namespace secretary.views
 {
     /// <summary>
@@ -24,6 +24,7 @@ namespace secretary.views
     {
         string currentForm = "Student";
         string currentTable = "students";
+        List<Lesson> lessons = new List<Lesson>();
         bool isBeingEdited = false;
 
         public MainView()
@@ -85,7 +86,7 @@ namespace secretary.views
               formStudent.Visibility = Visibility.Hidden;
               formEmployee.Visibility = Visibility.Hidden;
 
-              currentForm = "Student";
+              currentForm = "Teacher";
           }
 
           private void StudentFormBtn_Click(object sender, RoutedEventArgs e)
@@ -98,7 +99,7 @@ namespace secretary.views
               formStudent.Visibility = Visibility.Visible;
               formEmployee.Visibility = Visibility.Hidden;
 
-              currentForm = "Teacher";
+              currentForm = "Student";
           }
 
           private void EmployeeFormBtn_Click(object sender, RoutedEventArgs e)
@@ -116,7 +117,9 @@ namespace secretary.views
         
          private void addTeacher()
          {
-             char gender = comboBoxGender.SelectedItem.ToString() == "Male" ? 'M' : 'F';
+            currentTable = "teachers";
+            char gender = comboBoxGender.SelectedItem.ToString() == "Male" ? 'M' : 'F';
+            string taughtSubjectsJson = JsonSerializer.Serialize(lessons);
 
              Teacher newTeacher = new Teacher();
 
@@ -129,9 +132,12 @@ namespace secretary.views
              newTeacher.birthDate = datePickerBirthDate.SelectedDate.Value.Date;
              newTeacher.pesel = new []{ textBoxPesel.Text};
              newTeacher.imagePath = "pathhh";
+            newTeacher.classTutor = textBoxTutor.Text;
+            newTeacher.taughtSubjects = taughtSubjectsJson;
              newTeacher.gender = gender;
              newTeacher.dateOfEmployment = TdatePickerEmployment.SelectedDate.Value.Date;
 
+         
              DbHelper.insertTeacher(newTeacher);
              DataGrid1.ItemsSource = DbHelper.basicSelect(currentTable).DefaultView;
 
@@ -246,6 +252,17 @@ namespace secretary.views
 
                 }
                 }
+        }
+
+        private void addLessonBtn_Click(object sender, RoutedEventArgs e)
+        {
+            lessonsListView.Items.Add(new Lesson{name= textboxLesson.Text, lessonTime = datepickerLesson.SelectedDate.Value.Date });
+            lessons.Add(new Lesson { name = "fdsa", lessonTime = DateTime.Now });
+        }
+
+        private void deleteLessonBtn_Click(object sender, RoutedEventArgs e)
+        {
+            lessonsListView.Items.RemoveAt(lessonsListView.Items.Count - 1);
         }
     }
 }
