@@ -34,11 +34,11 @@ namespace Secretary
         //  SQLiteConnection sql;
       
         private void displayCloud(string btnDesc,System.Windows.UIElement curView) {
+
             hoverCloud.PlacementTarget = curView;
             hoverCloud.Placement = PlacementMode.Right;
             hoverCloud.IsOpen = true;
             Header.PopupText.Text = btnDesc;
-            
         }
 
 

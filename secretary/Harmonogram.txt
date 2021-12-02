@@ -28,5 +28,13 @@ Fourth test 01.12.2021 20:15
 - checking if db is working 
 - checking if dbHelper is working
 === test results ===
-db+db Helper are working, I haven't implement form validation yet
+-db+db Helper are working, I haven't implement form validation yet
 Idk why form switcher stopped working :c
+
+Fifth test 02.12.2021 11:37
+=== test goals ===
+- checking if form switcher is working
+- checking if searcher is working
+
+=== test results ===
+- everything is working, I haven't implement form validation yet, I should implement form cleaner :o

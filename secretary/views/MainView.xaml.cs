@@ -29,22 +29,15 @@ namespace secretary.views
         public MainView()
         {
             InitializeComponent();
-            DataGridColumn col = new DataGridTextColumn();
-            col.Header = "delete";
 
+            studentRadio.IsChecked=true;
 
-            //   DataGrid1.ItemsSource = DbHelper.basicSelect("students").DefaultView;
-            // comboBoxCurrentGroup.ItemsSource = DbHelper.basicSelect("students").DefaultView;
-            //     comboBoxCurrentGroup.ItemsSource = DbHelper.basicSelect("groups").DefaultView;
-            //   comboBoxCurrentGroup.DisplayMemberPath = "name";
-            //  comboBoxCurrentGroup.SelectedValuePath = "id";
+ 
 
             initializeGroupCombobox();
             initializeClassesCombobox();
           
-            //   MessageBox.Show("Selected ZoneName=" + ComboBoxZone.Text + " and ZoneId=" + ComboBoxZone.SelectedValue.ToString());
-            //   comboBoxCurrentGroup.DisplayMemberPath = "name";
-            //  comboBoxCurrentGroup.ValueMember = "";
+        
 
             DataGrid1.ItemsSource = DbHelper.basicSelect(currentTable).DefaultView;
         }
@@ -239,7 +232,7 @@ namespace secretary.views
             {
                 try
                 {
-                    if (comboBoxSelectField.SelectedItem.ToString() != "field")
+                    if (comboBoxSelectField.SelectedItem.ToString() != "id")
                     {
                         DataGrid1.ItemsSource = DbHelper.likeSelect(currentTable, textBoxSearcher.Text, comboBoxSelectField.SelectedItem.ToString()).DefaultView;
                     }
