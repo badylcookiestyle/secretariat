@@ -11,6 +11,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using secretary.dbHelper;
+using System.Data;
+using System.Data.SQLite;
 //using dbhelper;
 
 namespace secretary.views
@@ -29,13 +31,57 @@ namespace secretary.views
             InitializeComponent();
             DataGridColumn col = new DataGridTextColumn();
             col.Header = "delete";
-           
-            DataGrid1.ItemsSource = DbHelper.basicSelect("students").DefaultView;
-       
-            //var amountOfColumns = DataGrid1.Columns.Count;
-            //DataGrid1.Columns[amountOfColumns + 1].Name = "fa";
-        }
 
+
+            //   DataGrid1.ItemsSource = DbHelper.basicSelect("students").DefaultView;
+            // comboBoxCurrentGroup.ItemsSource = DbHelper.basicSelect("students").DefaultView;
+            //     comboBoxCurrentGroup.ItemsSource = DbHelper.basicSelect("groups").DefaultView;
+            //   comboBoxCurrentGroup.DisplayMemberPath = "name";
+            //  comboBoxCurrentGroup.SelectedValuePath = "id";
+
+            initializeGroupCombobox();
+            initializeClassesCombobox();
+          
+            //   MessageBox.Show("Selected ZoneName=" + ComboBoxZone.Text + " and ZoneId=" + ComboBoxZone.SelectedValue.ToString());
+            //   comboBoxCurrentGroup.DisplayMemberPath = "name";
+            //  comboBoxCurrentGroup.ValueMember = "";
+
+            DataGrid1.ItemsSource = DbHelper.basicSelect(currentTable).DefaultView;
+        }
+        private void initializeGroupCombobox()
+        {
+            var rows = DbHelper.basicSelect("groups").DefaultView;
+
+            for (int i = 0; i<rows.Count; i++)  
+            {
+               // your code goes here
+                 var row = rows[i];
+        comboBoxCurrentGroup.Items.Add(row["name"]);
+            }
+}
+        private void initializeClassesCombobox()
+        {
+            var rows = DbHelper.basicSelect("classes").DefaultView;
+
+            for (int i = 0; i < rows.Count; i++)
+            {
+                // your code goes here
+                var row = rows[i];
+                comboBoxCurrentClass.Items.Add(row["name"]);
+            }
+        }
+        private void initializeTableFieldsCombobox()
+        {
+            comboBoxSelectField.Items.Clear();
+           var rows = DbHelper.basicSelect(currentTable).DefaultView;
+            for (var i = 0; i < DataGrid1.Columns.Count; i++)
+            {
+                var name = DataGrid1.Columns[i].Header;
+                comboBoxSelectField.Items.Add(name.ToString());
+            }
+        
+
+        }
         private void TeacherFormBtn_Click(object sender, RoutedEventArgs e)
           {
               TeacherFormBtn.Foreground = new SolidColorBrush(Colors.Purple);
@@ -94,7 +140,7 @@ namespace secretary.views
              newTeacher.dateOfEmployment = TdatePickerEmployment.SelectedDate.Value.Date;
 
              DbHelper.insertTeacher(newTeacher);
-             DataGrid1.ItemsSource = DbHelper.basicSelect("teachers").DefaultView;
+             DataGrid1.ItemsSource = DbHelper.basicSelect(currentTable).DefaultView;
 
          }
          private void addStudent()
@@ -113,11 +159,11 @@ namespace secretary.views
              newStudent.pesel = new string[] { textBoxPesel.Text };
              newStudent.imagePath = "pathhh";
              newStudent.gender = gender;
-             newStudent.currentClass = textBoxCurrentClass.Text;
-
+             newStudent.currentClass = comboBoxCurrentGroup.Text;
+            formStudent.Visibility = Visibility.Hidden;
              //  persons.Add(newStudent);
              DbHelper.insertStudent(newStudent);
-             DataGrid1.ItemsSource = DbHelper.basicSelect("students").DefaultView;
+             DataGrid1.ItemsSource = DbHelper.basicSelect(currentTable).DefaultView;
          }
          private void addEmployee()
          {
@@ -140,7 +186,7 @@ namespace secretary.views
              newEmployee.dateOfEmployment = EdatePickerEmployment.SelectedDate.Value.Date;
 
              DbHelper.insertEmployee(newEmployee);
-             DataGrid1.ItemsSource = DbHelper.basicSelect("employees").DefaultView;
+             DataGrid1.ItemsSource = DbHelper.basicSelect(currentTable).DefaultView;
          }
          private void submitPerson_Click(object sender, RoutedEventArgs e)
          {
@@ -161,6 +207,52 @@ namespace secretary.views
              }
 
          }
-     
+
+        private void TeacherRadioBtn_Click(object sender, RoutedEventArgs e)
+        {
+            currentTable = "teachers";
+            DataGrid1.ItemsSource = DbHelper.basicSelect(currentTable).DefaultView;
+            initializeTableFieldsCombobox();
+            DataGrid1.ItemsSource = DbHelper.basicSelect(currentTable).DefaultView;
+        }
+
+        private void StudentRadioBtn_Click(object sender, RoutedEventArgs e)
+        {
+            currentTable = "students";
+            DataGrid1.ItemsSource = DbHelper.basicSelect(currentTable).DefaultView;
+            initializeTableFieldsCombobox();
+            DataGrid1.ItemsSource = DbHelper.basicSelect(currentTable).DefaultView;
+        }
+
+        private void EmployeeRadioBtn_Click(object sender, RoutedEventArgs e)
+        {
+            currentTable = "employees";
+             DataGrid1.ItemsSource = DbHelper.basicSelect(currentTable).DefaultView;
+            initializeTableFieldsCombobox();
+            DataGrid1.ItemsSource = DbHelper.basicSelect(currentTable).DefaultView;
+        }
+
+        private void SearchBtn_Click(object sender, RoutedEventArgs e)
+        {
+           
+            if (textBoxSearcher.Text != "")
+            {
+                try
+                {
+                    if (comboBoxSelectField.SelectedItem.ToString() != "field")
+                    {
+                        DataGrid1.ItemsSource = DbHelper.likeSelect(currentTable, textBoxSearcher.Text, comboBoxSelectField.SelectedItem.ToString()).DefaultView;
+                    }
+                    else
+                    {
+                        DataGrid1.ItemsSource = DbHelper.idSelect(currentTable, textBoxSearcher.Text).DefaultView;
+                    }
+                    }
+                catch (Exception er)
+                {
+
+                }
+                }
+        }
     }
 }

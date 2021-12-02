@@ -21,3 +21,12 @@ Third test 30.11.2021 21:35
 - checking if insert methods in dbHelper class are working
 === test results ===
 - everything is working, I haven't implement form validation yet
+
+Fourth test 01.12.2021 20:15
+=== test goals ===
+- checking if form is working after rework
+- checking if db is working 
+- checking if dbHelper is working
+=== test results ===
+db+db Helper are working, I haven't implement form validation yet
+Idk why form switcher stopped working :c
