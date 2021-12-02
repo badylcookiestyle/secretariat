@@ -10,7 +10,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using Microsoft.Win32;
+using System.IO;
+using secretary.dbHelper;
 namespace secretary.views
 {
     /// <summary>
@@ -21,6 +23,14 @@ namespace secretary.views
         public DataView()
         {
             InitializeComponent();
+        }
+
+        private void saveDataBtn_Click(object sender, RoutedEventArgs e)
+        {
+            string dbDump = DbHelper.dumpDbToJson();
+            SaveFileDialog saveDialog = new SaveFileDialog();
+            if (saveDialog.ShowDialog() == true)
+                File.WriteAllText(saveDialog.FileName,dbDump);
         }
     }
 }
