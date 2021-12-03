@@ -82,6 +82,7 @@ namespace secretary.dbHelper
         }
         public static void insertStudent(Student newStudent)
         {
+      
             string newStudentString = "INSERT INTO students(first_name,second_name,last_name,maiden_name,fathers_name,mothers_name,birth_date,pesel,image_path,gender,current_class,groups) VALUES('" + newStudent.firstName + "','" + newStudent.secondName + "','" + newStudent.lastname + "','" + newStudent.maidenName + "','" + newStudent.fathersName + "','" + newStudent.mothersName + "','"+newStudent.birthDate.ToString()+"','" + newStudent.pesel + "','" + newStudent.imagePath + "','" + newStudent.gender + "','" + newStudent.currentClass + "','" + newStudent.groups + "');";
 
             sendQuery(newStudentString);

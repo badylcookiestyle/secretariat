@@ -15,6 +15,7 @@ using System.Data;
 using System.Data.SQLite;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
+using System.IO;
 
 //using dbhelper;
 using System.Text.Json;
@@ -27,6 +28,8 @@ namespace secretary.views
     {
         string currentForm = "Student";
         string currentTable = "students";
+        string selectedFilePath;
+
         List<Lesson> lessons = new List<Lesson>();
         bool isBeingEdited = false;
 
@@ -121,10 +124,13 @@ namespace secretary.views
          private void addTeacher()
          {
             currentTable = "teachers";
+          //  comboBoxGender.SelectedItem.
             char gender = comboBoxGender.SelectedItem.ToString() == "Male" ? 'M' : 'F';
             string taughtSubjectsJson = JsonSerializer.Serialize(lessons);
 
              Teacher newTeacher = new Teacher();
+            var fileName=selectedFilePath;
+            File.Move(selectedFilePath,@"/images/"+newTeacher.pesel+".png");
 
              newTeacher.firstName = textBoxFname.Text;
              newTeacher.secondName = textBoxFname.Text;
@@ -135,8 +141,8 @@ namespace secretary.views
              newTeacher.birthDate = datePickerBirthDate.SelectedDate.Value.Date;
              newTeacher.pesel = new []{ textBoxPesel.Text};
              newTeacher.imagePath = "pathhh";
-            newTeacher.classTutor = textBoxTutor.Text;
-            newTeacher.taughtSubjects = taughtSubjectsJson;
+             newTeacher.classTutor = textBoxTutor.Text;
+             newTeacher.taughtSubjects = taughtSubjectsJson;
              newTeacher.gender = gender;
              newTeacher.dateOfEmployment = TdatePickerEmployment.SelectedDate.Value.Date;
 
@@ -277,6 +283,9 @@ namespace secretary.views
               "Portable Network Graphic (*.png)|*.png";
             if (op.ShowDialog() == true)
             {
+
+                selectedFilePath =op.FileName;
+                cFileName.Content = selectedFilePath;
                 imgPhoto.Source = new BitmapImage(new Uri(op.FileName));
             }
 

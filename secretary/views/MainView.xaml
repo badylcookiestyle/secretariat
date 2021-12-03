@@ -78,6 +78,7 @@
                     <Button Margin="12,12,16,7" HorizontalAlignment="Right" Height="23" 
         Name="btnLoadImg" VerticalAlignment="Bottom"
         Width="75" Grid.Column="1" Click="btnLoadImg_Click"  >Load img</Button>
+                    <Label x:Name="cFileName" Height="40" HorizontalAlignment="Right" Foreground="White"   Margin="0,-70,30,0"></Label>
                     <Grid Height="26">
                         <Label Foreground="White" Margin="90,-5,0,0">Name</Label>
                         <TextBox MaxLength="16" x:Name="textBoxFname"  HorizontalAlignment="Left"  Width="90"/>
