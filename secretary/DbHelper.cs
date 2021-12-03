@@ -139,9 +139,10 @@ namespace secretary.dbHelper
             DataTable students = basicSelect("students");
             DataTable employees = basicSelect("employees");
 
-            jsonDump = convertTableToString(teachers);
-            jsonDump += convertTableToString(students);
-            jsonDump += convertTableToString(employees);
+            // jsonDump = convertTableToString(teachers);
+           // jsonDump = convertTableToString(students);
+            //jsonDump += convertTableToString(employees);
+            jsonDump = convertTableToString(students);
             return jsonDump;
         }
     }

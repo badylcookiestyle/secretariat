@@ -74,31 +74,35 @@
                     </Button>
                 </StackPanel>
                 <StackPanel    x:Name="topPanel"  Background="Transparent" VerticalAlignment="Top"   Margin="-440,30,0,0" Height="260" Width="460">
+                    <Image Margin="12,12,16,7" HorizontalAlignment="Right"  Name="imgPhoto" Height="64" Width="64" />
+                    <Button Margin="12,12,16,7" HorizontalAlignment="Right" Height="23" 
+        Name="btnLoadImg" VerticalAlignment="Bottom"
+        Width="75" Grid.Column="1" Click="btnLoadImg_Click"  >Load img</Button>
                     <Grid Height="26">
                         <Label Foreground="White" Margin="90,-5,0,0">Name</Label>
-                        <TextBox  x:Name="textBoxFname"  HorizontalAlignment="Left"  Width="90"/>
+                        <TextBox MaxLength="16" x:Name="textBoxFname"  HorizontalAlignment="Left"  Width="90"/>
 
                     </Grid>
 
                     <Grid Height="26">
                         <Label Foreground="White" Margin="90,-5,0,0">Second name</Label>
-                        <TextBox  x:Name="textBoxSname"  HorizontalAlignment="Left"  Width="90"/>
+                        <TextBox  MaxLength="16" x:Name="textBoxSname"  HorizontalAlignment="Left"  Width="90"/>
                     </Grid>
                     <Grid Height="26">
                         <Label Foreground="White" Margin="90,-5,0,0">Last name</Label>
-                        <TextBox  x:Name="textBoxLname"  HorizontalAlignment="Left"  Width="90"/>
+                        <TextBox MaxLength="16"  x:Name="textBoxLname"  HorizontalAlignment="Left"  Width="90"/>
                     </Grid>
                     <Grid Height="26">
                         <Label Foreground="White" Margin="90,-5,0,0">Maiden name</Label>
-                        <TextBox  x:Name="textBoxMaiName"  HorizontalAlignment="Left"  Width="90"/>
+                        <TextBox   MaxLength="16" x:Name="textBoxMaiName"  HorizontalAlignment="Left"  Width="90"/>
                     </Grid>
                     <Grid Height="26">
                         <Label Foreground="White" Margin="90,-5,0,0">Fathers Name</Label>
-                        <TextBox  x:Name="textBoxFthName"  HorizontalAlignment="Left"  Width="90"/>
+                        <TextBox   MaxLength="16" x:Name="textBoxFthName"  HorizontalAlignment="Left"  Width="90"/>
                     </Grid>
                     <Grid Height="26">
                         <Label Foreground="White" Margin="90,-5,0,0">Mothers Name</Label>
-                        <TextBox  x:Name="textBoxMthName"  HorizontalAlignment="Left"  Width="90"/>
+                        <TextBox  MaxLength="16"  x:Name="textBoxMthName"  HorizontalAlignment="Left"  Width="90"/>
                     </Grid>
                     <Grid Height="26">
                         <Label Foreground="White" Margin="90,-5,0,0">Birth Date</Label>
@@ -107,7 +111,7 @@
                     </Grid>
                     <Grid Height="26">
                         <Label Foreground="White" Margin="90,-5,0,0">Pesel</Label>
-                        <TextBox  x:Name="textBoxPesel"   HorizontalAlignment="Left"  Width="90"/>
+                        <TextBox   MaxLength="16" x:Name="textBoxPesel"   HorizontalAlignment="Left"  Width="90"/>
                     </Grid>
                     <Grid Height="26">
                         <Label Foreground="White" Margin="90,-5,0,0">Gender</Label>
@@ -121,7 +125,7 @@
                 <StackPanel x:Name="formTeacher"  Visibility="Hidden" Background="Transparent" Height="120" Width="460" VerticalAlignment="Bottom"  Margin="-440,0,0,0">
                     <Grid Height="26">
                         <Label Foreground="White" Margin="0,-150,30,150" HorizontalAlignment="Right">Add new subject to timetable</Label>
-                        <TextBox Margin="200,-250,0,0" x:Name="textboxLesson" Width="90" Height="30"></TextBox>
+                        <TextBox  MaxLength="16" Margin="200,-250,0,0" x:Name="textboxLesson" Width="90" Height="30"></TextBox>
                         <DatePicker  Margin="0,-250,0,0" Width="30" Height="30" x:Name="datepickerLesson"></DatePicker>
                         <Button Content="+"  x:Name="addLessonBtn" Height="25" Width="25"  Margin="0,-250,25,0" HorizontalAlignment="Right" Click="addLessonBtn_Click"  />
                         <Button Content="-"  x:Name="deleteLessonBtn" Height="25" Width="25"  Margin="0,-250,50,0" HorizontalAlignment="Right" Click="deleteLessonBtn_Click"   />
@@ -138,11 +142,7 @@
                     </Grid>
                     <Grid Height="26">
                         <Label Foreground="White" Margin="90,-5,0,0">tutor?</Label>
-                        <TextBox  x:Name="textBoxTutor"   HorizontalAlignment="Left"  Width="90"/>
-                    </Grid>
-                    <Grid Height="26">
-                        <Label Foreground="White" Margin="90,-5,0,0">Taught Subjects</Label>
-                        <ComboBox  x:Name="comboBoxTaughtSubjects"   HorizontalAlignment="Left"  Width="90"/>
+                        <TextBox   MaxLength="16" x:Name="textBoxTutor"   HorizontalAlignment="Left"  Width="90"/>
                     </Grid>
                     <Grid Height="26">
                         <Label Foreground="White" Margin="90,-5,0,0">Date of Employment</Label>
@@ -170,11 +170,11 @@
                     </Grid>
                     <Grid Height="26">
                         <Label Foreground="White" Margin="90,-5,0,0">Job Position</Label>
-                        <TextBox  x:Name="textBoxJobPosition"   HorizontalAlignment="Left"  Width="90"/>
+                        <TextBox   MaxLength="16" x:Name="textBoxJobPosition"   HorizontalAlignment="Left"  Width="90"/>
                     </Grid>
                     <Grid Height="26">
                         <Label Foreground="White" Margin="90,-5,0,0">Job description</Label>
-                        <TextBox  x:Name="textBoxJobDescription"   HorizontalAlignment="Left"  Width="90"/>
+                        <TextBox    MaxLength="16" x:Name="textBoxJobDescription"   HorizontalAlignment="Left"  Width="90"/>
                     </Grid>
 
                 </StackPanel>

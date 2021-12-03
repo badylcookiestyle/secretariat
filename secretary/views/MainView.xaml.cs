@@ -13,6 +13,9 @@ using System.Windows.Shapes;
 using secretary.dbHelper;
 using System.Data;
 using System.Data.SQLite;
+using System.Windows.Media.Imaging;
+using Microsoft.Win32;
+
 //using dbhelper;
 using System.Text.Json;
 namespace secretary.views
@@ -263,6 +266,20 @@ namespace secretary.views
         private void deleteLessonBtn_Click(object sender, RoutedEventArgs e)
         {
             lessonsListView.Items.RemoveAt(lessonsListView.Items.Count - 1);
+        }
+
+        private void btnLoadImg_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog op = new OpenFileDialog();
+            op.Title = "Select a picture";
+            op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
+              "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
+              "Portable Network Graphic (*.png)|*.png";
+            if (op.ShowDialog() == true)
+            {
+                imgPhoto.Source = new BitmapImage(new Uri(op.FileName));
+            }
+
         }
     }
 }
