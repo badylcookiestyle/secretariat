@@ -141,7 +141,7 @@ namespace secretary.dbHelper
 
             jsonDump = convertTableToString(teachers);
             jsonDump += convertTableToString(students);
-            jsonDump = convertTableToString(employees);
+            jsonDump += convertTableToString(employees);
             return jsonDump;
         }
     }
