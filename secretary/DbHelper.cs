@@ -5,7 +5,7 @@ using System.Data.SQLite;
 using System.Data;
 namespace secretary.dbHelper
 {
-   public static class DbHelper
+    public static class DbHelper
     {
         static SQLiteConnection sqlConnection;
         static SQLiteCommand sqlQuery;
@@ -17,7 +17,7 @@ namespace secretary.dbHelper
         {
             sqlConnection = new SQLiteConnection("Data Source=db.db;Version=3;New=False");
         }
-        
+
         public static void sendQuery(string queryString)
         {
             connectToDb();
@@ -27,11 +27,11 @@ namespace secretary.dbHelper
             sqlQuery.CommandText = queryString;
             sqlQuery.ExecuteNonQuery();
 
-            
+
 
             sqlConnection.Close();
         }
-        
+     
         public static DataTable basicSelect(string curTable)
         {
             connectToDb();
@@ -101,6 +101,11 @@ namespace secretary.dbHelper
 
             sendQuery(newEmployeeString);
         }
+        public static void basicDelete(string tableName)
+        {
+            string queryString = "DELETE FROM "+tableName+";";
+            sendQuery(queryString);
+        }
         public static string convertTableToString(DataTable table) {
             var JSONString = new StringBuilder();
             if (table.Rows.Count > 0)
@@ -143,7 +148,7 @@ namespace secretary.dbHelper
             // jsonDump = convertTableToString(teachers);
            // jsonDump = convertTableToString(students);
             //jsonDump += convertTableToString(employees);
-            jsonDump = convertTableToString(students);
+            jsonDump = convertTableToString(teachers);
             return jsonDump;
         }
     }

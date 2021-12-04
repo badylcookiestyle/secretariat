@@ -15,7 +15,7 @@ namespace secretary
         public string fathersName { get; set; }
         public string mothersName { get; set; }
         public DateTime birthDate { get; set; }
-        public string[] pesel = new string[11];
+        public string pesel;
         public string imagePath;
         public char gender;
         

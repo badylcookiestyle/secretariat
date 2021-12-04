@@ -38,3 +38,14 @@ Fifth test 02.12.2021 11:37
 
 === test results ===
 - everything is working, I haven't implement form validation yet, I should implement form cleaner :o
+
+Sixth test 04.12.2021
+=== test goals ===
+- checking if file uploader works
+- cheking if db dumper works 
+=== test results ===
+
+- file uploader works 
+- db dumper isn't able to dump more than 1 table :e
+-  I haven't implement form validation yet, I should implement form cleaner :o
+

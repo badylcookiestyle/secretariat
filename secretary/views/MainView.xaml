@@ -74,11 +74,7 @@
                     </Button>
                 </StackPanel>
                 <StackPanel    x:Name="topPanel"  Background="Transparent" VerticalAlignment="Top"   Margin="-440,30,0,0" Height="260" Width="460">
-                    <Image Margin="12,12,16,7" HorizontalAlignment="Right"  Name="imgPhoto" Height="64" Width="64" />
-                    <Button Margin="12,12,16,7" HorizontalAlignment="Right" Height="23" 
-        Name="btnLoadImg" VerticalAlignment="Bottom"
-        Width="75" Grid.Column="1" Click="btnLoadImg_Click"  >Load img</Button>
-                    <Label x:Name="cFileName" Height="40" HorizontalAlignment="Right" Foreground="White"   Margin="0,-70,30,0"></Label>
+                    
                     <Grid Height="26">
                         <Label Foreground="White" Margin="90,-5,0,0">Name</Label>
                         <TextBox MaxLength="16" x:Name="textBoxFname"  HorizontalAlignment="Left"  Width="90"/>
@@ -122,15 +118,21 @@
                         </ComboBox>
 
                     </Grid>
+                    <Image  Margin="12,-220,26,280" HorizontalAlignment="Right"  Name="imgPhoto" Height="64" Width="64" />
+                    <Button Margin="12,-275,26,300" HorizontalAlignment="Right" Height="23" 
+        Name="btnLoadImg" VerticalAlignment="Bottom"
+        Width="75" Grid.Column="1" Click="btnLoadImg_Click"  >Load img</Button>
+                    <Label Margin="12,-570,26,200"  x:Name="cFileName" Height="30" HorizontalAlignment="Right" Width="240" Foreground="White"   ></Label>
                 </StackPanel>
-                <StackPanel x:Name="formTeacher"  Visibility="Hidden" Background="Transparent" Height="120" Width="460" VerticalAlignment="Bottom"  Margin="-440,0,0,0">
+                <StackPanel x:Name="formTeacher"  Visibility="Hidden" Background="Transparent" Height="120" Width="460" VerticalAlignment="Bottom"  Margin="-440,100,0,0">
                     <Grid Height="26">
-                        <Label Foreground="White" Margin="0,-150,30,150" HorizontalAlignment="Right">Add new subject to timetable</Label>
-                        <TextBox  MaxLength="16" Margin="200,-250,0,0" x:Name="textboxLesson" Width="90" Height="30"></TextBox>
-                        <DatePicker  Margin="0,-250,0,0" Width="30" Height="30" x:Name="datepickerLesson"></DatePicker>
-                        <Button Content="+"  x:Name="addLessonBtn" Height="25" Width="25"  Margin="0,-250,25,0" HorizontalAlignment="Right" Click="addLessonBtn_Click"  />
-                        <Button Content="-"  x:Name="deleteLessonBtn" Height="25" Width="25"  Margin="0,-250,50,0" HorizontalAlignment="Right" Click="deleteLessonBtn_Click"   />
-                        <ListView x:Name="lessonsListView" Width="180" HorizontalAlignment="Right" Margin="0,-80,25,0">
+                        <Label Foreground="White" Margin="0,-110,30,0" HorizontalAlignment="Right">Add new subject to timetable</Label>
+                        <TextBox  MaxLength="16" Margin="210,-150,0,0" x:Name="textboxLesson" Width="90" Height="30"></TextBox>
+                        <DatePicker  Margin="80,-150,0,0" Width="30" Height="30" x:Name="datepickerLesson"></DatePicker>
+                        <Button Content="+"  x:Name="addLessonBtn" Height="25" Width="25"  Margin="0,-150,25,0" HorizontalAlignment="Right" Click="addLessonBtn_Click"  />
+                        <Button Content="-"  x:Name="deleteLessonBtn" Height="25" Width="25"  Margin="0,-150,50,0" HorizontalAlignment="Right" Click="deleteLessonBtn_Click"   />
+                       
+                        <ListView x:Name="lessonsListView" Width="180" HorizontalAlignment="Right" Margin="0,-40,25,-40">
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn Header="name" DisplayMemberBinding="{Binding name}"/>
@@ -153,7 +155,7 @@
                 
 
                 </StackPanel>
-                <StackPanel x:Name="formStudent"   Background="Transparent" Height="90" Width="460" VerticalAlignment="Bottom"   Margin="-440,0,0,0">
+                <StackPanel x:Name="formStudent"   Background="Transparent" Height="90" Width="460" VerticalAlignment="Bottom"   Margin="-440,100,0,0">
                     <Grid Height="26">
                         <Label Foreground="White" Margin="90,-5,0,0">class</Label>
                         <ComboBox  x:Name="comboBoxCurrentClass"   HorizontalAlignment="Left"  Width="90"/>
@@ -164,7 +166,7 @@
                         <ComboBox  x:Name="comboBoxCurrentGroup"   HorizontalAlignment="Left"  Width="90"/>
                     </Grid>
                 </StackPanel>
-                <StackPanel  Visibility="Hidden" x:Name="formEmployee" Background="Transparent" Height="90" Width="460"   VerticalAlignment="Bottom"   Margin="-440,0,0,0">
+                <StackPanel  Visibility="Hidden" x:Name="formEmployee" Background="Transparent" Height="90" Width="460"   VerticalAlignment="Bottom"   Margin="-440,100,0,0">
                     <Grid Height="26">
                         <Label Foreground="White" Margin="90,-5,0,0">Date of Employment</Label>
                         <DatePicker  x:Name="EdatePickerEmployment"   HorizontalAlignment="Left"  Width="90"/>

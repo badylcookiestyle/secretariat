@@ -43,9 +43,13 @@ namespace secretary.views
 
             initializeGroupCombobox();
             initializeClassesCombobox();
-          
-        
 
+
+            DbHelper.basicDelete("teachers");
+
+            DbHelper.basicDelete("students");
+
+            DbHelper.basicDelete("employees");
             DataGrid1.ItemsSource = DbHelper.basicSelect(currentTable).DefaultView;
         }
         private void initializeGroupCombobox()
@@ -129,8 +133,7 @@ namespace secretary.views
             string taughtSubjectsJson = JsonSerializer.Serialize(lessons);
 
              Teacher newTeacher = new Teacher();
-            var fileName=selectedFilePath;
-            File.Move(selectedFilePath,@"/images/"+newTeacher.pesel+".png");
+          
 
              newTeacher.firstName = textBoxFname.Text;
              newTeacher.secondName = textBoxFname.Text;
@@ -139,16 +142,21 @@ namespace secretary.views
              newTeacher.fathersName = textBoxFthName.Text;
              newTeacher.mothersName = textBoxMthName.Text;
              newTeacher.birthDate = datePickerBirthDate.SelectedDate.Value.Date;
-             newTeacher.pesel = new []{ textBoxPesel.Text};
-             newTeacher.imagePath = "pathhh";
+             newTeacher.pesel = textBoxPesel.Text;
+
+            var newPath = Environment.CurrentDirectory + "/images/" + newTeacher.pesel + ".png";
+            File.Copy(selectedFilePath, newPath);
+            newTeacher.imagePath = newPath;
              newTeacher.classTutor = textBoxTutor.Text;
              newTeacher.taughtSubjects = taughtSubjectsJson;
              newTeacher.gender = gender;
              newTeacher.dateOfEmployment = TdatePickerEmployment.SelectedDate.Value.Date;
 
-         
-             DbHelper.insertTeacher(newTeacher);
+
+            DbHelper.insertTeacher(newTeacher);
              DataGrid1.ItemsSource = DbHelper.basicSelect(currentTable).DefaultView;
+
+
 
          }
          private void addStudent()
@@ -156,42 +164,54 @@ namespace secretary.views
              char gender = comboBoxGender.SelectedItem.ToString() == "Male" ? 'M' : 'F';
 
              Student newStudent = new Student();
-
-             newStudent.firstName = textBoxFname.Text;
+        
+            newStudent.firstName = textBoxFname.Text;
              newStudent.secondName = textBoxFname.Text;
              newStudent.lastname = textBoxLname.Text;
              newStudent.maidenName = textBoxMaiName.Text;
              newStudent.fathersName = textBoxFthName.Text;
              newStudent.mothersName = textBoxMthName.Text;
              newStudent.birthDate = datePickerBirthDate.SelectedDate.Value.Date;
-             newStudent.pesel = new string[] { textBoxPesel.Text };
-             newStudent.imagePath = "pathhh";
+             newStudent.pesel =textBoxPesel.Text;
+            var newPath = Environment.CurrentDirectory + "/images/" + newStudent.pesel + ".png";
+            File.Copy(selectedFilePath, newPath);
+
+
+            newStudent.imagePath = newPath;
              newStudent.gender = gender;
              newStudent.currentClass = comboBoxCurrentGroup.Text;
             formStudent.Visibility = Visibility.Hidden;
-             //  persons.Add(newStudent);
-             DbHelper.insertStudent(newStudent);
+
+      
+
+            DbHelper.insertStudent(newStudent);
              DataGrid1.ItemsSource = DbHelper.basicSelect(currentTable).DefaultView;
          }
          private void addEmployee()
          {
              char gender = comboBoxGender.SelectedItem.ToString() == "Male" ? 'M' : 'F';
+         
+            Employee newEmployee = new Employee();
+         
 
-             Employee newEmployee = new Employee();
-
-             newEmployee.firstName = textBoxFname.Text;
+            newEmployee.firstName = textBoxFname.Text;
              newEmployee.secondName = textBoxFname.Text;
              newEmployee.lastname = textBoxLname.Text;
              newEmployee.maidenName = textBoxMaiName.Text;
              newEmployee.fathersName = textBoxFthName.Text;
              newEmployee.mothersName = textBoxMthName.Text;
              newEmployee.birthDate = datePickerBirthDate.SelectedDate.Value.Date;
-             newEmployee.pesel = new[] { textBoxPesel.Text };
-             newEmployee.imagePath = "pathhh";
+             newEmployee.pesel =  textBoxPesel.Text ;
+            var newPath = Environment.CurrentDirectory + "/images/" + newEmployee.pesel + ".png";
+            File.Copy(selectedFilePath, newPath);
+
+            newEmployee.imagePath = newPath;
              newEmployee.gender = gender;
              newEmployee.jobPosition = textBoxJobPosition.Text;
              newEmployee.jobDescription = textBoxJobPosition.Text;
              newEmployee.dateOfEmployment = EdatePickerEmployment.SelectedDate.Value.Date;
+
+
 
              DbHelper.insertEmployee(newEmployee);
              DataGrid1.ItemsSource = DbHelper.basicSelect(currentTable).DefaultView;
