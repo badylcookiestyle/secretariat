@@ -33,6 +33,7 @@ namespace secretary.views
         string selectedFilePath;
 
         DataTable raportData;
+        string raportDataString="";
 
         List<Lesson> lessons = new List<Lesson>();
         bool isBeingEdited = false;
@@ -41,28 +42,25 @@ namespace secretary.views
         {
             InitializeComponent();
 
-            studentRadio.IsChecked=true;
-
- 
+            studentRadio.IsChecked = true;
 
             initializeGroupCombobox();
             initializeClassesCombobox();
-
-
-           
+            reloadData();
             DataGrid1.ItemsSource = DbHelper.basicSelect(currentTable).DefaultView;
         }
+
         private void initializeGroupCombobox()
         {
             var rows = DbHelper.basicSelect("groups").DefaultView;
 
-            for (int i = 0; i<rows.Count; i++)  
+            for (int i = 0; i < rows.Count; i++)
             {
-               // your code goes here
-                 var row = rows[i];
-        comboBoxCurrentGroup.Items.Add(row["name"]);
+                // your code goes here
+                var row = rows[i];
+                comboBoxCurrentGroup.Items.Add(row["name"]);
             }
-}
+        }
 
         private void initializeClassesCombobox()
         {
@@ -75,211 +73,199 @@ namespace secretary.views
                 comboBoxCurrentClass.Items.Add(row["name"]);
             }
         }
+
         private void initializeTableFieldsCombobox()
         {
             comboBoxSelectField.Items.Clear();
-           var rows = DbHelper.basicSelect(currentTable).DefaultView;
+            var rows = DbHelper.basicSelect(currentTable).DefaultView;
             for (var i = 0; i < DataGrid1.Columns.Count; i++)
             {
                 var name = DataGrid1.Columns[i].Header;
                 comboBoxSelectField.Items.Add(name.ToString());
             }
-        
-
         }
 
-       
         private void TeacherFormBtn_Click(object sender, RoutedEventArgs e)
-          {
-              TeacherFormBtn.Foreground = new SolidColorBrush(Colors.Purple);
-              StudentFormBtn.Foreground = new SolidColorBrush(Colors.White);
-              EmployeeFormBtn.Foreground = new SolidColorBrush(Colors.White);
+        {
+            TeacherFormBtn.Foreground = new SolidColorBrush(Colors.Purple);
+            StudentFormBtn.Foreground = new SolidColorBrush(Colors.White);
+            EmployeeFormBtn.Foreground = new SolidColorBrush(Colors.White);
 
-              formTeacher.Visibility = Visibility.Visible;
-              formStudent.Visibility = Visibility.Hidden;
-              formEmployee.Visibility = Visibility.Hidden;
+            formTeacher.Visibility = Visibility.Visible;
+            formStudent.Visibility = Visibility.Hidden;
+            formEmployee.Visibility = Visibility.Hidden;
 
-              currentForm = "Teacher";
-          }
+            currentForm = "Teacher";
+        }
 
-          private void StudentFormBtn_Click(object sender, RoutedEventArgs e)
-          {
-              TeacherFormBtn.Foreground = new SolidColorBrush(Colors.White);
-              StudentFormBtn.Foreground = new SolidColorBrush(Colors.Purple);
-              EmployeeFormBtn.Foreground = new SolidColorBrush(Colors.White);
+        private void StudentFormBtn_Click(object sender, RoutedEventArgs e)
+        {
+            TeacherFormBtn.Foreground = new SolidColorBrush(Colors.White);
+            StudentFormBtn.Foreground = new SolidColorBrush(Colors.Purple);
+            EmployeeFormBtn.Foreground = new SolidColorBrush(Colors.White);
 
-              formTeacher.Visibility = Visibility.Hidden;
-              formStudent.Visibility = Visibility.Visible;
-              formEmployee.Visibility = Visibility.Hidden;
+            formTeacher.Visibility = Visibility.Hidden;
+            formStudent.Visibility = Visibility.Visible;
+            formEmployee.Visibility = Visibility.Hidden;
 
-              currentForm = "Student";
-          }
+            currentForm = "Student";
+        }
 
-          private void EmployeeFormBtn_Click(object sender, RoutedEventArgs e)
-          {
-              TeacherFormBtn.Foreground = new SolidColorBrush(Colors.White);
-              StudentFormBtn.Foreground = new SolidColorBrush(Colors.White);
-              EmployeeFormBtn.Foreground = new SolidColorBrush(Colors.Purple);
+        private void EmployeeFormBtn_Click(object sender, RoutedEventArgs e)
+        {
+            TeacherFormBtn.Foreground = new SolidColorBrush(Colors.White);
+            StudentFormBtn.Foreground = new SolidColorBrush(Colors.White);
+            EmployeeFormBtn.Foreground = new SolidColorBrush(Colors.Purple);
 
-              formTeacher.Visibility = Visibility.Hidden;
-              formStudent.Visibility = Visibility.Hidden;
-              formEmployee.Visibility = Visibility.Visible;
+            formTeacher.Visibility = Visibility.Hidden;
+            formStudent.Visibility = Visibility.Hidden;
+            formEmployee.Visibility = Visibility.Visible;
 
-              currentForm = "Employee";
-          }
-        
-         private void addTeacher()
-         {
-            currentTable = "teachers";
-          //  comboBoxGender.SelectedItem.
+            currentForm = "Employee";
+        }
+
+        private void addTeacher()
+        {
+            
+ 
             char gender = comboBoxGender.SelectedItem.ToString() == "Male" ? 'M' : 'F';
             string taughtSubjectsJson = JsonSerializer.Serialize(lessons);
 
-             Teacher newTeacher = new Teacher();
-          
+            Teacher newTeacher = new Teacher();
 
-             newTeacher.firstName = textBoxFname.Text;
-             newTeacher.secondName = textBoxFname.Text;
-             newTeacher.lastname = textBoxLname.Text;
-             newTeacher.maidenName = textBoxMaiName.Text;
-             newTeacher.fathersName = textBoxFthName.Text;
-             newTeacher.mothersName = textBoxMthName.Text;
-             newTeacher.birthDate = datePickerBirthDate.SelectedDate.Value.Date;
-             newTeacher.pesel = textBoxPesel.Text;
+            newTeacher.firstName = textBoxFname.Text;
+            newTeacher.secondName = textBoxFname.Text;
+            newTeacher.lastname = textBoxLname.Text;
+            newTeacher.maidenName = textBoxMaiName.Text;
+            newTeacher.fathersName = textBoxFthName.Text;
+            newTeacher.mothersName = textBoxMthName.Text;
+            newTeacher.birthDate = datePickerBirthDate.SelectedDate.Value.Date;
+            newTeacher.pesel = textBoxPesel.Text;
 
             var newPath = Environment.CurrentDirectory + "/images/" + newTeacher.pesel + ".png";
             File.Copy(selectedFilePath, newPath);
             newTeacher.imagePath = newPath;
-             newTeacher.classTutor = textBoxTutor.Text;
-             newTeacher.taughtSubjects = taughtSubjectsJson;
-             newTeacher.gender = gender;
-             newTeacher.dateOfEmployment = TdatePickerEmployment.SelectedDate.Value.Date;
+            newTeacher.classTutor = textBoxTutor.Text;
+            newTeacher.taughtSubjects = taughtSubjectsJson;
+            newTeacher.gender = gender;
+            newTeacher.dateOfEmployment = TdatePickerEmployment.SelectedDate.Value.Date;
 
 
             DbHelper.insertTeacher(newTeacher);
-             DataGrid1.ItemsSource = DbHelper.basicSelect(currentTable).DefaultView;
+            DataGrid1.ItemsSource = DbHelper.basicSelect(currentTable).DefaultView;
 
 
 
-         }
-         private void addStudent()
-         {
-             char gender = comboBoxGender.SelectedItem.ToString() == "Male" ? 'M' : 'F';
+        }
+        private void addStudent()
+        {
+            char gender = comboBoxGender.SelectedItem.ToString() == "Male" ? 'M' : 'F';
 
-             Student newStudent = new Student();
-        
+            Student newStudent = new Student();
+
             newStudent.firstName = textBoxFname.Text;
-             newStudent.secondName = textBoxFname.Text;
-             newStudent.lastname = textBoxLname.Text;
-             newStudent.maidenName = textBoxMaiName.Text;
-             newStudent.fathersName = textBoxFthName.Text;
-             newStudent.mothersName = textBoxMthName.Text;
-             newStudent.birthDate = datePickerBirthDate.SelectedDate.Value.Date;
-             newStudent.pesel =textBoxPesel.Text;
+            newStudent.secondName = textBoxFname.Text;
+            newStudent.lastname = textBoxLname.Text;
+            newStudent.maidenName = textBoxMaiName.Text;
+            newStudent.fathersName = textBoxFthName.Text;
+            newStudent.mothersName = textBoxMthName.Text;
+            newStudent.birthDate = datePickerBirthDate.SelectedDate.Value.Date;
+            newStudent.pesel = textBoxPesel.Text;
+
             var newPath = Environment.CurrentDirectory + "/images/" + newStudent.pesel + ".png";
             File.Copy(selectedFilePath, newPath);
-
-
+            //  newStudent.groups = comboBoxCurrentGroup.SelectedItem.Content.toString();
+            newStudent.groups = "group";
             newStudent.imagePath = newPath;
-             newStudent.gender = gender;
-             newStudent.currentClass = comboBoxCurrentGroup.Text;
+            newStudent.gender = gender;
+            newStudent.currentClass = "class";
             formStudent.Visibility = Visibility.Hidden;
 
-      
-
             DbHelper.insertStudent(newStudent);
-             DataGrid1.ItemsSource = DbHelper.basicSelect(currentTable).DefaultView;
-         }
-         private void addEmployee()
-         {
-             char gender = comboBoxGender.SelectedItem.ToString() == "Male" ? 'M' : 'F';
-         
+            DataGrid1.ItemsSource = DbHelper.basicSelect(currentTable).DefaultView;
+        }
+        private void addEmployee()
+        {
+            char gender = comboBoxGender.SelectedItem.ToString() == "Male" ? 'M' : 'F';
+
             Employee newEmployee = new Employee();
-         
 
             newEmployee.firstName = textBoxFname.Text;
-             newEmployee.secondName = textBoxFname.Text;
-             newEmployee.lastname = textBoxLname.Text;
-             newEmployee.maidenName = textBoxMaiName.Text;
-             newEmployee.fathersName = textBoxFthName.Text;
-             newEmployee.mothersName = textBoxMthName.Text;
-             newEmployee.birthDate = datePickerBirthDate.SelectedDate.Value.Date;
-             newEmployee.pesel =  textBoxPesel.Text ;
-            var newPath = Environment.CurrentDirectory + "/images/" + newEmployee.pesel + ".png";
+            newEmployee.secondName = textBoxFname.Text;
+            newEmployee.lastname = textBoxLname.Text;
+            newEmployee.maidenName = textBoxMaiName.Text;
+            newEmployee.fathersName = textBoxFthName.Text;
+            newEmployee.mothersName = textBoxMthName.Text;
+            newEmployee.birthDate = datePickerBirthDate.SelectedDate.Value.Date;
+            newEmployee.pesel = textBoxPesel.Text;
 
+            var newPath = Environment.CurrentDirectory + "/images/" + newEmployee.pesel + ".png";
             File.Copy(selectedFilePath, newPath);
 
             newEmployee.imagePath = newPath;
-             newEmployee.gender = gender;
-             newEmployee.jobPosition = textBoxJobPosition.Text;
-             newEmployee.jobDescription = textBoxJobPosition.Text;
-             newEmployee.dateOfEmployment = EdatePickerEmployment.SelectedDate.Value.Date;
+            newEmployee.gender = gender;
+            newEmployee.jobPosition = textBoxJobPosition.Text;
+            newEmployee.jobDescription = textBoxJobPosition.Text;
+            newEmployee.dateOfEmployment = EdatePickerEmployment.SelectedDate.Value.Date;
 
-
-
-             DbHelper.insertEmployee(newEmployee);
-             DataGrid1.ItemsSource = DbHelper.basicSelect(currentTable).DefaultView;
-         }
-         private void submitPerson_Click(object sender, RoutedEventArgs e)
-         {
-             if (isBeingEdited == false)
-             {
-                 switch (currentForm)
-                 {
-                     case "Student":
-                         addStudent();
-                         break;
-                     case "Teacher":
-                         addTeacher();
-                         break;
-                     case "Employee":
-                         addEmployee();
-                         break;
-                 }
-             }
-
-         }
-
-        private void TeacherRadioBtn_Click(object sender, RoutedEventArgs e)
+            DbHelper.insertEmployee(newEmployee);
+            DataGrid1.ItemsSource = DbHelper.basicSelect(currentTable).DefaultView;
+        }
+        private void submitPerson_Click(object sender, RoutedEventArgs e)
         {
-            currentTable = "teachers";
+            if (isBeingEdited == false)
+            {
+                switch (currentForm)
+                {
+                    case "Student":
+                        addStudent();
+                        break;
+                    case "Teacher":
+                        addTeacher();
+                        break;
+                    case "Employee":
+                        addEmployee();
+                        break;
+                }
+            }
+
+        }
+        private void reloadData()
+        {
 
             DataGrid1.ItemsSource = DbHelper.basicSelect(currentTable).DefaultView;
             initializeTableFieldsCombobox();
-          raportData = DbHelper.basicSelect(currentTable);
+            raportData = DbHelper.basicSelect(currentTable);
             DataGrid1.ItemsSource = raportData.DefaultView;
+        }
+        private void TeacherRadioBtn_Click(object sender, RoutedEventArgs e)
+        {
+            currentTable = "teachers";
+            reloadData();
         }
 
         private void StudentRadioBtn_Click(object sender, RoutedEventArgs e)
         {
             currentTable = "students";
-
-            DataGrid1.ItemsSource = DbHelper.basicSelect(currentTable).DefaultView;
-            initializeTableFieldsCombobox();
-            raportData = DbHelper.basicSelect(currentTable);
-            DataGrid1.ItemsSource = raportData.DefaultView;
+            reloadData();
         }
 
         private void EmployeeRadioBtn_Click(object sender, RoutedEventArgs e)
         {
             currentTable = "employees";
-
-             DataGrid1.ItemsSource = DbHelper.basicSelect(currentTable).DefaultView;
-            initializeTableFieldsCombobox();
-            raportData = DbHelper.basicSelect(currentTable);
-            DataGrid1.ItemsSource = raportData.DefaultView;
+            reloadData();
         }
 
         private void SearchBtn_Click(object sender, RoutedEventArgs e)
         {
-           
+
             if (textBoxSearcher.Text != "")
             {
                 try
                 {
                     if (comboBoxSelectField.SelectedItem.ToString() != "id")
                     {
-                        raportData  = DbHelper.likeSelect(currentTable, textBoxSearcher.Text, comboBoxSelectField.SelectedItem.ToString());
+                        raportData = DbHelper.likeSelect(currentTable, textBoxSearcher.Text, comboBoxSelectField.SelectedItem.ToString());
                         DataGrid1.ItemsSource = raportData.DefaultView;
                     }
                     else
@@ -287,17 +273,17 @@ namespace secretary.views
                         raportData = DbHelper.idSelect(currentTable, textBoxSearcher.Text);
                         DataGrid1.ItemsSource = raportData.DefaultView;
                     }
-                    }
+                }
                 catch (Exception er)
                 {
 
                 }
-                }
+            }
         }
 
         private void addLessonBtn_Click(object sender, RoutedEventArgs e)
         {
-            lessonsListView.Items.Add(new Lesson{name= textboxLesson.Text, lessonTime = datepickerLesson.SelectedDate.Value.Date });
+            lessonsListView.Items.Add(new Lesson { name = textboxLesson.Text, lessonTime = datepickerLesson.SelectedDate.Value.Date });
             lessons.Add(new Lesson { name = "fdsa", lessonTime = DateTime.Now });
         }
 
@@ -316,7 +302,7 @@ namespace secretary.views
             if (op.ShowDialog() == true)
             {
 
-                selectedFilePath =op.FileName;
+                selectedFilePath = op.FileName;
                 cFileName.Content = selectedFilePath;
                 imgPhoto.Source = new BitmapImage(new Uri(op.FileName));
             }
@@ -340,42 +326,50 @@ namespace secretary.views
                 dataTable.Rows.Add(values);
             }
             return dataTable;
-        
-    }
-         
+
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-          
-          //DbHelper.saveDbChanges(DataGrid1.);
+            DbHelper.basicDelete("teachers");
+            DbHelper.basicDelete("students");
+            DbHelper.basicDelete("employees");
+
         }
         private void columnHeader_Click(object sender, RoutedEventArgs e)
         {
             var id = DataGrid1.SelectedCells[0];
-            cFileName.Content = id+"";
+            cFileName.Content = id + "";
 
         }
 
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+            DbHelper.basicDelete("teachers");
+            DbHelper.basicDelete("students");
+            DbHelper.basicDelete("employees");
 
         }
 
         private void generateRaportBtn_Click(object sender, RoutedEventArgs e)
         {
-            string result="";
+    
             foreach (DataRow row in raportData.Rows)
             {
+
                 for (int i = 0; i < raportData.Columns.Count; i++)
                 {
-                    result+=(row[i].ToString());
-                    result+=(i == raportData.Columns.Count - 1 ? "\n" : ",");
+                 
+                    raportDataString += "|"+(row[i].ToString());
+                    raportDataString += (i == raportData.Columns.Count - 1 ? "\n" : "|");
                 }
-                result += "\n";
+                raportDataString += "| \n";
             }
             SaveFileDialog saveDialog = new SaveFileDialog();
             if (saveDialog.ShowDialog() == true)
-                File.WriteAllText(saveDialog.FileName, result);
+                File.WriteAllText(saveDialog.FileName, raportDataString);
+            MessageBox.Show("Your raport has already been saved"+raportDataString);
         }
     }
 }

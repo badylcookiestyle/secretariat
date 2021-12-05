@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Data.SQLite;
 using System.Data;
-using System.Data.SQLite;
+ 
 namespace secretary.dbHelper
 {
     public static class DbHelper

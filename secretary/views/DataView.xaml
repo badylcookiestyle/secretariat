@@ -8,8 +8,8 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Margin="130,0,0,0" Background="Transparent">
         <Label Content="Upload data" HorizontalAlignment="Left" Margin="0,116,0,0" VerticalAlignment="Top" Foreground="#FFF9F9F9"/>
-        <Label Content="Save data" HorizontalAlignment="Left" Margin="120,116,0,0" VerticalAlignment="Top" Foreground="#FFF9F9F9"/>
-        <Button  Content="Button" HorizontalAlignment="Left" Margin="120,147,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lll" Content="Save data" HorizontalAlignment="Left" Margin="120,116,0,0" VerticalAlignment="Top" Foreground="#FFF9F9F9"/>
+        <Button  x:Name="uploadDataBtn" Content="Button" HorizontalAlignment="Left" Margin="131,147,0,0" VerticalAlignment="Top" Click="uploadDataBtn_Click"/>
         <Button x:Name="saveDataBtn"  Content="Button" HorizontalAlignment="Left" Margin="0,142,0,0" VerticalAlignment="Top" Click="saveDataBtn_Click"/>
     </Grid>
 </UserControl>

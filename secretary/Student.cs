@@ -7,6 +7,6 @@ namespace secretary
    public class Student : Person
     {
         public string currentClass;
-        public string[] groups;
+        public string groups;
     }
 }
