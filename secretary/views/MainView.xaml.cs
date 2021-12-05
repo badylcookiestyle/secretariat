@@ -16,7 +16,9 @@ using System.Data.SQLite;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
 using System.IO;
+using System.Reflection;
 
+using System.Collections.Generic;
 //using dbhelper;
 using System.Text.Json;
 namespace secretary.views
@@ -29,6 +31,8 @@ namespace secretary.views
         string currentForm = "Student";
         string currentTable = "students";
         string selectedFilePath;
+
+        DataTable raportData;
 
         List<Lesson> lessons = new List<Lesson>();
         bool isBeingEdited = false;
@@ -45,11 +49,7 @@ namespace secretary.views
             initializeClassesCombobox();
 
 
-            DbHelper.basicDelete("teachers");
-
-            DbHelper.basicDelete("students");
-
-            DbHelper.basicDelete("employees");
+           
             DataGrid1.ItemsSource = DbHelper.basicSelect(currentTable).DefaultView;
         }
         private void initializeGroupCombobox()
@@ -63,6 +63,7 @@ namespace secretary.views
         comboBoxCurrentGroup.Items.Add(row["name"]);
             }
 }
+
         private void initializeClassesCombobox()
         {
             var rows = DbHelper.basicSelect("classes").DefaultView;
@@ -86,6 +87,8 @@ namespace secretary.views
         
 
         }
+
+       
         private void TeacherFormBtn_Click(object sender, RoutedEventArgs e)
           {
               TeacherFormBtn.Foreground = new SolidColorBrush(Colors.Purple);
@@ -203,6 +206,7 @@ namespace secretary.views
              newEmployee.birthDate = datePickerBirthDate.SelectedDate.Value.Date;
              newEmployee.pesel =  textBoxPesel.Text ;
             var newPath = Environment.CurrentDirectory + "/images/" + newEmployee.pesel + ".png";
+
             File.Copy(selectedFilePath, newPath);
 
             newEmployee.imagePath = newPath;
@@ -239,25 +243,31 @@ namespace secretary.views
         private void TeacherRadioBtn_Click(object sender, RoutedEventArgs e)
         {
             currentTable = "teachers";
+
             DataGrid1.ItemsSource = DbHelper.basicSelect(currentTable).DefaultView;
             initializeTableFieldsCombobox();
-            DataGrid1.ItemsSource = DbHelper.basicSelect(currentTable).DefaultView;
+          raportData = DbHelper.basicSelect(currentTable);
+            DataGrid1.ItemsSource = raportData.DefaultView;
         }
 
         private void StudentRadioBtn_Click(object sender, RoutedEventArgs e)
         {
             currentTable = "students";
+
             DataGrid1.ItemsSource = DbHelper.basicSelect(currentTable).DefaultView;
             initializeTableFieldsCombobox();
-            DataGrid1.ItemsSource = DbHelper.basicSelect(currentTable).DefaultView;
+            raportData = DbHelper.basicSelect(currentTable);
+            DataGrid1.ItemsSource = raportData.DefaultView;
         }
 
         private void EmployeeRadioBtn_Click(object sender, RoutedEventArgs e)
         {
             currentTable = "employees";
+
              DataGrid1.ItemsSource = DbHelper.basicSelect(currentTable).DefaultView;
             initializeTableFieldsCombobox();
-            DataGrid1.ItemsSource = DbHelper.basicSelect(currentTable).DefaultView;
+            raportData = DbHelper.basicSelect(currentTable);
+            DataGrid1.ItemsSource = raportData.DefaultView;
         }
 
         private void SearchBtn_Click(object sender, RoutedEventArgs e)
@@ -269,11 +279,13 @@ namespace secretary.views
                 {
                     if (comboBoxSelectField.SelectedItem.ToString() != "id")
                     {
-                        DataGrid1.ItemsSource = DbHelper.likeSelect(currentTable, textBoxSearcher.Text, comboBoxSelectField.SelectedItem.ToString()).DefaultView;
+                        raportData  = DbHelper.likeSelect(currentTable, textBoxSearcher.Text, comboBoxSelectField.SelectedItem.ToString());
+                        DataGrid1.ItemsSource = raportData.DefaultView;
                     }
                     else
                     {
-                        DataGrid1.ItemsSource = DbHelper.idSelect(currentTable, textBoxSearcher.Text).DefaultView;
+                        raportData = DbHelper.idSelect(currentTable, textBoxSearcher.Text);
+                        DataGrid1.ItemsSource = raportData.DefaultView;
                     }
                     }
                 catch (Exception er)
@@ -310,5 +322,61 @@ namespace secretary.views
             }
 
         }
+        public static DataTable DataGridConverter<T>(List<T> items)
+        {
+            DataTable dataTable = new DataTable(typeof(T).Name);
+            PropertyInfo[] Props = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            foreach (PropertyInfo prop in Props)
+            {
+                dataTable.Columns.Add(prop.Name);
+            }
+            foreach (T item in items)
+            {
+                var values = new object[Props.Length];
+                for (int i = 0; i < Props.Length; i++)
+                {
+                    values[i] = Props[i].GetValue(item, null);
+                }
+                dataTable.Rows.Add(values);
+            }
+            return dataTable;
+        
+    }
+         
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+          
+          //DbHelper.saveDbChanges(DataGrid1.);
+        }
+        private void columnHeader_Click(object sender, RoutedEventArgs e)
+        {
+            var id = DataGrid1.SelectedCells[0];
+            cFileName.Content = id+"";
+
+        }
+
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void generateRaportBtn_Click(object sender, RoutedEventArgs e)
+        {
+            string result="";
+            foreach (DataRow row in raportData.Rows)
+            {
+                for (int i = 0; i < raportData.Columns.Count; i++)
+                {
+                    result+=(row[i].ToString());
+                    result+=(i == raportData.Columns.Count - 1 ? "\n" : ",");
+                }
+                result += "\n";
+            }
+            SaveFileDialog saveDialog = new SaveFileDialog();
+            if (saveDialog.ShowDialog() == true)
+                File.WriteAllText(saveDialog.FileName, result);
+        }
     }
 }
+//

@@ -41,7 +41,10 @@ namespace Secretary
             Header.PopupText.Text = btnDesc;
         }
 
-
+        private void PasteCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            
+        }
         private void MainViewMouse_Entr(object sender, MouseEventArgs e)
         {
             displayCloud("Home", MainViewBtn);

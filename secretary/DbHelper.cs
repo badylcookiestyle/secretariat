@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Data.SQLite;
 using System.Data;
+using System.Data.SQLite;
 namespace secretary.dbHelper
 {
     public static class DbHelper
@@ -31,15 +32,15 @@ namespace secretary.dbHelper
 
             sqlConnection.Close();
         }
-     
+
         public static DataTable basicSelect(string curTable)
         {
             connectToDb();
 
             sqlConnection.Open();
             sqlQuery = sqlConnection.CreateCommand();
-            
-            dbAdapter = new SQLiteDataAdapter("SELECT * FROM "+curTable, sqlConnection);
+
+            dbAdapter = new SQLiteDataAdapter("SELECT * FROM " + curTable, sqlConnection);
             dataSet.Reset();
             dbAdapter.Fill(dataSet);
             dataTable = dataSet.Tables[0];
@@ -47,6 +48,9 @@ namespace secretary.dbHelper
             sqlConnection.Close();
 
             return dataTable;
+        }
+        public static void saveDbChanges(DataTable cTable){
+            dbAdapter.Update(cTable);
         }
         public static DataTable likeSelect(string curTable,string lText,string cField)
         {
@@ -148,7 +152,7 @@ namespace secretary.dbHelper
             // jsonDump = convertTableToString(teachers);
            // jsonDump = convertTableToString(students);
             //jsonDump += convertTableToString(employees);
-            jsonDump = convertTableToString(teachers);
+            jsonDump = convertTableToString(students);
             return jsonDump;
         }
     }

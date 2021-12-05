@@ -44,8 +44,17 @@ Sixth test 04.12.2021
 - checking if file uploader works
 - cheking if db dumper works 
 === test results ===
-
 - file uploader works 
 - db dumper isn't able to dump more than 1 table :e
 -  I haven't implement form validation yet, I should implement form cleaner :o
+
+Seventh test 05.12.2021
+=== test goals ===
+- checking if raport generator works :o
+- checking if db dumper started working magically without my intervention
+=== test results ===
+- raport generator works
+- btw  db dumper isn't able to dump more than 1 table :e
+- btw  I haven't implement form validation yet, I should implement form cleaner :o
+
 

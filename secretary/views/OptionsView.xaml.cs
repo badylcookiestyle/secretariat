@@ -10,7 +10,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using secretary.dbHelper;
+ 
+using System.Data.SQLite;
 namespace secretary.views
 {
     /// <summary>
@@ -21,6 +23,13 @@ namespace secretary.views
         public OptionsView()
         {
             InitializeComponent();
+            Datagrid1.ItemsSource = DbHelper.basicSelect("teachers").DefaultView;
         }
+
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
     }
 }
