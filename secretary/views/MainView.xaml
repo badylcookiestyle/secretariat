@@ -6,10 +6,311 @@
              xmlns:local="clr-namespace:secretary.views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="1200">
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="Expander.Static.Circle.Stroke" Color="#FF333333"/>
+        <SolidColorBrush x:Key="Expander.Static.Circle.Fill" Color="#FFFFFFFF"/>
+        <SolidColorBrush x:Key="Expander.Static.Arrow.Stroke" Color="#FF333333"/>
+        <SolidColorBrush x:Key="Expander.MouseOver.Circle.Stroke" Color="#FF5593FF"/>
+        <SolidColorBrush x:Key="Expander.MouseOver.Circle.Fill" Color="#FFF3F9FF"/>
+        <SolidColorBrush x:Key="Expander.MouseOver.Arrow.Stroke" Color="#FF000000"/>
+        <SolidColorBrush x:Key="Expander.Pressed.Circle.Stroke" Color="#FF3C77DD"/>
+        <SolidColorBrush x:Key="Expander.Pressed.Circle.Fill" Color="#FFD9ECFF"/>
+        <SolidColorBrush x:Key="Expander.Pressed.Arrow.Stroke" Color="#FF000000"/>
+        <SolidColorBrush x:Key="Expander.Disabled.Circle.Stroke" Color="#FFBCBCBC"/>
+        <SolidColorBrush x:Key="Expander.Disabled.Circle.Fill" Color="#FFE6E6E6"/>
+        <SolidColorBrush x:Key="Expander.Disabled.Arrow.Stroke" Color="#FF707070"/>
+        <Style x:Key="ExpanderHeaderFocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Border>
+                            <Rectangle Margin="0" StrokeDashArray="1 2" SnapsToDevicePixels="true" StrokeThickness="1" Stroke="Black"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ExpanderDownHeaderStyle" TargetType="{x:Type ToggleButton}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <Border Padding="{TemplateBinding Padding}">
+                            <Grid Background="Transparent" SnapsToDevicePixels="False">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="19"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Ellipse x:Name="circle" Fill="{StaticResource Expander.Static.Circle.Fill}" HorizontalAlignment="Center" Height="19" Stroke="{StaticResource Expander.Static.Circle.Stroke}" VerticalAlignment="Center" Width="19"/>
+                                <Path x:Name="arrow" Data="M 1,1.5 L 4.5,5 L 8,1.5" HorizontalAlignment="Center" SnapsToDevicePixels="false" StrokeThickness="2" Stroke="{StaticResource Expander.Static.Arrow.Stroke}" VerticalAlignment="Center"/>
+                                <ContentPresenter Grid.Column="1" HorizontalAlignment="Left" Margin="4,0,0,0" RecognizesAccessKey="True" SnapsToDevicePixels="True" VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="true">
+                                <Setter Property="Data" TargetName="arrow" Value="M 1,4.5  L 4.5,1  L 8,4.5"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Stroke" TargetName="circle" Value="{StaticResource Expander.MouseOver.Circle.Stroke}"/>
+                                <Setter Property="Fill" TargetName="circle" Value="{StaticResource Expander.MouseOver.Circle.Fill}"/>
+                                <Setter Property="Stroke" TargetName="arrow" Value="{StaticResource Expander.MouseOver.Arrow.Stroke}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Stroke" TargetName="circle" Value="{StaticResource Expander.Pressed.Circle.Stroke}"/>
+                                <Setter Property="StrokeThickness" TargetName="circle" Value="1.5"/>
+                                <Setter Property="Fill" TargetName="circle" Value="{StaticResource Expander.Pressed.Circle.Fill}"/>
+                                <Setter Property="Stroke" TargetName="arrow" Value="{StaticResource Expander.Pressed.Arrow.Stroke}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Stroke" TargetName="circle" Value="{StaticResource Expander.Disabled.Circle.Stroke}"/>
+                                <Setter Property="Fill" TargetName="circle" Value="{StaticResource Expander.Disabled.Circle.Fill}"/>
+                                <Setter Property="Stroke" TargetName="arrow" Value="{StaticResource Expander.Disabled.Arrow.Stroke}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ExpanderUpHeaderStyle" TargetType="{x:Type ToggleButton}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <Border Padding="{TemplateBinding Padding}">
+                            <Grid Background="Transparent" SnapsToDevicePixels="False">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="19"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid>
+                                    <Grid.LayoutTransform>
+                                        <TransformGroup>
+                                            <TransformGroup.Children>
+                                                <TransformCollection>
+                                                    <RotateTransform Angle="180"/>
+                                                </TransformCollection>
+                                            </TransformGroup.Children>
+                                        </TransformGroup>
+                                    </Grid.LayoutTransform>
+                                    <Ellipse x:Name="circle" Fill="{StaticResource Expander.Static.Circle.Fill}" HorizontalAlignment="Center" Height="19" Stroke="{StaticResource Expander.Static.Circle.Stroke}" VerticalAlignment="Center" Width="19"/>
+                                    <Path x:Name="arrow" Data="M 1,1.5 L 4.5,5 L 8,1.5" HorizontalAlignment="Center" SnapsToDevicePixels="false" StrokeThickness="2" Stroke="{StaticResource Expander.Static.Arrow.Stroke}" VerticalAlignment="Center"/>
+                                </Grid>
+                                <ContentPresenter Grid.Column="1" HorizontalAlignment="Left" Margin="4,0,0,0" RecognizesAccessKey="True" SnapsToDevicePixels="True" VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="true">
+                                <Setter Property="Data" TargetName="arrow" Value="M 1,4.5  L 4.5,1  L 8,4.5"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Stroke" TargetName="circle" Value="{StaticResource Expander.MouseOver.Circle.Stroke}"/>
+                                <Setter Property="Fill" TargetName="circle" Value="{StaticResource Expander.MouseOver.Circle.Fill}"/>
+                                <Setter Property="Stroke" TargetName="arrow" Value="{StaticResource Expander.MouseOver.Arrow.Stroke}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Stroke" TargetName="circle" Value="{StaticResource Expander.Pressed.Circle.Stroke}"/>
+                                <Setter Property="StrokeThickness" TargetName="circle" Value="1.5"/>
+                                <Setter Property="Fill" TargetName="circle" Value="{StaticResource Expander.Pressed.Circle.Fill}"/>
+                                <Setter Property="Stroke" TargetName="arrow" Value="{StaticResource Expander.Pressed.Arrow.Stroke}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Stroke" TargetName="circle" Value="{StaticResource Expander.Disabled.Circle.Stroke}"/>
+                                <Setter Property="Fill" TargetName="circle" Value="{StaticResource Expander.Disabled.Circle.Fill}"/>
+                                <Setter Property="Stroke" TargetName="arrow" Value="{StaticResource Expander.Disabled.Arrow.Stroke}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ExpanderLeftHeaderStyle" TargetType="{x:Type ToggleButton}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <Border Padding="{TemplateBinding Padding}">
+                            <Grid Background="Transparent" SnapsToDevicePixels="False">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="19"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid>
+                                    <Grid.LayoutTransform>
+                                        <TransformGroup>
+                                            <TransformGroup.Children>
+                                                <TransformCollection>
+                                                    <RotateTransform Angle="90"/>
+                                                </TransformCollection>
+                                            </TransformGroup.Children>
+                                        </TransformGroup>
+                                    </Grid.LayoutTransform>
+                                    <Ellipse x:Name="circle" Fill="{StaticResource Expander.Static.Circle.Fill}" HorizontalAlignment="Center" Height="19" Stroke="{StaticResource Expander.Static.Circle.Stroke}" VerticalAlignment="Center" Width="19"/>
+                                    <Path x:Name="arrow" Data="M 1,1.5 L 4.5,5 L 8,1.5" HorizontalAlignment="Center" SnapsToDevicePixels="false" StrokeThickness="2" Stroke="{StaticResource Expander.Static.Arrow.Stroke}" VerticalAlignment="Center"/>
+                                </Grid>
+                                <ContentPresenter HorizontalAlignment="Center" Margin="0,4,0,0" RecognizesAccessKey="True" Grid.Row="1" SnapsToDevicePixels="True" VerticalAlignment="Top"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="true">
+                                <Setter Property="Data" TargetName="arrow" Value="M 1,4.5  L 4.5,1  L 8,4.5"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Stroke" TargetName="circle" Value="{StaticResource Expander.MouseOver.Circle.Stroke}"/>
+                                <Setter Property="Fill" TargetName="circle" Value="{StaticResource Expander.MouseOver.Circle.Fill}"/>
+                                <Setter Property="Stroke" TargetName="arrow" Value="{StaticResource Expander.MouseOver.Arrow.Stroke}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Stroke" TargetName="circle" Value="{StaticResource Expander.Pressed.Circle.Stroke}"/>
+                                <Setter Property="StrokeThickness" TargetName="circle" Value="1.5"/>
+                                <Setter Property="Fill" TargetName="circle" Value="{StaticResource Expander.Pressed.Circle.Fill}"/>
+                                <Setter Property="Stroke" TargetName="arrow" Value="{StaticResource Expander.Pressed.Arrow.Stroke}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Stroke" TargetName="circle" Value="{StaticResource Expander.Disabled.Circle.Stroke}"/>
+                                <Setter Property="Fill" TargetName="circle" Value="{StaticResource Expander.Disabled.Circle.Fill}"/>
+                                <Setter Property="Stroke" TargetName="arrow" Value="{StaticResource Expander.Disabled.Arrow.Stroke}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ExpanderRightHeaderStyle" TargetType="{x:Type ToggleButton}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <Grid SnapsToDevicePixels="False" Background="Transparent">
+                            <Ellipse HorizontalAlignment="Center" x:Name="circle" VerticalAlignment="Center" Width="15" Height="15" Fill="{DynamicResource ButtonNormalBackgroundFill}" Stroke="DarkGray"/>
+                            <Ellipse Visibility="Hidden" HorizontalAlignment="Center" x:Name="shadow" VerticalAlignment="Center" Width="13" Height="13" Fill="{DynamicResource ExpanderShadowFill}"/>
+                            <Path SnapsToDevicePixels="false" x:Name="arrow" VerticalAlignment="Center" HorizontalAlignment="Center" Stroke="#666" StrokeThickness="2" Data="M1,1 L4,4 7,1" />
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="true">
+                                <Setter Property="Data" TargetName="arrow" Value="M 1,4 L 4,1 L 7,4"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Stroke" TargetName="circle" Value="#666"/>
+                                <Setter Property="Stroke" TargetName="arrow" Value="#222"/>
+                                <Setter Property="Visibility" TargetName="shadow" Value="Visible"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <SolidColorBrush x:Key="GroupBoxBorderBrush" Color="#D0D0BF"/>
+        <SolidColorBrush x:Key="GroupBoxHeaderBrush" Color="#0046D5"/>
+        <BorderGapMaskConverter x:Key="BorderGapMaskConverter"/>
+
+        <Style x:Key="GroupBoxExpander" TargetType="Expander">
+
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Expander}">
+                        <Grid SnapsToDevicePixels="true">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="6" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="6" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="6" />
+                            </Grid.RowDefinitions>
+                            <Border CornerRadius="4" Grid.Row="1" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="4" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="Transparent" Background="{TemplateBinding Background}" />
+                            <Border x:Name="Header" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Padding="3,0,3,0">
+                                <Grid SnapsToDevicePixels="False" Background="Transparent" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <ToggleButton Grid.Column="0" MinHeight="0" MinWidth="0"
+  Name="HeaderToggle" Style="{StaticResource GroupBoxExpanderToggleButtonStyle}"
+  IsChecked="{Binding Path=IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" >
+                                    </ToggleButton>
+                                    <ContentPresenter ContentSource="Header" RecognizesAccessKey="true"
+  TextElement.Foreground="{StaticResource GroupBoxHeaderBrush}"
+  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="3,0,0,0" />
+                                </Grid>
+                            </Border>
+
+                            <ContentPresenter x:Name="ExpandSite" Visibility="Collapsed" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Margin="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+
+                            <Border Grid.Row="1" Grid.RowSpan="3" Grid.ColumnSpan="4" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="4">
+                                <Border.OpacityMask>
+                                    <MultiBinding Converter="{StaticResource BorderGapMaskConverter}" ConverterParameter="7">
+                                        <Binding Path="ActualWidth" ElementName="Header"/>
+                                        <Binding Path="ActualWidth" RelativeSource="{RelativeSource Self}"/>
+                                        <Binding Path="ActualHeight" RelativeSource="{RelativeSource Self}"/>
+                                    </MultiBinding>
+                                </Border.OpacityMask>
+                            </Border>
+
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsExpanded" Value="true">
+                                <Setter Property="Visibility" TargetName="ExpandSite" Value="Visible"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ExpanderStyle1" TargetType="{x:Type Expander}">
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Expander}">
+                        <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="3" SnapsToDevicePixels="true">
+                            <DockPanel>
+                                <ToggleButton x:Name="HeaderSite" ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}" DockPanel.Dock="Top" FontStyle="{TemplateBinding FontStyle}" FontStretch="{TemplateBinding FontStretch}" FontWeight="{TemplateBinding FontWeight}" FocusVisualStyle="{StaticResource ExpanderHeaderFocusVisual}" FontFamily="{TemplateBinding FontFamily}" Foreground="{TemplateBinding Foreground}" FontSize="{TemplateBinding FontSize}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" MinHeight="0" MinWidth="0" Margin="1" Padding="{TemplateBinding Padding}" Style="{StaticResource ExpanderDownHeaderStyle}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                <ContentPresenter x:Name="ExpandSite" DockPanel.Dock="Bottom" Focusable="false" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Visibility="Collapsed"/>
+                            </DockPanel>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsExpanded" Value="true">
+                                <Setter Property="Visibility" TargetName="ExpandSite" Value="Visible"/>
+                            </Trigger>
+                            <Trigger Property="ExpandDirection" Value="Right">
+                                <Setter Property="DockPanel.Dock" TargetName="ExpandSite" Value="Right"/>
+                                <Setter Property="DockPanel.Dock" TargetName="HeaderSite" Value="Left"/>
+                                <Setter Property="Style" TargetName="HeaderSite" Value="{StaticResource ExpanderRightHeaderStyle}"/>
+                            </Trigger>
+                            <Trigger Property="ExpandDirection" Value="Up">
+                                <Setter Property="DockPanel.Dock" TargetName="ExpandSite" Value="Top"/>
+                                <Setter Property="DockPanel.Dock" TargetName="HeaderSite" Value="Bottom"/>
+                                <Setter Property="Style" TargetName="HeaderSite" Value="{StaticResource ExpanderUpHeaderStyle}"/>
+                            </Trigger>
+                            <Trigger Property="ExpandDirection" Value="Left">
+                                <Setter Property="DockPanel.Dock" TargetName="ExpandSite" Value="Left"/>
+                                <Setter Property="DockPanel.Dock" TargetName="HeaderSite" Value="Right"/>
+                                <Setter Property="Style" TargetName="HeaderSite" Value="{StaticResource ExpanderLeftHeaderStyle}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
     <Grid Margin="90,0,0,0" Background="Transparent">
 
-        <DataGrid HorizontalAlignment="Left" Width="1750" Margin="30,90,30,30" Height="600" x:Name="DataGrid1" GridLinesVisibility="Horizontal" Focusable="False" RowBackground="#00B41616" Background="#00F0F0F0" Foreground="White" HorizontalGridLinesBrush="White" VerticalGridLinesBrush="White" HeadersVisibility="Column" RowHeight="22" ColumnHeaderHeight="30" ScrollViewer.HorizontalScrollBarVisibility="Visible" AutomationProperties.IsRowHeader="True" RowHeaderWidth="29">
-           <DataGrid.ColumnHeaderStyle>
+        <DataGrid HorizontalAlignment="Left" Width="1750" Margin="30,90,30,30" Height="600" x:Name="DataGrid1" GridLinesVisibility="Horizontal" Focusable="False" RowBackground="#00B41616" Background="#00F0F0F0" Foreground="White" HorizontalGridLinesBrush="White" VerticalGridLinesBrush="White" HeadersVisibility="Column" RowHeight="22" ColumnHeaderHeight="30" ScrollViewer.HorizontalScrollBarVisibility="Visible" AutomationProperties.IsRowHeader="True" RowHeaderWidth="29" CellEditEnding="DataGrid1_CellEditEnding" SelectionChanged="DataGrid1_SelectionChanged">
+            <DataGrid.ColumnHeaderStyle>
                 <Style TargetType="DataGridColumnHeader">
                     <Setter Property="Background" Value="#574B90"></Setter>
                     <Setter Property="Padding" Value="20 0 20 0"></Setter>
@@ -20,14 +321,14 @@
                     <Setter Property="Background" Value="#574B90"></Setter>
                     <Setter Property="Height" Value="40"></Setter>
                 </Style>
-            </DataGrid.RowHeaderStyle> 
+            </DataGrid.RowHeaderStyle>
             <DataGrid.CellStyle>
                 <Style TargetType="DataGridCell">
 
                     <Setter Property="Height" Value="60"></Setter>
                     <Setter Property="Padding" Value="10"></Setter>
                 </Style>
-            </DataGrid.CellStyle> 
+            </DataGrid.CellStyle>
             <DataGrid.Resources>
                 <Style TargetType="DataGridRowHeader">
                     <EventSetter Event="Click" Handler="columnHeader_Click" />
@@ -42,9 +343,9 @@
             <Button Content="Button" Click="Button_Click"/>
 
         </StackPanel>
-      
-        <Expander Padding="-200,5,0,0"  Foreground="White" Header="add new persons" HorizontalAlignment="Left" Height="460" Width="460" Margin="668,53,0,0" VerticalAlignment="Top"  >
-            
+
+        <Expander x:Name="formExpander" Padding="-200,5,0,0"  Foreground="White" Header="add new persons" HorizontalAlignment="Left" Height="460" Width="460" Margin="668,53,0,0" VerticalAlignment="Top" Expanded="formExpander_Expanded"  >
+
             <DockPanel Background="#39315e" HorizontalAlignment="Right" Width="460" Margin="0,0,30,30" >
                 <StackPanel Margin="10,0,0,0" Background="Transparent" VerticalAlignment="Top" Height="25" Width="460">
 
@@ -80,7 +381,7 @@
                     </Button>
                 </StackPanel>
                 <StackPanel    x:Name="topPanel"  Background="Transparent" VerticalAlignment="Top"   Margin="-440,30,0,0" Height="260" Width="460">
-                    
+
                     <Grid Height="26">
                         <Label Foreground="White" Margin="90,-5,0,0">Name</Label>
                         <TextBox MaxLength="16" x:Name="textBoxFname"  HorizontalAlignment="Left"  Width="90"/>
@@ -137,13 +438,13 @@
                         <DatePicker  Margin="80,-150,0,0" Width="30" Height="30" x:Name="datepickerLesson"></DatePicker>
                         <Button Content="+"  x:Name="addLessonBtn" Height="25" Width="25"  Margin="0,-150,25,0" HorizontalAlignment="Right" Click="addLessonBtn_Click"  />
                         <Button Content="-"  x:Name="deleteLessonBtn" Height="25" Width="25"  Margin="0,-150,50,0" HorizontalAlignment="Right" Click="deleteLessonBtn_Click"   />
-                       
+
                         <ListView x:Name="lessonsListView" Width="180" HorizontalAlignment="Right" Margin="0,-40,25,-40">
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn Header="name" DisplayMemberBinding="{Binding name}"/>
                                     <GridViewColumn Header="lessonTime" DisplayMemberBinding="{Binding lessonTime}"/>
-                                   
+
                                 </GridView>
                             </ListView.View>
                         </ListView>
@@ -158,7 +459,7 @@
                         <DatePicker  x:Name="TdatePickerEmployment"   HorizontalAlignment="Left"  Width="90"/>
                     </Grid>
 
-                
+
 
                 </StackPanel>
                 <StackPanel x:Name="formStudent"   Background="Transparent" Height="90" Width="460" VerticalAlignment="Bottom"   Margin="-440,100,0,0">
@@ -189,7 +490,7 @@
                 </StackPanel>
                 <Button   x:Name="submitPerson" Height="20"   Content="Add" Margin="-460,0,30,30" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="submitPerson_Click"></Button>
             </DockPanel>
-            
+
         </Expander>
 
         <Button Content="Button" Height="25" Width="25" Margin="650,-320,300,373" Click="SearchBtn_Click" RenderTransformOrigin="5,0.773"/>
@@ -197,5 +498,123 @@
         <ComboBox x:Name="comboBoxSelectField"  Margin="517,-270,300,372" Height="25"  Width="90"/>
         <Button Content="Button" HorizontalAlignment="Left" Margin="923,-40,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
         <Button x:Name="generateRaportBtn"  HorizontalAlignment="Left" Content="Generate raport" Height="30" Width="30" Margin="472,616,0,0" VerticalAlignment="Top" Click="generateRaportBtn_Click"/>
+        <Expander Style="{DynamicResource ExpanderStyle1}" x:Name="editFormExpander" Header="" HorizontalAlignment="Left" Height="100" Margin="1660,-37,0,0"  VerticalAlignment="Top" Width="100" AutomationProperties.IsOffscreenBehavior="Default" Expanded="editFormExpander_Expanded">
+            <Grid Margin="-1300,80,600,-600" Width="400" Height="400" Background="#222831">
+                <Border BorderThickness="1" BorderBrush="#574B90" />
+                <StackPanel Background="Firebrick" Height="250" Margin="0,0,0,150" >
+                    <Grid Height="26" Margin="0,5,0,0">
+                        <Label Foreground="White" Margin="90,-5,0,0">Name</Label>
+                        <TextBox MaxLength="16" x:Name="eTextBoxFname"  HorizontalAlignment="Left"  Width="90"/>
+
+                    </Grid>
+
+                    <Grid Height="26">
+                        <Label Foreground="White" Margin="90,-5,0,0">Second name</Label>
+                        <TextBox  MaxLength="16" x:Name="eTextBoxSname"  HorizontalAlignment="Left"  Width="90"/>
+                    </Grid>
+                    <Grid Height="26">
+                        <Label Foreground="White" Margin="90,-5,0,0">Last name</Label>
+                        <TextBox MaxLength="16"  x:Name="eTextBoxLname"  HorizontalAlignment="Left"  Width="90"/>
+                    </Grid>
+                    <Grid Height="26">
+                        <Label Foreground="White" Margin="90,-5,0,0">Maiden name</Label>
+                        <TextBox   MaxLength="16" x:Name="eTextBoxMaiName"  HorizontalAlignment="Left"  Width="90"/>
+                    </Grid>
+                    <Grid Height="26">
+                        <Label Foreground="White" Margin="90,-5,0,0">Fathers Name</Label>
+                        <TextBox   MaxLength="16" x:Name="eTextBoxFthName"  HorizontalAlignment="Left"  Width="90"/>
+                    </Grid>
+                    <Grid Height="26">
+                        <Label Foreground="White" Margin="90,-5,0,0">Mothers Name</Label>
+                        <TextBox  MaxLength="16"  x:Name="eTextBoxMthName"  HorizontalAlignment="Left"  Width="90"/>
+                    </Grid>
+                    <Grid Height="26">
+                        <Label Foreground="White" Margin="90,-5,0,0">Birth Date</Label>
+                        <DatePicker  x:Name="eDatePickerBirthDate"  HorizontalAlignment="Left"  Width="90"/>
+
+                    </Grid>
+                    <Grid Height="26">
+                        <Label Foreground="White" Margin="90,-5,0,0">Pesel</Label>
+                        <TextBox   MaxLength="16" x:Name="eTextBoxPesel"   HorizontalAlignment="Left"  Width="90"/>
+                    </Grid>
+                    <Grid Height="26">
+                        <Label Foreground="White" Margin="90,-5,0,0">Gender</Label>
+                        <ComboBox  x:Name="eComboBoxGender"  HorizontalAlignment="Left"  Width="90">
+                            <ComboBoxItem>Male</ComboBoxItem>
+                            <ComboBoxItem>Female</ComboBoxItem>
+                        </ComboBox>
+
+                    </Grid>
+                </StackPanel>
+            
+                <StackPanel Background="AntiqueWhite" Height="150" Margin="0,250,0,0">
+                    
+                    <Button Content="Edit" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,125,5,0" Click="Button_Click_2"></Button>
+                  
+                    <Button Content="Delete" Width="40" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,-225,5,25"></Button>
+                </StackPanel>
+                <StackPanel x:Name="eStudentForm"  Background="CadetBlue" Height="100" Margin="0,0,0,-190"  Visibility="Hidden">
+                    <Grid Height="26">
+                        <Label Foreground="White" Margin="90,-5,0,0">class</Label>
+                        <ComboBox  x:Name="eComboBoxCurrentClass"   HorizontalAlignment="Left"  Width="90"/>
+
+                    </Grid>
+                    <Grid Height="26">
+                        <Label Foreground="White" Margin="90,-5,0,0">group</Label>
+                        <ComboBox  x:Name="eComboBoxCurrentGroup"   HorizontalAlignment="Left"  Width="90"/>
+                    </Grid>
+                </StackPanel>
+                <StackPanel x:Name="eTeacherForm"  Background="CadetBlue" Height="100" Margin="0,0,0,-190" Visibility="Hidden">
+                    <Grid Height="26">
+                        <Label Foreground="White" Margin="89,0,0,0">tutor?</Label>
+                        <TextBox   MaxLength="16" x:Name="eTextBoxTutor"   HorizontalAlignment="Left"  Width="90"/>
+                    </Grid>
+                    <Grid Height="26">
+                        <Label Foreground="White"  Margin="89,0,0,0">Date of Employment</Label>
+                        <DatePicker  x:Name="eTdatePickerEmployment"   HorizontalAlignment="Left"  Width="90"/>
+                    </Grid>
+                    <Label Foreground="White" Margin="0,-90,30,0" HorizontalAlignment="Right">Add new subject to timetable</Label>
+                    <TextBox  MaxLength="16" Margin="150,-90,0,0" x:Name="eTextboxLesson" Width="90" Height="30"></TextBox>
+                    <DatePicker  Margin="28,-90,0,0" Width="30" Height="30" x:Name="eDatepickerLesson"></DatePicker>
+                    <Button Content="+"  x:Name="eAddLessonBtn" Height="25" Width="25"  Margin="0,-90,25,0" HorizontalAlignment="Right" Click="addLessonBtn_Click"  />
+                    <Button Content="-"  x:Name="eDeleteLessonBtn" Height="25" Width="25"  Margin="0,-90,50,0" HorizontalAlignment="Right" Click="deleteLessonBtn_Click"   />
+
+                    <ListView x:Name="eLessonsListView" Width="180" HorizontalAlignment="Right" Margin="0,-30,15,-45">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="name" DisplayMemberBinding="{Binding name}"/>
+                                <GridViewColumn Header="lessonTime" DisplayMemberBinding="{Binding lessonTime}"/>
+
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+
+                </StackPanel>
+                <StackPanel x:Name="eEmployeeForm"  Background="CadetBlue" Height="100" Margin="0,0,0,-190"  Visibility="Hidden">
+                    <Grid Height="26">
+                        <Label Foreground="White" Margin="90,-5,0,0">Date of Employment</Label>
+                        <DatePicker  x:Name="eEdatePickerEmployment"   HorizontalAlignment="Left"  Width="90"/>
+                    </Grid>
+                    <Grid Height="26">
+                        <Label Foreground="White" Margin="90,-5,0,0">Job Position</Label>
+                        <TextBox   MaxLength="16" x:Name="eTextBoxJobPosition"   HorizontalAlignment="Left"  Width="90"/>
+                    </Grid>
+                    <Grid Height="26">
+                        <Label Foreground="White" Margin="90,-5,0,0">Job description</Label>
+                        <TextBox    MaxLength="16" x:Name="eTextBoxJobDescription"   HorizontalAlignment="Left"  Width="90"/>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+        </Expander>
+        <Rectangle HorizontalAlignment="Left" Height="19" Margin="993,37,0,0" Stroke="#222831" VerticalAlignment="Top" Width="19" RenderTransformOrigin="0.5,0.5" Fill="#222831">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-27.971"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
     </Grid>
 </UserControl>

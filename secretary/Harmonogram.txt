@@ -64,3 +64,19 @@ eighth test 05.12.2021 18:01
 === tests results ===
 - both functions works
 - btw  I haven't implement form validation yet, I should implement form cleaner :o
+
+nineth test 11.12.2021
+=== test goals ===
+- checking if prototype of studentUpdate method work
+=== tests results ===
+- it's working
+- btw  I haven't implement form validation  and  form cleaner yet
+
+tenth test 12.12.2021 13:31
+=== test goals ===
+- checking if row modify/delete pop up works
+- checking if user can modify row
+- checking if methods updateEmployee/updateTeacher/updateTeacher in DbHelperClass works
+=== test results ===
+- everything is working
+-  btw  I haven't implement form validation yet, I should implement form cleaner :o

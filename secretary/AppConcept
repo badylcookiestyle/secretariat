@@ -1,10 +1,7 @@
 ﻿http://wklejto.pl/927337
 
 //////////Colour Pallette//////////////////////
-232931
-393E46
-4ECCA3
-EEEEEE
+# I don't need it anymore
 //////////////////////////////////////////////
 
 I'll create 4 classes 1 abstract class 3 inheritative classes
@@ -18,7 +15,10 @@ There'll be a sidebar with 3 options which will make user able
 to switch between app views
 
 
-
+///////////////////////////////////////////////////////
+Edititing and deleting rows
+selecting row will display a special modal and this modal will make user able to edit/delete row :3
+///////////////////////////////////////////////////////
 
 $more -btn will open additional window with informations
 ***** remember about validation *****

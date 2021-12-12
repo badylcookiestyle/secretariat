@@ -31,11 +31,12 @@ namespace secretary.views
         string currentForm = "Student";
         string currentTable = "students";
         string selectedFilePath;
-
+        int selectedRow;
         DataTable raportData;
         string raportDataString="";
-
+        bool isEditing = false;
         List<Lesson> lessons = new List<Lesson>();
+        List<Lesson> eLessons = new List<Lesson>();
         bool isBeingEdited = false;
 
         public MainView()
@@ -58,6 +59,7 @@ namespace secretary.views
             {
                 // your code goes here
                 var row = rows[i];
+                eComboBoxCurrentGroup.Items.Add(row["name"]);
                 comboBoxCurrentGroup.Items.Add(row["name"]);
             }
         }
@@ -70,6 +72,7 @@ namespace secretary.views
             {
                 // your code goes here
                 var row = rows[i];
+                eComboBoxCurrentClass.Items.Add(row["name"]);
                 comboBoxCurrentClass.Items.Add(row["name"]);
             }
         }
@@ -283,13 +286,30 @@ namespace secretary.views
 
         private void addLessonBtn_Click(object sender, RoutedEventArgs e)
         {
-            lessonsListView.Items.Add(new Lesson { name = textboxLesson.Text, lessonTime = datepickerLesson.SelectedDate.Value.Date });
-            lessons.Add(new Lesson { name = "fdsa", lessonTime = DateTime.Now });
+            isEditing = editFormExpander.IsExpanded==true?true:false;
+            if (isEditing == true)
+            {
+                eLessonsListView.Items.Add(new Lesson { name = eTextboxLesson.Text, lessonTime = eDatepickerLesson.SelectedDate.Value.Date });
+                eLessons.Add(new Lesson { name = "fdsa", lessonTime = DateTime.Now });
+            }
+            else
+            {
+                lessonsListView.Items.Add(new Lesson { name = textboxLesson.Text, lessonTime = datepickerLesson.SelectedDate.Value.Date });
+                lessons.Add(new Lesson { name = "fdsa", lessonTime = DateTime.Now });
+            }
         }
 
         private void deleteLessonBtn_Click(object sender, RoutedEventArgs e)
         {
-            lessonsListView.Items.RemoveAt(lessonsListView.Items.Count - 1);
+            isEditing = editFormExpander.IsExpanded == true ? true : false;
+            if (isEditing == true)
+            {
+                eLessonsListView.Items.RemoveAt(lessonsListView.Items.Count - 1);
+            }
+            else
+            {
+                lessonsListView.Items.RemoveAt(lessonsListView.Items.Count - 1);
+            }
         }
 
         private void btnLoadImg_Click(object sender, RoutedEventArgs e)
@@ -370,6 +390,173 @@ namespace secretary.views
             if (saveDialog.ShowDialog() == true)
                 File.WriteAllText(saveDialog.FileName, raportDataString);
             MessageBox.Show("Your raport has already been saved"+raportDataString);
+        }
+
+        private void DataGrid1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DataGrid datagrid = sender as DataGrid;
+            DataRowView row = datagrid.SelectedItem as DataRowView;
+           
+         //  formExpander.IsExpanded = false;
+            if (row != null)
+            {
+                editFormExpander.IsExpanded = true;
+                selectedRow = Int32.Parse(row[0].ToString());
+               if (currentTable == "students"){
+                    eStudentForm.Visibility = Visibility.Visible;
+                    eTeacherForm.Visibility = Visibility.Hidden;
+                    eEmployeeForm.Visibility = Visibility.Hidden;
+             
+                    
+                                  
+                    eTextBoxFname.Text = row[1].ToString();
+                    eTextBoxSname.Text = row[2].ToString();
+                    eTextBoxLname.Text = row[3].ToString();
+                    eTextBoxMaiName.Text= row[4].ToString();
+                    eTextBoxFthName.Text = row[5].ToString();
+                    eTextBoxMthName.Text = row[6].ToString();
+                    eDatePickerBirthDate.SelectedDate = DateTime.Parse(row[7].ToString());
+                    eTextBoxPesel.Text = row[8].ToString();
+             
+                    eComboBoxCurrentGroup.SelectedItem = row[11].ToString();
+                   
+                }
+               if(currentTable == "teachers"){
+                    eStudentForm.Visibility = Visibility.Hidden;
+                    eTeacherForm.Visibility = Visibility.Visible;
+                    eEmployeeForm.Visibility = Visibility.Hidden;
+
+                    eTextBoxFname.Text = row[1].ToString();
+                    eTextBoxSname.Text = row[2].ToString();
+                    eTextBoxLname.Text = row[3].ToString();
+                    eTextBoxMaiName.Text = row[4].ToString();
+                    eTextBoxFthName.Text = row[5].ToString();
+                    eTextBoxMthName.Text = row[6].ToString();
+                    eDatePickerBirthDate.SelectedDate = DateTime.Parse(row[7].ToString());
+                    eTextBoxPesel.Text = row[8].ToString();
+
+                }
+               if (currentTable == "employees"){
+                    eStudentForm.Visibility = Visibility.Hidden;
+                    eTeacherForm.Visibility = Visibility.Hidden;
+                    eEmployeeForm.Visibility = Visibility.Visible;
+
+                    eTextBoxFname.Text = row[1].ToString();
+                    eTextBoxSname.Text = row[2].ToString();
+                    eTextBoxLname.Text = row[3].ToString();
+                    eTextBoxMaiName.Text = row[4].ToString();
+                    eTextBoxFthName.Text = row[5].ToString();
+                    eTextBoxMthName.Text = row[6].ToString();
+                    eDatePickerBirthDate.SelectedDate = DateTime.Parse(row[7].ToString());
+                    eTextBoxPesel.Text = row[8].ToString();
+                }
+         /*       employee_id_txtbx.Text = dr["EMPLOYEE_ID"].ToString();
+                last_name_txtbx.Text = dr["LAST_NAME"].ToString();
+                job_id_txtbx.Text = dr["JOB_ID"].ToString();
+                email_txtbx.Text = dr["EMAIL"].ToString();
+                hire_date_picker.SelectedDate = DateTime.Parse(dr["HIRE_DATE"].ToString());
+
+                add_btn.IsEnabled = false;
+                update_btn.IsEnabled = true;
+                delete_btn.IsEnabled = true;*/
+
+            }
+        }
+
+        private void DataGrid1_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            if (currentTable == "students")
+            {
+                char gender = eComboBoxGender.SelectedItem.ToString() == "Male" ? 'M' : 'F';
+                Student curStudent = new Student();
+                curStudent.firstName = eTextBoxFname.Text;
+                curStudent.secondName = eTextBoxFname.Text;
+                curStudent.lastname = eTextBoxLname.Text;
+                curStudent.maidenName = eTextBoxMaiName.Text;
+                curStudent.fathersName = eTextBoxFthName.Text;
+                curStudent.mothersName = eTextBoxMthName.Text;
+                curStudent.birthDate = eDatePickerBirthDate.SelectedDate.Value.Date;
+                curStudent.pesel = eTextBoxPesel.Text;
+
+                var newPath = Environment.CurrentDirectory + "/images/" + curStudent.pesel + ".png";
+                //    File.Copy(selectedFilePath, newPath);
+                //  newStudent.groups = comboBoxCurrentGroup.SelectedItem.Content.toString();
+                curStudent.groups = eComboBoxCurrentGroup.SelectedItem.ToString();
+                curStudent.imagePath = newPath;
+                curStudent.gender = gender;
+                curStudent.currentClass = eComboBoxCurrentClass.SelectedItem.ToString();
+                DbHelper.updateStudent(curStudent, selectedRow);
+                DbHelper.basicSelect(currentTable);
+                DataGrid1.ItemsSource = DbHelper.basicSelect(currentTable).DefaultView;
+            }
+            if(currentTable == "teachers")
+            {
+                string taughtSubjectsJson = JsonSerializer.Serialize(eLessons);
+                char gender = eComboBoxGender.SelectedItem.ToString() == "Male" ? 'M' : 'F';
+                Teacher curTeacher = new Teacher();
+                curTeacher.firstName = eTextBoxFname.Text;
+                curTeacher.secondName = eTextBoxFname.Text;
+                curTeacher.lastname = eTextBoxLname.Text;
+                curTeacher.maidenName = eTextBoxMaiName.Text;
+                curTeacher.fathersName = eTextBoxFthName.Text;
+                curTeacher.mothersName = eTextBoxMthName.Text;
+                curTeacher.birthDate = eDatePickerBirthDate.SelectedDate.Value.Date;
+                curTeacher.pesel = eTextBoxPesel.Text;
+                curTeacher.gender = gender;
+
+
+                var newPath = Environment.CurrentDirectory + "/images/" + curTeacher.pesel + ".png";
+                curTeacher.imagePath = newPath;
+                curTeacher.classTutor = eTextBoxTutor.Text;
+                curTeacher.taughtSubjects = taughtSubjectsJson;
+              
+                curTeacher.dateOfEmployment = eTdatePickerEmployment.SelectedDate.Value.Date;
+
+                DbHelper.updateTeacher(curTeacher, selectedRow);
+                DbHelper.basicSelect(currentTable);
+                DataGrid1.ItemsSource = DbHelper.basicSelect(currentTable).DefaultView;
+            }
+            if (currentTable == "employees")
+            {
+                char gender = eComboBoxGender.SelectedItem.ToString() == "Male" ? 'M' : 'F';
+                Employee curEmployee = new Employee();
+                curEmployee.firstName = eTextBoxFname.Text;
+                curEmployee.secondName = eTextBoxFname.Text;
+                curEmployee.lastname = eTextBoxLname.Text;
+                curEmployee.maidenName = eTextBoxMaiName.Text;
+                curEmployee.fathersName = eTextBoxFthName.Text;
+                curEmployee.mothersName = eTextBoxMthName.Text;
+                curEmployee.birthDate = eDatePickerBirthDate.SelectedDate.Value.Date;
+                curEmployee.pesel = eTextBoxPesel.Text;
+                curEmployee.gender = gender;
+                curEmployee.jobPosition = eTextBoxJobPosition.Text;
+                curEmployee.jobDescription = eTextBoxJobPosition.Text;
+                curEmployee.dateOfEmployment = eEdatePickerEmployment.SelectedDate.Value.Date;
+
+                var newPath = Environment.CurrentDirectory + "/images/" + curEmployee.pesel + ".png";
+                curEmployee.imagePath = newPath;
+
+                DbHelper.updateEmployee(curEmployee, selectedRow);
+                DbHelper.basicSelect(currentTable);
+                DataGrid1.ItemsSource = DbHelper.basicSelect(currentTable).DefaultView;
+            }
+            editFormExpander.IsExpanded = false;
+        }
+
+        private void editFormExpander_Expanded(object sender, RoutedEventArgs e)
+        {
+            formExpander.IsExpanded = false;
+
+        }
+
+        private void formExpander_Expanded(object sender, RoutedEventArgs e)
+        {
+            editFormExpander.IsExpanded = false;
         }
     }
 }
