@@ -501,7 +501,7 @@
         <Expander Style="{DynamicResource ExpanderStyle1}" x:Name="editFormExpander" Header="" HorizontalAlignment="Left" Height="100" Margin="1660,-37,0,0"  VerticalAlignment="Top" Width="100" AutomationProperties.IsOffscreenBehavior="Default" Expanded="editFormExpander_Expanded">
             <Grid Margin="-1300,80,600,-600" Width="400" Height="400" Background="#222831">
                 <Border BorderThickness="1" BorderBrush="#574B90" />
-                <StackPanel Background="Firebrick" Height="250" Margin="0,0,0,150" >
+                <StackPanel Background="Transparent" Height="250" Margin="0,0,0,150" >
                     <Grid Height="26" Margin="0,5,0,0">
                         <Label Foreground="White" Margin="90,-5,0,0">Name</Label>
                         <TextBox MaxLength="16" x:Name="eTextBoxFname"  HorizontalAlignment="Left"  Width="90"/>
@@ -546,14 +546,14 @@
 
                     </Grid>
                 </StackPanel>
-            
-                <StackPanel Background="AntiqueWhite" Height="150" Margin="0,250,0,0">
+
+                <StackPanel   Background="Transparent" Height="150" Margin="0,250,0,0">
                     
                     <Button Content="Edit" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,125,5,0" Click="Button_Click_2"></Button>
                   
-                    <Button Content="Delete" Width="40" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,-225,5,25"></Button>
+                    <Button Content="Delete" Width="40" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,-225,5,25" Click="Button_Click_3"></Button>
                 </StackPanel>
-                <StackPanel x:Name="eStudentForm"  Background="CadetBlue" Height="100" Margin="0,0,0,-190"  Visibility="Hidden">
+                <StackPanel x:Name="eStudentForm"    Background="Transparent" Height="100" Margin="0,0,0,-190"  Visibility="Hidden">
                     <Grid Height="26">
                         <Label Foreground="White" Margin="90,-5,0,0">class</Label>
                         <ComboBox  x:Name="eComboBoxCurrentClass"   HorizontalAlignment="Left"  Width="90"/>
@@ -564,7 +564,7 @@
                         <ComboBox  x:Name="eComboBoxCurrentGroup"   HorizontalAlignment="Left"  Width="90"/>
                     </Grid>
                 </StackPanel>
-                <StackPanel x:Name="eTeacherForm"  Background="CadetBlue" Height="100" Margin="0,0,0,-190" Visibility="Hidden">
+                <StackPanel x:Name="eTeacherForm"   Background="Transparent" Height="100" Margin="0,0,0,-190" Visibility="Hidden">
                     <Grid Height="26">
                         <Label Foreground="White" Margin="89,0,0,0">tutor?</Label>
                         <TextBox   MaxLength="16" x:Name="eTextBoxTutor"   HorizontalAlignment="Left"  Width="90"/>
@@ -590,7 +590,7 @@
                     </ListView>
 
                 </StackPanel>
-                <StackPanel x:Name="eEmployeeForm"  Background="CadetBlue" Height="100" Margin="0,0,0,-190"  Visibility="Hidden">
+                <StackPanel x:Name="eEmployeeForm"    Background="Transparent" Height="100" Margin="0,0,0,-190"  Visibility="Hidden">
                     <Grid Height="26">
                         <Label Foreground="White" Margin="90,-5,0,0">Date of Employment</Label>
                         <DatePicker  x:Name="eEdatePickerEmployment"   HorizontalAlignment="Left"  Width="90"/>

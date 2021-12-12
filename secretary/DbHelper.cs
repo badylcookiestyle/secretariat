@@ -137,6 +137,11 @@ namespace secretary.dbHelper
             string queryString = "DELETE FROM " + tableName + ";";
             sendQuery(queryString);
         }
+        public static void deleteById(string tableName,int id)
+        {
+            string queryString = "DELETE FROM "+ tableName +" WHERE id='"+id.ToString()+"';";
+            sendQuery(queryString);
+        }
         public static string convertTableToString(DataTable table)
         {
             var JSONString = new StringBuilder();

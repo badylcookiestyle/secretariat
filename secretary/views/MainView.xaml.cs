@@ -542,7 +542,7 @@ namespace secretary.views
                 curEmployee.imagePath = newPath;
 
                 DbHelper.updateEmployee(curEmployee, selectedRow);
-                DbHelper.basicSelect(currentTable);
+        
                 DataGrid1.ItemsSource = DbHelper.basicSelect(currentTable).DefaultView;
             }
             editFormExpander.IsExpanded = false;
@@ -556,6 +556,13 @@ namespace secretary.views
 
         private void formExpander_Expanded(object sender, RoutedEventArgs e)
         {
+            editFormExpander.IsExpanded = false;
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            DbHelper.deleteById(currentTable, selectedRow);
+            DataGrid1.ItemsSource = DbHelper.basicSelect(currentTable).DefaultView;
             editFormExpander.IsExpanded = false;
         }
     }

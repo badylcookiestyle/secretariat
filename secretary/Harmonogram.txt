@@ -80,3 +80,11 @@ tenth test 12.12.2021 13:31
 === test results ===
 - everything is working
 -  btw  I haven't implement form validation yet, I should implement form cleaner :o
+
+eleventh test 12.12.2021 13:35
+=== test goals ===
+- checking if user can delete row
+- checking if method deleteById in DbHelperClass works
+=== test results ===
+- everything is working
+-  btw  I haven't implement form validation yet, I should implement form cleaner :o
