@@ -11,7 +11,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using secretary.dbHelper;
- 
+using System.IO;
+using secretary;
+using Secretary;
 using System.Data.SQLite;
 namespace secretary.views
 {
@@ -20,16 +22,48 @@ namespace secretary.views
     /// </summary>
     public partial class OptionsView : UserControl
     {
+        string path = Environment.CurrentDirectory + "/assets/binds.txt";
         public OptionsView()
         {
             InitializeComponent();
-            Datagrid1.ItemsSource = DbHelper.basicSelect("teachers").DefaultView;
+            int counter = 0;
+           
+            string text = File.ReadAllText(path);
+            string[] lines = text.Split(Environment.NewLine);
+
+            foreach (string line in lines)
+            {
+
+                if (counter == 0)
+                {
+                    textBoxMainView.Text = line;
+                }
+                if (counter == 1)
+                {
+                    textBoxDataView.Text = line;
+
+                }
+                if (counter == 2)
+                {
+                    textBoxOptionView.Text = line;
+                }
+                counter++;
+            }
         }
 
-        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void saveBtn_Click(object sender, RoutedEventArgs e)
         {
-
+          
+            File.Delete(path);
+            using (StreamWriter writer = File.CreateText(path))
+            {
+                writer.WriteLine(textBoxMainView.Text);
+                writer.WriteLine(textBoxDataView.Text);
+                writer.WriteLine(textBoxOptionView.Text);
+            }
         }
+         
+
 
     }
 }

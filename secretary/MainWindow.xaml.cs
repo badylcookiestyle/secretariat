@@ -13,7 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Controls.Primitives;
-
+using System.IO;
+ 
 using secretary.viewModels;
 using secretary;
 namespace Secretary
@@ -32,7 +33,12 @@ namespace Secretary
         }
 
         //  SQLiteConnection sql;
-      
+        public string[] binds;
+       
+    public string bindMain = "F1";
+        public string bindUpload = "F2";
+        public string bindOptions = "F3";
+
         private void displayCloud(string btnDesc,System.Windows.UIElement curView) {
 
             hoverCloud.PlacementTarget = curView;
@@ -102,6 +108,49 @@ namespace Secretary
         private void WindowDrag_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             DragMove();
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            int counter = 0;
+            string path = Environment.CurrentDirectory + "/assets/binds.txt";
+            string text = File.ReadAllText(path);
+            string[] lines = text.Split(Environment.NewLine);
+
+            foreach (string line in lines)
+            {
+              
+                if (counter == 0)
+                {
+                    bindMain = line;
+                }
+                if (counter == 1)
+                {
+                    bindUpload = line;
+
+                }
+                if(counter == 2)
+                {
+                    bindOptions = line;
+                }
+                counter++;
+            }
+
+
+
+            if (e.Key.ToString() == bindMain)
+            {
+                DataContext = new MainViewModel();
+            }
+            if (e.Key.ToString() == bindUpload)
+            {
+                DataContext = new DataViewModel();
+
+            }
+            if (e.Key.ToString() == bindOptions)
+            {
+                DataContext = new OptionsViewModel();
+            }
         }
     }
 }

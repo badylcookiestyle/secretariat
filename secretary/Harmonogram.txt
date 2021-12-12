@@ -88,3 +88,14 @@ eleventh test 12.12.2021 13:35
 === test results ===
 - everything is working
 -  btw  I haven't implement form validation yet, I should implement form cleaner :o
+
+
+twelfth test 12.12.2021 20:00
+=== test goals ===
+- checking if databinding works
+- checking if options view works
+- checking if user is able to change binding
+- checking if layout works properly :3
+=== test results ===
+- everything is working
+-  btw  I haven't implement form validation yet, I should implement form cleaner :o
