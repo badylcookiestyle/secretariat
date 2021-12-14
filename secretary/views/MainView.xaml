@@ -87,7 +87,7 @@
             </DataGrid.CellStyle>
             <DataGrid.Resources>
                 <Style TargetType="DataGridRowHeader">
-                    <EventSetter Event="Click" Handler="columnHeader_Click" />
+                   
                 </Style>
             </DataGrid.Resources>
         </DataGrid>
@@ -96,13 +96,13 @@
             <RadioButton x:Name="teacherRadio" Click="TeacherRadioBtn_Click"  Foreground="White">Teachers</RadioButton>
             <RadioButton x:Name="studentRadio" Click="StudentRadioBtn_Click" Foreground="White">Students</RadioButton>
             <RadioButton x:Name="employeeRadio" Click="EmployeeRadioBtn_Click"  Foreground="White">Emp</RadioButton>
-            <Button Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Top" Width="30" Height="30"   Margin="0,-10,-30,30" Click="Button_Click">
+            <Button Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Top" Width="30" Height="30"   Margin="0,-10,-30,30" Click="DeleteEverythingBtn_Click">
                 <Image   Source="/assets/images/trash.png" ></Image>
             </Button>
 
         </StackPanel>
 
-        <Expander x:Name="formExpander" Padding="-200,5,0,0"  Foreground="White" Header="add new persons" HorizontalAlignment="Left" Height="460" Width="460" Margin="668,53,0,0" VerticalAlignment="Top" Expanded="formExpander_Expanded"  >
+        <Expander x:Name="formExpander" Padding="-200,5,0,0"  Foreground="White" Header="add new persons" HorizontalAlignment="Left" Height="460" Width="460" Margin="668,53,0,0" VerticalAlignment="Top" Expanded="FormExpander_Expanded"  >
 
             <DockPanel Background="#39315e" HorizontalAlignment="Right" Width="460" Margin="0,0,30,30" >
                 <StackPanel Margin="10,0,0,0" Background="Transparent" VerticalAlignment="Top" Height="25" Width="460">
@@ -186,7 +186,7 @@
                     <Image  Margin="12,-220,26,280" HorizontalAlignment="Right"  Name="imgPhoto" Height="64" Width="64" />
                     <Button Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Foreground="White"  Margin="12,-275,26,300" HorizontalAlignment="Right" Height="23" 
         Name="btnLoadImg" VerticalAlignment="Bottom"
-        Width="75" Grid.Column="1" Click="btnLoadImg_Click"  >Load img</Button>
+        Width="75" Grid.Column="1" Click="LoadImgBtn_Click"  >Load img</Button>
                     <Label Margin="12,-570,26,200"  x:Name="cFileName" Height="30" HorizontalAlignment="Right" Width="240" Foreground="White"   ></Label>
                 </StackPanel>
                 <StackPanel x:Name="formTeacher"  Visibility="Hidden" Background="Transparent" Height="120" Width="460" VerticalAlignment="Bottom"  Margin="-440,100,0,0">
@@ -194,8 +194,8 @@
                         <Label Foreground="White" Margin="0,-110,30,0" HorizontalAlignment="Right">Add new subject to timetable</Label>
                         <TextBox  MaxLength="16" Margin="210,-150,0,0" x:Name="textboxLesson" Width="90" Height="30"></TextBox>
                         <DatePicker  Margin="80,-150,0,0" Width="30" Height="30" x:Name="datepickerLesson"></DatePicker>
-                        <Button Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Foreground="White" Content="+"  x:Name="addLessonBtn" Height="25" Width="25"  Margin="0,-150,25,0" HorizontalAlignment="Right" Click="addLessonBtn_Click"  />
-                        <Button Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Foreground="White" Content="-"  x:Name="deleteLessonBtn" Height="25" Width="25"  Margin="0,-150,50,0" HorizontalAlignment="Right" Click="deleteLessonBtn_Click"   />
+                        <Button Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Foreground="White" Content="+"  x:Name="addLessonBtn" Height="25" Width="25"  Margin="0,-150,25,0" HorizontalAlignment="Right" Click="AddLessonBtn_Click"  />
+                        <Button Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Foreground="White" Content="-"  x:Name="deleteLessonBtn" Height="25" Width="25"  Margin="0,-150,50,0" HorizontalAlignment="Right" Click="DeleteLessonBtn_Click"   />
 
                         <ListView x:Name="lessonsListView" Width="180" HorizontalAlignment="Right" Margin="0,-40,25,-40">
                             <ListView.View>
@@ -246,7 +246,7 @@
                     </Grid>
 
                 </StackPanel>
-                <Button  Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Foreground="White"     x:Name="submitPerson" Height="20"   Content="Add" Margin="-460,0,30,30" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="submitPerson_Click"></Button>
+                <Button  Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Foreground="White"     x:Name="submitPerson" Height="20"   Content="Add" Margin="-460,0,30,30" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="SubmitPersonBtn_Click"></Button>
             </DockPanel>
 
         </Expander>
@@ -256,9 +256,9 @@
         </Button>
         <TextBox Text="TextBox" x:Name="textBoxSearcher" TextWrapping="Wrap"  Margin="517,-320,300,372" Height="25" Width="90" />
         <ComboBox x:Name="comboBoxSelectField"  Margin="517,-270,300,372" Height="25"  Width="90"/>
-        <Button Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Foreground="White" Content="Button" HorizontalAlignment="Left" Margin="923,-40,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
-        <Button Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Foreground="White" x:Name="generateRaportBtn"  HorizontalAlignment="Left" Content="Generate raport" Height="30" Width="90" Margin="472,616,0,0" VerticalAlignment="Top" Click="generateRaportBtn_Click"/>
-        <Expander Style="{DynamicResource ExpanderStyle1}" x:Name="editFormExpander" Header="" HorizontalAlignment="Left" Height="100" Margin="1660,-37,0,0"  VerticalAlignment="Top" Width="100" AutomationProperties.IsOffscreenBehavior="Default" Expanded="editFormExpander_Expanded">
+        
+        <Button Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Foreground="White" x:Name="generateRaportBtn"  HorizontalAlignment="Left" Content="Generate raport" Height="30" Width="90" Margin="472,616,0,0" VerticalAlignment="Top" Click="GenerateRaportBtn_Click"/>
+        <Expander Style="{DynamicResource ExpanderStyle1}" x:Name="editFormExpander" Header="" HorizontalAlignment="Left" Height="100" Margin="1660,-37,0,0"  VerticalAlignment="Top" Width="100" AutomationProperties.IsOffscreenBehavior="Default" Expanded="EditFormExpander_Expanded">
             <Grid Margin="-1300,80,600,-600" Width="400" Height="400" Background="#222831">
                 <Border BorderThickness="1" BorderBrush="#574B90" />
                 <StackPanel Background="Transparent" Height="250" Margin="0,0,0,150" >
@@ -309,9 +309,9 @@
 
                 <StackPanel   Background="Transparent" Height="150" Margin="0,250,0,0">
 
-                    <Button Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Foreground="White" Content="Edit" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,125,5,0" Click="Button_Click_2"></Button>
+                    <Button Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Foreground="White" Content="Edit" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,125,5,0" Click="EditRowBtn_Click"></Button>
 
-                    <Button Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Foreground="White" Content="Delete" Width="40" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,-225,5,25" Click="Button_Click_3"></Button>
+                    <Button Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Foreground="White" Content="Delete" Width="40" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,-225,5,25" Click="DeleteChoosenRowBtn_Click"></Button>
                 </StackPanel>
                 <StackPanel x:Name="eStudentForm"    Background="Transparent" Height="100" Margin="0,0,0,-190"  Visibility="Hidden">
                     <Grid Height="26">
@@ -336,8 +336,8 @@
                     <Label Foreground="White" Margin="0,-90,30,0" HorizontalAlignment="Right">Add new subject to timetable</Label>
                     <TextBox  MaxLength="16" Margin="150,-90,0,0" x:Name="eTextboxLesson" Width="90" Height="30"></TextBox>
                     <DatePicker  Margin="28,-90,0,0" Width="30" Height="30" x:Name="eDatepickerLesson"></DatePicker>
-                    <Button Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Foreground="White" Content="+"  x:Name="eAddLessonBtn" Height="25" Width="25"  Margin="0,-90,25,0" HorizontalAlignment="Right" Click="addLessonBtn_Click"  />
-                    <Button Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Foreground="White" Content="-"  x:Name="eDeleteLessonBtn" Height="25" Width="25"  Margin="0,-90,50,0" HorizontalAlignment="Right" Click="deleteLessonBtn_Click"   />
+                    <Button Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Foreground="White" Content="+"  x:Name="eAddLessonBtn" Height="25" Width="25"  Margin="0,-90,25,0" HorizontalAlignment="Right" Click="AddLessonBtn_Click"  />
+                    <Button Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Foreground="White" Content="-"  x:Name="eDeleteLessonBtn" Height="25" Width="25"  Margin="0,-90,50,0" HorizontalAlignment="Right" Click="DeleteLessonBtn_Click"   />
 
                     <ListView x:Name="eLessonsListView" Width="180" HorizontalAlignment="Right" Margin="0,-30,15,-45">
                         <ListView.View>
@@ -366,15 +366,6 @@
                 </StackPanel>
             </Grid>
         </Expander>
-        <Rectangle HorizontalAlignment="Left" Height="19" Margin="993,37,0,0" Stroke="#222831" VerticalAlignment="Top" Width="19" RenderTransformOrigin="0.5,0.5" Fill="#222831">
-            <Rectangle.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-27.971"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Rectangle.RenderTransform>
-        </Rectangle>
+        
     </Grid>
 </UserControl>
