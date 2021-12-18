@@ -1,22 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Controls.Primitives;
 using System.IO;
  
 using secretary.viewModels;
-using secretary;
+
 namespace Secretary
 {
     /// <summary>
@@ -35,12 +24,12 @@ namespace Secretary
         //  SQLiteConnection sql;
         public string[] binds;
        
-    public string bindMain = "F1";
+        public string bindMain = "F1";
         public string bindUpload = "F2";
         public string bindOptions = "F3";
 
-        private void displayCloud(string btnDesc,System.Windows.UIElement curView) {
-
+        private void displayCloud(string btnDesc,System.Windows.UIElement curView) 
+        {
             hoverCloud.PlacementTarget = curView;
             hoverCloud.Placement = PlacementMode.Right;
             hoverCloud.IsOpen = true;
@@ -63,7 +52,6 @@ namespace Secretary
 
         private void MainViewMouse_Lv(object sender, MouseEventArgs e)
         {
-            
             hoverCloud.Visibility = Visibility.Collapsed;
             hoverCloud.IsOpen = false;
         }
@@ -83,13 +71,10 @@ namespace Secretary
         private void MainViewBtn_Click(object sender,RoutedEventArgs e)
         {
            DataContext = new MainViewModel();
-         
-
         }
         private void DataViewBtn_Click(object sender, RoutedEventArgs e)
         {
-            DataContext = new DataViewModel();
-
+            DataContext = new DataViewModel();    
         }
         private void OptionsViewBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -135,8 +120,6 @@ namespace Secretary
                 }
                 counter++;
             }
-
-
 
             if (e.Key.ToString() == bindMain)
             {
