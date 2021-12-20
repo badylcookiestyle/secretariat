@@ -38,6 +38,7 @@ namespace secretary.dbHelper
             sqlQuery = sqlConnection.CreateCommand();
 
             dbAdapter = new SQLiteDataAdapter("SELECT * FROM " + curTable, sqlConnection);
+           
             dataSet.Reset();
             dbAdapter.Fill(dataSet);
             dataTable = dataSet.Tables[0];
@@ -140,7 +141,6 @@ namespace secretary.dbHelper
             sqlQuery = sqlConnection.CreateCommand();
             dbAdapter = new SQLiteDataAdapter("SELECT * FROM " + curTable + " WHERE   substr(birth_date,7,4) || substr(birth_date, 4, 2) || substr(birth_date, 1, 2) <    substr('" + youngerDate + "',7,4) || substr('" + youngerDate + "', 4, 2) || substr('" + youngerDate + "', 1, 2)  AND birth_date >  substr('" + olderDate + "',7,4) || substr('" + olderDate + "', 4, 2) || substr('" + olderDate + "', 1, 2) WHERE " + cField + " LIKE '%" + lText + "%'  ;", sqlConnection);
 
-            //  dbAdapter = new SQLiteDataAdapter("SELECT * FROM " + curTable + "WHERE birth_date < '" + youngerDate + "' AND birth_date > '" + olderDate + "';", sqlConnection);
             dataSet.Reset();
             dbAdapter.Fill(dataSet);
             dataTable = dataSet.Tables[0];
