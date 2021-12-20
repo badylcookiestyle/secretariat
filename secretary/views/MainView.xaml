@@ -65,7 +65,8 @@
     </UserControl.Resources>
     <Grid Margin="90,0,0,0" Background="Transparent">
 
-        <DataGrid HorizontalAlignment="Left" Width="1750" Margin="30,90,30,30" Height="600" x:Name="DataGrid1" GridLinesVisibility="Horizontal" Focusable="False" RowBackground="#00B41616" Background="#00F0F0F0" Foreground="White" HorizontalGridLinesBrush="White" VerticalGridLinesBrush="White" HeadersVisibility="Column" RowHeight="22" ColumnHeaderHeight="30" ScrollViewer.HorizontalScrollBarVisibility="Visible" AutomationProperties.IsRowHeader="True" RowHeaderWidth="29" CellEditEnding="DataGrid1_CellEditEnding" SelectionChanged="DataGrid1_SelectionChanged">
+
+        <DataGrid HorizontalAlignment="Left" Width="1750" Margin="30,90,30,30" Height="600" x:Name="DataGrid1" GridLinesVisibility="Horizontal" Focusable="False" RowBackground="#00B41616" Background="#00F0F0F0" Foreground="White" HorizontalGridLinesBrush="White" VerticalGridLinesBrush="White" HeadersVisibility="Column" RowHeight="22" ColumnHeaderHeight="30" ScrollViewer.HorizontalScrollBarVisibility="Visible" AutomationProperties.IsRowHeader="True" RowHeaderWidth="29" CellEditEnding="DataGrid1_CellEditEnding" SelectionChanged="DataGrid1_SelectionChanged" Grid.Column="0">
             <DataGrid.ColumnHeaderStyle>
                 <Style TargetType="DataGridColumnHeader">
                     <Setter Property="Background" Value="#574B90"></Setter>
@@ -87,7 +88,7 @@
             </DataGrid.CellStyle>
             <DataGrid.Resources>
                 <Style TargetType="DataGridRowHeader">
-                   
+
                 </Style>
             </DataGrid.Resources>
         </DataGrid>
@@ -96,13 +97,13 @@
             <RadioButton x:Name="teacherRadio" Click="TeacherRadioBtn_Click"  Foreground="White">Teachers</RadioButton>
             <RadioButton x:Name="studentRadio" Click="StudentRadioBtn_Click" Foreground="White">Students</RadioButton>
             <RadioButton x:Name="employeeRadio" Click="EmployeeRadioBtn_Click"  Foreground="White">Emp</RadioButton>
-            <Button Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Top" Width="30" Height="30"   Margin="0,-10,-30,30" Click="DeleteEverythingBtn_Click">
-                <Image   Source="/assets/images/trash.png" ></Image>
+            <Button Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Top" Width="30" Height="30"   Margin="0,-10,-30,30" Click="DeleteEverythingBtn_Click" BorderBrush="#00000000">
+                <Image  Margin="3,3,3,3" Source="/assets/images/trash.png" ></Image>
             </Button>
 
         </StackPanel>
 
-        <Expander x:Name="formExpander" Padding="-200,5,0,0"  Foreground="White" Header="add new persons" HorizontalAlignment="Left" Height="460" Width="460" Margin="668,53,0,0" VerticalAlignment="Top" Expanded="FormExpander_Expanded"  >
+        <Expander x:Name="formExpander" Padding="-200,-5,0,0"  Foreground="White" Header="add new persons" HorizontalAlignment="Left" Height="460" Width="460" Margin="468,53,0,0" VerticalAlignment="Top" Expanded="FormExpander_Expanded"  >
 
             <DockPanel Background="#39315e" HorizontalAlignment="Right" Width="460" Margin="0,0,30,30" >
                 <StackPanel Margin="10,0,0,0" Background="Transparent" VerticalAlignment="Top" Height="25" Width="460">
@@ -250,14 +251,18 @@
             </DockPanel>
 
         </Expander>
-
-        <Button   Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Height="25" Width="25" Margin="650,-320,300,373" Click="SearchBtn_Click" RenderTransformOrigin="5,0.773">
-            <Image   Source="/assets/images/search.png" ></Image>
+        <DatePicker x:Name="datePickerOlderThan" HorizontalAlignment="Left" Margin="860,58,0,0" VerticalAlignment="Top"/>
+        <DatePicker x:Name="datePickerYoungerThan" HorizontalAlignment="Left" Margin="860,35,0,0" VerticalAlignment="Top" CalendarClosed="datePickerYoungerThan_CalendarClosed"/>
+        <Label Content="Older than" Foreground="White" HorizontalAlignment="Left" Margin="784,55,0,0" VerticalAlignment="Top"/>
+        <Label Content="Younger than" Foreground="White" HorizontalAlignment="Left" Margin="770,32,0,0" VerticalAlignment="Top"/>
+        <Label Content="Search by" Foreground="White" HorizontalAlignment="Left" Margin="982,56,0,0" VerticalAlignment="Top"/>
+        <Button   Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Height="30" Width="30" Margin="558,-704,0,0" Click="SearchBtn_Click" RenderTransformOrigin="5,0.773">
+            <Image   Source="/assets/images/search.png" Margin="3,3,3,3"></Image>
         </Button>
-        <TextBox Text="TextBox" x:Name="textBoxSearcher" TextWrapping="Wrap"  Margin="517,-320,300,372" Height="25" Width="90" />
-        <ComboBox x:Name="comboBoxSelectField"  Margin="517,-270,300,372" Height="25"  Width="90"/>
-        
-        <Button Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Foreground="White" x:Name="generateRaportBtn"  HorizontalAlignment="Left" Content="Generate raport" Height="30" Width="90" Margin="472,616,0,0" VerticalAlignment="Top" Click="GenerateRaportBtn_Click"/>
+        <TextBox Text="Search" x:Name="textBoxSearcher" TextWrapping="Wrap"  Margin="728,-540,292,168" Height="25" Width="90" />
+        <ComboBox x:Name="comboBoxSelectField"  Margin="728,-520,292,142" Height="25"  Width="90"/>
+
+        <Button Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Foreground="White" x:Name="generateRaportBtn"  HorizontalAlignment="Left" Content="Generate raport" Height="30" Width="90" Margin="30,735,0,0" VerticalAlignment="Top" Click="GenerateRaportBtn_Click"/>
         <Expander Style="{DynamicResource ExpanderStyle1}" x:Name="editFormExpander" Header="" HorizontalAlignment="Left" Height="100" Margin="1660,-37,0,0"  VerticalAlignment="Top" Width="100" AutomationProperties.IsOffscreenBehavior="Default" Expanded="EditFormExpander_Expanded">
             <Grid Margin="-1300,80,600,-600" Width="400" Height="400" Background="#222831">
                 <Border BorderThickness="1" BorderBrush="#574B90" />
@@ -366,6 +371,6 @@
                 </StackPanel>
             </Grid>
         </Expander>
-        
+
     </Grid>
 </UserControl>

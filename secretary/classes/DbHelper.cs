@@ -51,6 +51,152 @@ namespace secretary.dbHelper
         {
             //   dbAdapter.Update(cTable.Table);
         }
+        public static DataTable olderThanSelect(string curTable,string date)
+        {
+            connectToDb();
+
+            sqlConnection.Open();
+            sqlQuery = sqlConnection.CreateCommand();
+
+            dbAdapter = new SQLiteDataAdapter("SELECT * FROM " + curTable + " WHERE   substr(birth_date,7,4) || substr(birth_date, 4, 2) || substr(birth_date, 1, 2)>    substr('" + date + "',7,4) || substr('" + date + "', 4, 2) || substr('" + date + "', 1, 2) ;", sqlConnection);
+            dataSet.Reset();
+            dbAdapter.Fill(dataSet);
+            dataTable = dataSet.Tables[0];
+
+            sqlConnection.Close();
+
+            return dataTable;
+        }
+        public static DataTable youngerThanSelect(string curTable, string date)
+        {
+            connectToDb();
+
+            sqlConnection.Open();
+            sqlQuery = sqlConnection.CreateCommand();
+
+            dbAdapter = new SQLiteDataAdapter("SELECT * FROM " + curTable + " WHERE   substr(birth_date,7,4) || substr(birth_date, 4, 2) || substr(birth_date, 1, 2) <   substr('"+date+ "',7,4) || substr('" + date + "', 4, 2) || substr('" + date + "', 1, 2)  ;", sqlConnection); 
+            dataSet.Reset();
+            dbAdapter.Fill(dataSet);
+            dataTable = dataSet.Tables[0];
+
+            sqlConnection.Close();
+
+            return dataTable;
+        }
+        public static DataTable olderAndYoungerThanSelect(string curTable, string olderDate,string youngerDate)
+        {
+            connectToDb();
+
+            sqlConnection.Open();
+            sqlQuery = sqlConnection.CreateCommand();
+
+            dbAdapter = new SQLiteDataAdapter("SELECT * FROM " + curTable + " WHERE   substr(birth_date,7,4) || substr(birth_date, 4, 2) || substr(birth_date, 1, 2) <    substr('" + youngerDate + "',7,4) || substr('" + youngerDate + "', 4, 2) || substr('" + youngerDate + "', 1, 2)  AND birth_date >  substr('" + olderDate + "',7,4) || substr('" + olderDate + "', 4, 2) || substr('" + olderDate + "', 1, 2) ;", sqlConnection);
+            dataSet.Reset();
+            dbAdapter.Fill(dataSet);
+            dataTable = dataSet.Tables[0];
+
+            sqlConnection.Close();
+
+            return dataTable;
+        }
+        public static DataTable advancedSelectOlderThan(string curTable, string date, string cField, string lText) {
+            connectToDb();
+
+            sqlConnection.Open();
+            sqlQuery = sqlConnection.CreateCommand();
+
+            dbAdapter = new SQLiteDataAdapter("SELECT * FROM " + curTable + " WHERE   substr(birth_date,7,4) || substr(birth_date, 4, 2) || substr(birth_date, 1, 2)>    substr('" + date + "',7,4) || substr('" + date + "', 4, 2) || substr('" + date + "', 1, 2)  WHERE " + cField + " LIKE '%" + lText + "%' ;", sqlConnection);
+
+            dataSet.Reset();
+            dbAdapter.Fill(dataSet);
+            dataTable = dataSet.Tables[0];
+
+            sqlConnection.Close();
+
+            return dataTable;
+        }
+        public static DataTable advancedSelectYoungerThan(string curTable, string date, string cField, string lText)
+        {
+            connectToDb();
+
+            sqlConnection.Open();
+            sqlQuery = sqlConnection.CreateCommand();
+
+            dbAdapter = new SQLiteDataAdapter("SELECT * FROM " + curTable + " WHERE   substr(birth_date,7,4) || substr(birth_date, 4, 2) || substr(birth_date, 1, 2) < substr('" + date + "',7,4) || substr('" + date + "', 4, 2) || substr('" + date + "', 1, 2)  WHERE " + cField + " LIKE '%" + lText + "%' ;", sqlConnection);
+
+            dataSet.Reset();
+            dbAdapter.Fill(dataSet);
+            dataTable = dataSet.Tables[0];
+
+            sqlConnection.Close();
+
+            return dataTable;
+        }
+        public static DataTable advancedSelectOlderAndYoungerThan(string curTable, string olderDate, string youngerDate, string cField,string lText)
+        {
+            connectToDb();
+
+            sqlConnection.Open();
+            sqlQuery = sqlConnection.CreateCommand();
+            dbAdapter = new SQLiteDataAdapter("SELECT * FROM " + curTable + " WHERE   substr(birth_date,7,4) || substr(birth_date, 4, 2) || substr(birth_date, 1, 2) <    substr('" + youngerDate + "',7,4) || substr('" + youngerDate + "', 4, 2) || substr('" + youngerDate + "', 1, 2)  AND birth_date >  substr('" + olderDate + "',7,4) || substr('" + olderDate + "', 4, 2) || substr('" + olderDate + "', 1, 2) WHERE " + cField + " LIKE '%" + lText + "%'  ;", sqlConnection);
+
+            //  dbAdapter = new SQLiteDataAdapter("SELECT * FROM " + curTable + "WHERE birth_date < '" + youngerDate + "' AND birth_date > '" + olderDate + "';", sqlConnection);
+            dataSet.Reset();
+            dbAdapter.Fill(dataSet);
+            dataTable = dataSet.Tables[0];
+
+            sqlConnection.Close();
+
+            return dataTable;
+        }
+        public static DataTable advancedSelectOlderAndYoungerThanId(string curTable, string olderDate, string youngerDate,string id)
+        {
+            connectToDb();
+
+            sqlConnection.Open();
+            sqlQuery = sqlConnection.CreateCommand();
+            dbAdapter = new SQLiteDataAdapter("SELECT * FROM " + curTable + " WHERE   substr(birth_date,7,4) || substr(birth_date, 4, 2) || substr(birth_date, 1, 2) <    substr('" + youngerDate + "',7,4) || substr('" + youngerDate + "', 4, 2) || substr('" + youngerDate + "', 1, 2)  AND birth_date >  substr('" + olderDate + "',7,4) || substr('" + olderDate + "', 4, 2) || substr('" + olderDate + "', 1, 2) WHERE id='"+id+"' ;", sqlConnection);
+
+            dataSet.Reset();
+            dbAdapter.Fill(dataSet);
+            dataTable = dataSet.Tables[0];
+
+            sqlConnection.Close();
+
+            return dataTable;
+        }
+        public static DataTable advancedSelectOlderThanId(string curTable,string date, string id)
+        {
+            connectToDb();
+
+            sqlConnection.Open();
+            sqlQuery = sqlConnection.CreateCommand();
+            dbAdapter = new SQLiteDataAdapter("SELECT * FROM " + curTable + " WHERE   substr(birth_date,7,4) || substr(birth_date, 4, 2) || substr(birth_date, 1, 2)>    substr('" + date + "',7,4) || substr('" + date + "', 4, 2) || substr('" + date + "', 1, 2)  WHERE id='"+id+"' ;", sqlConnection);
+
+            dataSet.Reset();
+            dbAdapter.Fill(dataSet);
+            dataTable = dataSet.Tables[0];
+
+            sqlConnection.Close();
+
+            return dataTable;
+        }
+        public static DataTable advancedSelectYoungerThanId(string curTable, string date, string id)
+        {
+            connectToDb();
+
+            sqlConnection.Open();
+            sqlQuery = sqlConnection.CreateCommand();
+            dbAdapter = new SQLiteDataAdapter("SELECT * FROM " + curTable + " WHERE   substr(birth_date,7,4) || substr(birth_date, 4, 2) || substr(birth_date, 1, 2) <    substr('" + date + "',7,4) || substr('" + date + "', 4, 2) || substr('" + date + "', 1, 2)  WHERE id='" + id + "' ;", sqlConnection);
+
+            dataSet.Reset();
+            dbAdapter.Fill(dataSet);
+            dataTable = dataSet.Tables[0];
+
+            sqlConnection.Close();
+
+            return dataTable;
+        }
         public static DataTable likeSelect(string curTable, string lText, string cField)
         {
             connectToDb();
@@ -177,6 +323,7 @@ namespace secretary.dbHelper
         public static string dumpDbToJson()
         {
             string jsonDump;
+
             DataTable teachers = basicSelect("teachers");
             DataTable students = basicSelect("students");
             DataTable employees = basicSelect("employees");

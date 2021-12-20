@@ -99,3 +99,11 @@ twelfth test 12.12.2021 20:00
 === test results ===
 - everything is working
 -  btw  I haven't implement form validation yet, I should implement form cleaner :o
+
+thirteenth test 20.12.2021 10:00
+=== test goals ===
+- checking if filtering by older than/younger than works
+- checking if image_path column is being deleted (I'm deleting in manually, because I'll need it to implement somethin awesome in the future)
+=== tests results ===
+- everything is working
+-  btw  I haven't implement form validation yet, I should implement form cleaner :o
