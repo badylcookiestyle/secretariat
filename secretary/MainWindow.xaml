@@ -1,14 +1,13 @@
 ﻿<Window x:Class="Secretary.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Secretary"
-        xmlns:viewmodels="clr-namespace:secretary.viewModels"
-        xmlns:views="clr-namespace:secretary.views"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:local="clr-namespace:Secretary"
+	xmlns:viewmodels="clr-namespace:secretary.viewModels"
+	xmlns:views="clr-namespace:secretary.views"
         mc:Ignorable="d"
         Title="MainWindow" Height="800" Width="1850" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" KeyDown="Window_KeyDown">
- 
     <Window.Resources>
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
@@ -79,18 +78,14 @@
         </DataTemplate>
     </Window.Resources>
     <Grid Background="#393E46">
-        
         <Grid  x:Name="mainGrid" Background="#222831">
-             
             <ContentControl   Content="{Binding}"></ContentControl>
             <StackPanel Width="90" HorizontalAlignment="Left" Background="#574B90">
                 <Button  Click="MainViewBtn_Click" Style="{DynamicResource SidebarBtnStyle}" x:Name="MainViewBtn" Height="90"  BorderBrush="Transparent" Background="Transparent" Margin="0,30,0,0" Foreground="White" MouseEnter="MainViewMouse_Entr" MouseLeave="MainViewMouse_Lv">
-
                     <Image Source="/assets/images/main.png" Margin="15,15,15,15"  />
                 </Button>
                 <Button  Click="DataViewBtn_Click" MouseEnter="DataViewMouse_Entr" MouseLeave="DataViewMouse_Lv" Style="{DynamicResource SidebarBtnStyle}" x:Name="DataViewBtn" Height="90"  BorderBrush="Transparent" Background="Transparent"  >
                     <Image Source="/assets/images/upload.png" Margin="15,15,15,15"  />
-                    
                 </Button>
                 <Button Click="OptionsViewBtn_Click"  MouseEnter="OptionsMouse_Entr" MouseLeave="OptionsMouse_Lv" Style="{DynamicResource SidebarBtnStyle}" x:Name="OptionsViewBtn" Height="90"  BorderBrush="Transparent" Background="Transparent">
                     <Image Source="/assets/images/preference.png" Margin="15,15,15,15"  ></Image>
@@ -103,20 +98,16 @@
                     </Button>
                     <Button  x:Name="crossBtn" Height="25" Width="25" BorderBrush="Transparent" Background="Transparent" Click="CloseBtn_Click">
                         <Image Source="/assets/images/cross.png"></Image>
-                        
                     </Button>
                 </DockPanel>
-
                 <Popup x:Name="hoverCloud"
                    AllowsTransparency="True"
                    HorizontalOffset="10"
                    VerticalOffset="10">
-
                     <Grid>
                         <local:HoverCloud x:Name="Header" Foreground="#E0FFFF"/>
                     </Grid>
                 </Popup>
-
             </Grid>
         </Grid>
     </Grid>

@@ -31,14 +31,12 @@ namespace secretary.views
         }
         private string generateTableString(DataTable curTable)
         {
-
             string curTableString = "";
             foreach (DataRow row in curTable.Rows)
             {
                 
                 for (int i = 0; i < curTable.Columns.Count; i++)
                 {
-
                     curTableString +=row[i].ToString();
                     curTableString += i == curTable.Columns.Count - 1 ? "" : "|";
                 }
@@ -52,6 +50,7 @@ namespace secretary.views
             dbDump += generateTableString(DbHelper.basicSelect("students"));
             dbDump += generateTableString(DbHelper.basicSelect("teachers"));
             dbDump += generateTableString(DbHelper.basicSelect("employees"));
+
             SaveFileDialog saveDialog = new SaveFileDialog();
             if (saveDialog.ShowDialog() == true)
                 File.WriteAllText(saveDialog.FileName,dbDump);
@@ -59,17 +58,11 @@ namespace secretary.views
 
         private void uploadDataBtn_Click(object sender, RoutedEventArgs e)
         {
-
             OpenFileDialog openFileDialog = new OpenFileDialog();
             if (openFileDialog.ShowDialog() == true) { 
                 string[] lines = File.ReadAllLines(openFileDialog.FileName);
-
-       
-
-          
             foreach (string line in lines)
                 {
-                    string rowType = "";
                     string insertType = "";
                     string[] columnArray = new string[1000];
                     int counter = 0;
@@ -80,21 +73,12 @@ namespace secretary.views
                             counter++;
                     }
                     if (counter == 12)
-                    { insertType = "student";
-                 //       columnArray = new string[13];
- 
-                    }
+                        insertType = "student";
                     if (counter == 13)
-                    {
                         insertType = "teacher";
-                     //   columnArray = new string[14];
-                    }
                     if (counter == 14)
-                    {
-                         insertType = "employee";
-                      //  columnArray = new string[15];
-
-                    }
+                        insertType = "employee";
+                    
                     lll.Content = counter.ToString();
                     string[] columns = line.Split('|');
                 foreach (string column in columns)
@@ -116,17 +100,16 @@ namespace secretary.views
                         newStudent.birthDate = Convert.ToDateTime(columnArray[7]) ;
                         newStudent.pesel = columnArray[8]; ;
                         newStudent.imagePath = columnArray[9];
-                        newStudent.gender = Convert.ToChar(columnArray[10]);
+                        newStudent.gender = columnArray[10];
                         newStudent.currentClass = columnArray[11];
                         newStudent.groups = columnArray[12]; ;
+                        
                         DbHelper.insertStudent(newStudent);
-
-
-
-
                     }
-                    if(insertType == "teacher") {
+                    if(insertType == "teacher") 
+                    {
                         Teacher newTeacher = new Teacher();
+
                         newTeacher.firstName = columnArray[1];
                         newTeacher.secondName = columnArray[2];
                         newTeacher.lastname = columnArray[3];
@@ -136,7 +119,7 @@ namespace secretary.views
                         newTeacher.birthDate = Convert.ToDateTime(columnArray[7]);
                         newTeacher.pesel = columnArray[8]; ;
                         newTeacher.imagePath = columnArray[9];
-                        newTeacher.gender = Convert.ToChar(columnArray[10]);
+                        newTeacher.gender = columnArray[10];
                         newTeacher.dateOfEmployment = Convert.ToDateTime(columnArray[11]);
                         newTeacher.classTutor = columnArray[12];
                         newTeacher.taughtSubjects = columnArray[13];
@@ -156,7 +139,7 @@ namespace secretary.views
                         newEmployee.birthDate = Convert.ToDateTime(columnArray[7]);
                         newEmployee.pesel = columnArray[8]; ;
                         newEmployee.imagePath = columnArray[9];
-                        newEmployee.gender = Convert.ToChar(columnArray[10]);
+                        newEmployee.gender = columnArray[10];
                         newEmployee.dateOfEmployment = Convert.ToDateTime(columnArray[11]);
                         newEmployee.jobPosition = columnArray[12];
                         newEmployee.jobDescription = columnArray[13];
@@ -164,7 +147,7 @@ namespace secretary.views
 
                         DbHelper.insertEmployee(newEmployee);
                     }
-            }
+                }
             }
         }
     }

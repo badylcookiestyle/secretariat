@@ -1,9 +1,9 @@
 ﻿<UserControl x:Class="secretary.views.MainView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:secretary.views"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:local="clr-namespace:secretary.views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="1200">
     <UserControl.Resources>
@@ -64,9 +64,7 @@
         </Style>
     </UserControl.Resources>
     <Grid Margin="90,0,0,0" Background="Transparent">
-
-
-        <DataGrid HorizontalAlignment="Left" Width="1750" Margin="30,90,30,30" Height="600" x:Name="DataGrid1" GridLinesVisibility="Horizontal" Focusable="False" RowBackground="#00B41616" Background="#00F0F0F0" Foreground="White" HorizontalGridLinesBrush="White" VerticalGridLinesBrush="White" HeadersVisibility="Column" RowHeight="22" ColumnHeaderHeight="30" ScrollViewer.HorizontalScrollBarVisibility="Visible" AutomationProperties.IsRowHeader="True" RowHeaderWidth="29" CellEditEnding="DataGrid1_CellEditEnding" SelectionChanged="DataGrid1_SelectionChanged" Grid.Column="0">
+        <DataGrid IsReadOnly="True" HorizontalAlignment="Left" Width="1750" Margin="30,90,30,30" Height="600" x:Name="DataGrid1" GridLinesVisibility="Horizontal" Focusable="False" RowBackground="#00B41616" Background="#00F0F0F0" Foreground="White" HorizontalGridLinesBrush="White" VerticalGridLinesBrush="White" HeadersVisibility="Column" RowHeight="64" ColumnHeaderHeight="64" ScrollViewer.HorizontalScrollBarVisibility="Visible" AutomationProperties.IsRowHeader="True" RowHeaderWidth="29" CellEditEnding="DataGrid1_CellEditEnding" SelectionChanged="DataGrid1_SelectionChanged" Grid.Column="0">
             <DataGrid.ColumnHeaderStyle>
                 <Style TargetType="DataGridColumnHeader">
                     <Setter Property="Background" Value="#574B90"></Setter>
@@ -81,33 +79,25 @@
             </DataGrid.RowHeaderStyle>
             <DataGrid.CellStyle>
                 <Style TargetType="DataGridCell">
-
-                    <Setter Property="Height" Value="60"></Setter>
+                    <Setter Property="Height" Value="64"></Setter>
                     <Setter Property="Padding" Value="10"></Setter>
                 </Style>
             </DataGrid.CellStyle>
             <DataGrid.Resources>
-                <Style TargetType="DataGridRowHeader">
-
-                </Style>
+                <Style TargetType="DataGridRowHeader"></Style>
             </DataGrid.Resources>
         </DataGrid>
         <StackPanel Margin="60">
-
             <RadioButton x:Name="teacherRadio" Click="TeacherRadioBtn_Click"  Foreground="White">Teachers</RadioButton>
             <RadioButton x:Name="studentRadio" Click="StudentRadioBtn_Click" Foreground="White">Students</RadioButton>
-            <RadioButton x:Name="employeeRadio" Click="EmployeeRadioBtn_Click"  Foreground="White">Emp</RadioButton>
+            <RadioButton x:Name="employeeRadio" Click="EmployeeRadioBtn_Click"  Foreground="White">Employees</RadioButton>
             <Button Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Top" Width="30" Height="30"   Margin="0,-10,-30,30" Click="DeleteEverythingBtn_Click" BorderBrush="#00000000">
                 <Image  Margin="3,3,3,3" Source="/assets/images/trash.png" ></Image>
             </Button>
-
         </StackPanel>
-
         <Expander x:Name="formExpander" Padding="-200,-5,0,0"  Foreground="White" Header="add new persons" HorizontalAlignment="Left" Height="460" Width="460" Margin="468,53,0,0" VerticalAlignment="Top" Expanded="FormExpander_Expanded"  >
-
             <DockPanel Background="#39315e" HorizontalAlignment="Right" Width="460" Margin="0,0,30,30" >
                 <StackPanel Margin="10,0,0,0" Background="Transparent" VerticalAlignment="Top" Height="25" Width="460">
-
                     <Button  x:Name="TeacherFormBtn" Foreground="White" VerticalAlignment="Top" Content="T" Height="20" Width="20" HorizontalAlignment="Left" Click="TeacherFormBtn_Click" Margin="0">
                         <Button.Template>
                             <ControlTemplate TargetType="{x:Type Button}">
@@ -140,13 +130,10 @@
                     </Button>
                 </StackPanel>
                 <StackPanel    x:Name="topPanel"  Background="Transparent" VerticalAlignment="Top"   Margin="-440,30,0,0" Height="260" Width="460">
-
                     <Grid Height="26">
                         <Label Foreground="White" Margin="90,-5,0,0">Name</Label>
                         <TextBox MaxLength="16" x:Name="textBoxFname"  HorizontalAlignment="Left"  Width="90"/>
-
                     </Grid>
-
                     <Grid Height="26">
                         <Label Foreground="White" Margin="90,-5,0,0">Second name</Label>
                         <TextBox  MaxLength="16" x:Name="textBoxSname"  HorizontalAlignment="Left"  Width="90"/>
@@ -170,7 +157,6 @@
                     <Grid Height="26">
                         <Label Foreground="White" Margin="90,-5,0,0">Birth Date</Label>
                         <DatePicker  x:Name="datePickerBirthDate"  HorizontalAlignment="Left"  Width="90"/>
-
                     </Grid>
                     <Grid Height="26">
                         <Label Foreground="White" Margin="90,-5,0,0">Pesel</Label>
@@ -182,7 +168,6 @@
                             <ComboBoxItem>Male</ComboBoxItem>
                             <ComboBoxItem>Female</ComboBoxItem>
                         </ComboBox>
-
                     </Grid>
                     <Image  Margin="12,-220,26,280" HorizontalAlignment="Right"  Name="imgPhoto" Height="64" Width="64" />
                     <Button Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Foreground="White"  Margin="12,-275,26,300" HorizontalAlignment="Right" Height="23" 
@@ -197,17 +182,14 @@
                         <DatePicker  Margin="80,-150,0,0" Width="30" Height="30" x:Name="datepickerLesson"></DatePicker>
                         <Button Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Foreground="White" Content="+"  x:Name="addLessonBtn" Height="25" Width="25"  Margin="0,-150,25,0" HorizontalAlignment="Right" Click="AddLessonBtn_Click"  />
                         <Button Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Foreground="White" Content="-"  x:Name="deleteLessonBtn" Height="25" Width="25"  Margin="0,-150,50,0" HorizontalAlignment="Right" Click="DeleteLessonBtn_Click"   />
-
                         <ListView x:Name="lessonsListView" Width="180" HorizontalAlignment="Right" Margin="0,-40,25,-40">
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn Header="name" DisplayMemberBinding="{Binding name}"/>
                                     <GridViewColumn Header="lessonTime" DisplayMemberBinding="{Binding lessonTime}"/>
-
                                 </GridView>
                             </ListView.View>
                         </ListView>
-
                     </Grid>
                     <Grid Height="26">
                         <Label Foreground="White" Margin="90,-5,0,0">tutor?</Label>
@@ -217,22 +199,18 @@
                         <Label Foreground="White" Margin="90,-5,0,0">Date of Employment</Label>
                         <DatePicker  x:Name="TdatePickerEmployment"   HorizontalAlignment="Left"  Width="90"/>
                     </Grid>
-
-
-
                 </StackPanel>
                 <StackPanel x:Name="formStudent"   Background="Transparent" Height="90" Width="460" VerticalAlignment="Bottom"   Margin="-440,100,0,0">
                     <Grid Height="26">
                         <Label Foreground="White" Margin="90,-5,0,0">class</Label>
                         <ComboBox  x:Name="comboBoxCurrentClass"   HorizontalAlignment="Left"  Width="90"/>
-
                     </Grid>
                     <Grid Height="26">
                         <Label Foreground="White" Margin="90,-5,0,0">group</Label>
                         <ComboBox  x:Name="comboBoxCurrentGroup"   HorizontalAlignment="Left"  Width="90"/>
                     </Grid>
                 </StackPanel>
-                <StackPanel  Visibility="Hidden" x:Name="formEmployee" Background="Transparent" Height="90" Width="460"   VerticalAlignment="Bottom"   Margin="-440,100,0,0">
+                <StackPanel  Visibility="Hidden" x:Name="formEmployee" Background="Transparent" Height="120" Width="460"   VerticalAlignment="Bottom"   Margin="-440,100,0,0">
                     <Grid Height="26">
                         <Label Foreground="White" Margin="90,-5,0,0">Date of Employment</Label>
                         <DatePicker  x:Name="EdatePickerEmployment"   HorizontalAlignment="Left"  Width="90"/>
@@ -245,11 +223,13 @@
                         <Label Foreground="White" Margin="90,-5,0,0">Job description</Label>
                         <TextBox    MaxLength="16" x:Name="textBoxJobDescription"   HorizontalAlignment="Left"  Width="90"/>
                     </Grid>
-
+                    <Grid Height="26">
+                        <Label Foreground="White" Margin="90,-5,0,0">Monthly working hours</Label>
+                        <TextBox MaxLength="16" x:Name="textBoxTenure" HorizontalAlignment="Left" Width="90"/>
+                    </Grid>
                 </StackPanel>
                 <Button  Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Foreground="White"     x:Name="submitPerson" Height="20"   Content="Add" Margin="-460,0,30,30" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="SubmitPersonBtn_Click"></Button>
             </DockPanel>
-
         </Expander>
         <DatePicker x:Name="datePickerOlderThan" HorizontalAlignment="Left" Margin="860,58,0,0" VerticalAlignment="Top"/>
         <DatePicker x:Name="datePickerYoungerThan" HorizontalAlignment="Left" Margin="860,35,0,0" VerticalAlignment="Top" CalendarClosed="datePickerYoungerThan_CalendarClosed"/>
@@ -261,18 +241,19 @@
         </Button>
         <TextBox Text="Search" x:Name="textBoxSearcher" TextWrapping="Wrap"  Margin="728,-540,292,168" Height="25" Width="90" />
         <ComboBox x:Name="comboBoxSelectField"  Margin="728,-520,292,142" Height="25"  Width="90"/>
-
         <Button Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Foreground="White" x:Name="generateRaportBtn"  HorizontalAlignment="Left" Content="Generate raport" Height="30" Width="90" Margin="30,735,0,0" VerticalAlignment="Top" Click="GenerateRaportBtn_Click"/>
         <Expander Style="{DynamicResource ExpanderStyle1}" x:Name="editFormExpander" Header="" HorizontalAlignment="Left" Height="100" Margin="1660,-37,0,0"  VerticalAlignment="Top" Width="100" AutomationProperties.IsOffscreenBehavior="Default" Expanded="EditFormExpander_Expanded">
             <Grid Margin="-1300,80,600,-600" Width="400" Height="400" Background="#222831">
                 <Border BorderThickness="1" BorderBrush="#574B90" />
                 <StackPanel Background="Transparent" Height="250" Margin="0,0,0,150" >
+                    <Button Background="#574B90"  Style="{DynamicResource ButtonBasicStyle}" Margin="3,3,3,3" Foreground="White" Width="25" Height="25"  HorizontalAlignment="Right"   Click="closeEditModalBtn">
+                        <Image Source="/assets/images/cross.png" VerticalAlignment="Center" HorizontalAlignment="Center" Height="25" Width="25"></Image>
+                    </Button>
+                    <Image x:Name="eImage" Width="64" Height="64" HorizontalAlignment="Left"  Source="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png"></Image>
                     <Grid Height="26" Margin="0,5,0,0">
                         <Label Foreground="White" Margin="90,-5,0,0">Name</Label>
                         <TextBox MaxLength="16" x:Name="eTextBoxFname"  HorizontalAlignment="Left"  Width="90"/>
-
                     </Grid>
-
                     <Grid Height="26">
                         <Label Foreground="White" Margin="90,-5,0,0">Second name</Label>
                         <TextBox  MaxLength="16" x:Name="eTextBoxSname"  HorizontalAlignment="Left"  Width="90"/>
@@ -296,7 +277,6 @@
                     <Grid Height="26">
                         <Label Foreground="White" Margin="90,-5,0,0">Birth Date</Label>
                         <DatePicker  x:Name="eDatePickerBirthDate"  HorizontalAlignment="Left"  Width="90"/>
-
                     </Grid>
                     <Grid Height="26">
                         <Label Foreground="White" Margin="90,-5,0,0">Pesel</Label>
@@ -308,21 +288,16 @@
                             <ComboBoxItem>Male</ComboBoxItem>
                             <ComboBoxItem>Female</ComboBoxItem>
                         </ComboBox>
-
                     </Grid>
                 </StackPanel>
-
                 <StackPanel   Background="Transparent" Height="150" Margin="0,250,0,0">
-
                     <Button Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Foreground="White" Content="Edit" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,125,5,0" Click="EditRowBtn_Click"></Button>
-
                     <Button Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Foreground="White" Content="Delete" Width="40" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,-225,5,25" Click="DeleteChoosenRowBtn_Click"></Button>
                 </StackPanel>
                 <StackPanel x:Name="eStudentForm"    Background="Transparent" Height="100" Margin="0,0,0,-190"  Visibility="Hidden">
                     <Grid Height="26">
                         <Label Foreground="White" Margin="90,-5,0,0">class</Label>
                         <ComboBox  x:Name="eComboBoxCurrentClass"   HorizontalAlignment="Left"  Width="90"/>
-
                     </Grid>
                     <Grid Height="26">
                         <Label Foreground="White" Margin="90,-5,0,0">group</Label>
@@ -343,19 +318,20 @@
                     <DatePicker  Margin="28,-90,0,0" Width="30" Height="30" x:Name="eDatepickerLesson"></DatePicker>
                     <Button Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Foreground="White" Content="+"  x:Name="eAddLessonBtn" Height="25" Width="25"  Margin="0,-90,25,0" HorizontalAlignment="Right" Click="AddLessonBtn_Click"  />
                     <Button Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Foreground="White" Content="-"  x:Name="eDeleteLessonBtn" Height="25" Width="25"  Margin="0,-90,50,0" HorizontalAlignment="Right" Click="DeleteLessonBtn_Click"   />
-
                     <ListView x:Name="eLessonsListView" Width="180" HorizontalAlignment="Right" Margin="0,-30,15,-45">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="name" DisplayMemberBinding="{Binding name}"/>
                                 <GridViewColumn Header="lessonTime" DisplayMemberBinding="{Binding lessonTime}"/>
-
                             </GridView>
                         </ListView.View>
                     </ListView>
-
                 </StackPanel>
-                <StackPanel x:Name="eEmployeeForm"    Background="Transparent" Height="100" Margin="0,0,0,-190"  Visibility="Hidden">
+                <StackPanel x:Name="eEmployeeForm"    Background="Transparent" Height="100" Margin="0,0,0,-160"  Visibility="Hidden">
+                    <Grid Height="26">
+                        <Label Foreground="White" Margin="90,-5,0,0">Monthly working hours</Label>
+                        <TextBox  Margin="90,-5,0,0" x:Name="eTextBoxTenure"    HorizontalAlignment="Left"  Width="90"></TextBox>
+                    </Grid>
                     <Grid Height="26">
                         <Label Foreground="White" Margin="90,-5,0,0">Date of Employment</Label>
                         <DatePicker  x:Name="eEdatePickerEmployment"   HorizontalAlignment="Left"  Width="90"/>
@@ -371,6 +347,5 @@
                 </StackPanel>
             </Grid>
         </Expander>
-
     </Grid>
 </UserControl>

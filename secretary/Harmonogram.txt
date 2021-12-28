@@ -107,3 +107,10 @@ thirteenth test 20.12.2021 10:00
 === tests results ===
 - everything is working
 -  btw  I haven't implement form validation yet, I should implement form cleaner :o
+
+fourteenth test 28.12.2021 16:00
+=== test goals ===
+- checking if app is working properly after removing image_path column
+=== test results ===
+- everything is working 
+- btw  I haven't implemented form validation yet, I should implement form cleaner :o
