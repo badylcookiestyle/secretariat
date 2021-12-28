@@ -89,7 +89,6 @@ eleventh test 12.12.2021 13:35
 - everything is working
 -  btw  I haven't implement form validation yet, I should implement form cleaner :o
 
-
 twelfth test 12.12.2021 20:00
 === test goals ===
 - checking if databinding works
@@ -114,3 +113,11 @@ fourteenth test 28.12.2021 16:00
 === test results ===
 - everything is working 
 - btw  I haven't implemented form validation yet, I should implement form cleaner :o
+
+sixteenth test 28.12.2021 20:41
+=== test goals ===
+- checking if form cleaner works
+- checking if raports are being saved as txt
+- checking if checking if db is exported as txt
+=== test goals ===
+-  everything works

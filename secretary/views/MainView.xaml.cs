@@ -246,22 +246,43 @@ namespace secretary.views
             employeeRadio.IsChecked = true;
             reloadData();
         }
+        void clearForm(DependencyObject obj)
+
+        {
+
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
+
+            {
+
+                if (obj is TextBox)
+
+                    ((TextBox)obj).Text = null;
+
+                clearForm(VisualTreeHelper.GetChild(obj, i));
+
+            }
+
+        }
         private void SubmitPersonBtn_Click(object sender, RoutedEventArgs e)
         {
             if (isBeingEdited == false)
             {
-                switch (currentForm)
-                {
-                    case "Student":
-                        addStudent();
-                        break;
-                    case "Teacher":
-                        addTeacher();
-                        break;
-                    case "Employee":
-                        addEmployee();
-                        break;
-                }
+               
+                    switch (currentForm)
+                    {
+                        case "Student":
+                            addStudent();
+                            break;
+                        case "Teacher":
+                            addTeacher();
+                            break;
+                        case "Employee":
+                            addEmployee();
+                            break;
+                    }
+                clearForm(MainViewGrid);
+
+
             }
 
         }
@@ -510,7 +531,7 @@ namespace secretary.views
             SaveFileDialog saveDialog = new SaveFileDialog();
 
             if (saveDialog.ShowDialog() == true)
-                File.WriteAllText(saveDialog.FileName, raportDataString);
+                File.WriteAllText(saveDialog.FileName+".txt", raportDataString);
 
             MessageBox.Show("Your raport has already been saved" + raportDataString);
         

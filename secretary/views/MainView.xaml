@@ -63,7 +63,7 @@
             </Setter>
         </Style>
     </UserControl.Resources>
-    <Grid Margin="90,0,0,0" Background="Transparent">
+    <Grid x:Name="MainViewGrid" Margin="90,0,0,0" Background="Transparent">
         <DataGrid IsReadOnly="True" HorizontalAlignment="Left" Width="1750" Margin="30,90,30,30" Height="600" x:Name="DataGrid1" GridLinesVisibility="Horizontal" Focusable="False" RowBackground="#00B41616" Background="#00F0F0F0" Foreground="White" HorizontalGridLinesBrush="White" VerticalGridLinesBrush="White" HeadersVisibility="Column" RowHeight="64" ColumnHeaderHeight="64" ScrollViewer.HorizontalScrollBarVisibility="Visible" AutomationProperties.IsRowHeader="True" RowHeaderWidth="29" CellEditEnding="DataGrid1_CellEditEnding" SelectionChanged="DataGrid1_SelectionChanged" Grid.Column="0">
             <DataGrid.ColumnHeaderStyle>
                 <Style TargetType="DataGridColumnHeader">

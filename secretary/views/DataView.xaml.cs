@@ -38,7 +38,7 @@ namespace secretary.views
                 for (int i = 0; i < curTable.Columns.Count; i++)
                 {
                     curTableString +=row[i].ToString();
-                    curTableString += i == curTable.Columns.Count - 1 ? "" : "|";
+                    curTableString += i == curTable.Columns.Count - 1 ? "" : ",";
                 }
                 curTableString += "\n";
             }
@@ -69,7 +69,7 @@ namespace secretary.views
                     int i = 0;
                     foreach (char c in line)
                     {
-                        if (c == '|')
+                        if (c == ',')
                             counter++;
                     }
                     if (counter == 12)
@@ -80,7 +80,7 @@ namespace secretary.views
                         insertType = "employee";
                     
                     lll.Content = counter.ToString();
-                    string[] columns = line.Split('|');
+                    string[] columns = line.Split(',');
                 foreach (string column in columns)
                 {
                         columnArray[i] = column;
