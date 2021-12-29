@@ -96,140 +96,7 @@
             </Button>
         </StackPanel>
         <Expander x:Name="formExpander" Padding="-200,-5,0,0"  Foreground="White" Header="add new persons" HorizontalAlignment="Left" Height="460" Width="460" Margin="468,53,0,0" VerticalAlignment="Top" Expanded="FormExpander_Expanded"  >
-            <DockPanel Background="#39315e" HorizontalAlignment="Right" Width="460" Margin="0,0,30,30" >
-                <StackPanel Margin="10,0,0,0" Background="Transparent" VerticalAlignment="Top" Height="25" Width="460">
-                    <Button  x:Name="TeacherFormBtn" Foreground="White" VerticalAlignment="Top" Content="T" Height="20" Width="20" HorizontalAlignment="Left" Click="TeacherFormBtn_Click" Margin="0">
-                        <Button.Template>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Grid Height="20" Width="20">
-                                    <Ellipse  />
-                                    <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Grid>
-                            </ControlTemplate>
-                        </Button.Template>
-                    </Button>
-                    <Button  x:Name="StudentFormBtn" Margin="25,-20,0,0"  Foreground="Purple" VerticalAlignment="Top" Content="S" Height="20" Width="20" HorizontalAlignment="Left" Click="StudentFormBtn_Click">
-                        <Button.Template>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Grid Height="20" Width="20">
-                                    <Ellipse />
-                                    <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Grid>
-                            </ControlTemplate>
-                        </Button.Template>
-                    </Button>
-                    <Button x:Name="EmployeeFormBtn" Margin="50,-20,0,0" Foreground="White" VerticalAlignment="Top" Content="E" Height="20" Width="20" HorizontalAlignment="Left" Click="EmployeeFormBtn_Click">
-                        <Button.Template>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Grid Height="20" Width="20">
-                                    <Ellipse  />
-                                    <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Grid>
-                            </ControlTemplate>
-                        </Button.Template>
-                    </Button>
-                </StackPanel>
-                <StackPanel    x:Name="topPanel"  Background="Transparent" VerticalAlignment="Top"   Margin="-440,30,0,0" Height="260" Width="460">
-                    <Grid Height="26">
-                        <Label Foreground="White" Margin="90,-5,0,0">Name</Label>
-                        <TextBox MaxLength="16" x:Name="textBoxFname"  HorizontalAlignment="Left"  Width="90"/>
-                    </Grid>
-                    <Grid Height="26">
-                        <Label Foreground="White" Margin="90,-5,0,0">Second name</Label>
-                        <TextBox  MaxLength="16" x:Name="textBoxSname"  HorizontalAlignment="Left"  Width="90"/>
-                    </Grid>
-                    <Grid Height="26">
-                        <Label Foreground="White" Margin="90,-5,0,0">Last name</Label>
-                        <TextBox MaxLength="16"  x:Name="textBoxLname"  HorizontalAlignment="Left"  Width="90"/>
-                    </Grid>
-                    <Grid Height="26">
-                        <Label Foreground="White" Margin="90,-5,0,0">Maiden name</Label>
-                        <TextBox   MaxLength="16" x:Name="textBoxMaiName"  HorizontalAlignment="Left"  Width="90"/>
-                    </Grid>
-                    <Grid Height="26">
-                        <Label Foreground="White" Margin="90,-5,0,0">Fathers Name</Label>
-                        <TextBox   MaxLength="16" x:Name="textBoxFthName"  HorizontalAlignment="Left"  Width="90"/>
-                    </Grid>
-                    <Grid Height="26">
-                        <Label Foreground="White" Margin="90,-5,0,0">Mothers Name</Label>
-                        <TextBox  MaxLength="16"  x:Name="textBoxMthName"  HorizontalAlignment="Left"  Width="90"/>
-                    </Grid>
-                    <Grid Height="26">
-                        <Label Foreground="White" Margin="90,-5,0,0">Birth Date</Label>
-                        <DatePicker  x:Name="datePickerBirthDate"  HorizontalAlignment="Left"  Width="90"/>
-                    </Grid>
-                    <Grid Height="26">
-                        <Label Foreground="White" Margin="90,-5,0,0">Pesel</Label>
-                        <TextBox   MaxLength="16" x:Name="textBoxPesel"   HorizontalAlignment="Left"  Width="90"/>
-                    </Grid>
-                    <Grid Height="26">
-                        <Label Foreground="White" Margin="90,-5,0,0">Gender</Label>
-                        <ComboBox  x:Name="comboBoxGender"  HorizontalAlignment="Left"  Width="90">
-                            <ComboBoxItem>Male</ComboBoxItem>
-                            <ComboBoxItem>Female</ComboBoxItem>
-                        </ComboBox>
-                    </Grid>
-                    <Image  Margin="12,-220,26,280" HorizontalAlignment="Right"  Name="imgPhoto" Height="64" Width="64" />
-                    <Button Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Foreground="White"  Margin="12,-275,26,300" HorizontalAlignment="Right" Height="23" 
-        Name="btnLoadImg" VerticalAlignment="Bottom"
-        Width="75" Grid.Column="1" Click="LoadImgBtn_Click"  >Load img</Button>
-                    <Label Margin="12,-570,26,200"  x:Name="cFileName" Height="30" HorizontalAlignment="Right" Width="240" Foreground="White"   ></Label>
-                </StackPanel>
-                <StackPanel x:Name="formTeacher"  Visibility="Hidden" Background="Transparent" Height="120" Width="460" VerticalAlignment="Bottom"  Margin="-440,100,0,0">
-                    <Grid Height="26">
-                        <Label Foreground="White" Margin="0,-110,30,0" HorizontalAlignment="Right">Add new subject to timetable</Label>
-                        <TextBox  MaxLength="16" Margin="210,-150,0,0" x:Name="textboxLesson" Width="90" Height="30"></TextBox>
-                        <DatePicker  Margin="80,-150,0,0" Width="30" Height="30" x:Name="datepickerLesson"></DatePicker>
-                        <Button Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Foreground="White" Content="+"  x:Name="addLessonBtn" Height="25" Width="25"  Margin="0,-150,25,0" HorizontalAlignment="Right" Click="AddLessonBtn_Click"  />
-                        <Button Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Foreground="White" Content="-"  x:Name="deleteLessonBtn" Height="25" Width="25"  Margin="0,-150,50,0" HorizontalAlignment="Right" Click="DeleteLessonBtn_Click"   />
-                        <ListView x:Name="lessonsListView" Width="180" HorizontalAlignment="Right" Margin="0,-40,25,-40">
-                            <ListView.View>
-                                <GridView>
-                                    <GridViewColumn Header="name" DisplayMemberBinding="{Binding name}"/>
-                                    <GridViewColumn Header="lessonTime" DisplayMemberBinding="{Binding lessonTime}"/>
-                                </GridView>
-                            </ListView.View>
-                        </ListView>
-                    </Grid>
-                    <Grid Height="26">
-                        <Label Foreground="White" Margin="90,-5,0,0">tutor?</Label>
-                        <TextBox   MaxLength="16" x:Name="textBoxTutor"   HorizontalAlignment="Left"  Width="90"/>
-                    </Grid>
-                    <Grid Height="26">
-                        <Label Foreground="White" Margin="90,-5,0,0">Date of Employment</Label>
-                        <DatePicker  x:Name="TdatePickerEmployment"   HorizontalAlignment="Left"  Width="90"/>
-                    </Grid>
-                </StackPanel>
-                <StackPanel x:Name="formStudent"   Background="Transparent" Height="90" Width="460" VerticalAlignment="Bottom"   Margin="-440,100,0,0">
-                    <Grid Height="26">
-                        <Label Foreground="White" Margin="90,-5,0,0">class</Label>
-                        <ComboBox  x:Name="comboBoxCurrentClass"   HorizontalAlignment="Left"  Width="90"/>
-                    </Grid>
-                    <Grid Height="26">
-                        <Label Foreground="White" Margin="90,-5,0,0">group</Label>
-                        <ComboBox  x:Name="comboBoxCurrentGroup"   HorizontalAlignment="Left"  Width="90"/>
-                    </Grid>
-                </StackPanel>
-                <StackPanel  Visibility="Hidden" x:Name="formEmployee" Background="Transparent" Height="120" Width="460"   VerticalAlignment="Bottom"   Margin="-440,100,0,0">
-                    <Grid Height="26">
-                        <Label Foreground="White" Margin="90,-5,0,0">Date of Employment</Label>
-                        <DatePicker  x:Name="EdatePickerEmployment"   HorizontalAlignment="Left"  Width="90"/>
-                    </Grid>
-                    <Grid Height="26">
-                        <Label Foreground="White" Margin="90,-5,0,0">Job Position</Label>
-                        <TextBox   MaxLength="16" x:Name="textBoxJobPosition"   HorizontalAlignment="Left"  Width="90"/>
-                    </Grid>
-                    <Grid Height="26">
-                        <Label Foreground="White" Margin="90,-5,0,0">Job description</Label>
-                        <TextBox    MaxLength="16" x:Name="textBoxJobDescription"   HorizontalAlignment="Left"  Width="90"/>
-                    </Grid>
-                    <Grid Height="26">
-                        <Label Foreground="White" Margin="90,-5,0,0">Monthly working hours</Label>
-                        <TextBox MaxLength="16" x:Name="textBoxTenure" HorizontalAlignment="Left" Width="90"/>
-                    </Grid>
-                </StackPanel>
-                <Button  Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Foreground="White"     x:Name="submitPerson" Height="20"   Content="Add" Margin="-460,0,30,30" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="SubmitPersonBtn_Click"></Button>
-            </DockPanel>
+           
         </Expander>
         <DatePicker x:Name="datePickerOlderThan" HorizontalAlignment="Left" Margin="860,58,0,0" VerticalAlignment="Top"/>
         <DatePicker x:Name="datePickerYoungerThan" HorizontalAlignment="Left" Margin="860,35,0,0" VerticalAlignment="Top" CalendarClosed="datePickerYoungerThan_CalendarClosed"/>
@@ -301,7 +168,13 @@
                     </Grid>
                     <Grid Height="26">
                         <Label Foreground="White" Margin="90,-5,0,0">group</Label>
-                        <ComboBox  x:Name="eComboBoxCurrentGroup"   HorizontalAlignment="Left"  Width="90"/>
+                        <ComboBox  x:Name="eComboBoxCurrentGroup" Margin="150,-70,0,70"  HorizontalAlignment="Left"  Width="90"/>
+                        
+                        <Button Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Foreground="White" Content="+"    Height="25" Width="25"  Margin="0,-80,190,0" HorizontalAlignment="Right" Click="addGroupBtn_Click"  />
+                        <Button Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Foreground="White" Content="-"  Height="25" Width="25"  Margin="0,-20,190,0" HorizontalAlignment="Right" Click="deleteGroupBtn_Click"   />
+                        <ListBox x:Name="eGroupsListView" Width="90" HorizontalAlignment="Right" Margin="0,-40,220,-40">
+                         
+                        </ListBox>
                     </Grid>
                 </StackPanel>
                 <StackPanel x:Name="eTeacherForm"   Background="Transparent" Height="100" Margin="0,0,0,-190" Visibility="Hidden">
@@ -329,8 +202,8 @@
                 </StackPanel>
                 <StackPanel x:Name="eEmployeeForm"    Background="Transparent" Height="100" Margin="0,0,0,-160"  Visibility="Hidden">
                     <Grid Height="26">
-                        <Label Foreground="White" Margin="90,-5,0,0">Monthly working hours</Label>
-                        <TextBox  Margin="90,-5,0,0" x:Name="eTextBoxTenure"    HorizontalAlignment="Left"  Width="90"></TextBox>
+                        <Label  Foreground="White" Margin="90,-5,0,0">Monthly working hours</Label>
+                        <TextBox   Margin="90,-5,0,0" x:Name="eTextBoxTenure"    HorizontalAlignment="Left"  Width="90"></TextBox>
                     </Grid>
                     <Grid Height="26">
                         <Label Foreground="White" Margin="90,-5,0,0">Date of Employment</Label>
@@ -345,6 +218,141 @@
                         <TextBox    MaxLength="16" x:Name="eTextBoxJobDescription"   HorizontalAlignment="Left"  Width="90"/>
                     </Grid>
                 </StackPanel>
+            </Grid>
+        </Expander>
+        <Expander HorizontalAlignment="Left" Height="520"  Margin="1160,25,0,0" VerticalAlignment="Top" Width="600" ExpandDirection="Left">
+            <Grid   Margin="10"    Background="#39315e">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="64"/>
+                    <ColumnDefinition Width="8"/>
+                    
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="28" />
+                    <RowDefinition Height="28" />
+                    <RowDefinition Height="28" />
+                    <RowDefinition Height="28" />
+                    <RowDefinition Height="28" />
+                    <RowDefinition Height="28" />
+                    <RowDefinition Height="28" />
+                    <RowDefinition Height="28" />
+                    <RowDefinition Height="28" />
+                    
+                   
+                    <RowDefinition Height="80" />
+                    <RowDefinition Height="28" />
+                    <RowDefinition Height="28" />
+                    <RowDefinition Height="28" />
+                </Grid.RowDefinitions>
+                <DockPanel Grid.Row="0" Margin="5,5,0,0" Grid.Column="0" Background="Transparent">
+                    <Button Foreground="White" Content="T" x:Name="TeacherFormBtn" Height="25" Width="25" VerticalAlignment="Top" HorizontalAlignment="Left" Click="TeacherFormBtn_Click">
+                        <Button.Template>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Grid Height="20" Width="20">
+                                    <Ellipse  />
+                                    <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <Button Foreground="Purple"  Content="S" x:Name="StudentFormBtn"  Height="25" Width="25" VerticalAlignment="Top" HorizontalAlignment="Left" Click="StudentFormBtn_Click">
+                        <Button.Template>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Grid Height="20" Width="20">
+                                    <Ellipse  />
+                                    <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <Button Foreground="White" Content="E" x:Name="EmployeeFormBtn"  Height="25" Width="25" VerticalAlignment="Top" HorizontalAlignment="Left" Click="EmployeeFormBtn_Click">
+                        <Button.Template>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Grid Height="20" Width="20">
+                                    <Ellipse  />
+                                    <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </DockPanel>
+                <Image   x:Name="imgPhoto" Grid.Column="3" Width="64" Height="64" HorizontalAlignment="Right"  Source="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png"></Image>
+                <Button Foreground="White" Style="{DynamicResource ButtonBasicStyle}" Background="#574B90"    Grid.Row="1" Grid.Column="3" Width="64" Content="Load Img"  HorizontalAlignment="Right" Click="LoadImgBtn_Click"  ></Button>
+                <Label Foreground="White"  VerticalAlignment="Bottom">Name:</Label>
+                <TextBox Width="120" x:Name="textBoxFname" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Column="1" Height="28" Margin="0,0,0,0" />
+                <Label Foreground="White" Grid.Row="1">Second Name :</Label>
+                <TextBox Grid.Row="1"  x:Name="textBoxSname" Width="120" HorizontalAlignment="Left" Grid.Column="1" Margin="0,0,0,0" />
+                <Label  Foreground="White" Grid.Row="2">Last Name :</Label>
+                <TextBox Grid.Row="2"  x:Name="textBoxLname" Width="120" HorizontalAlignment="Left" Grid.Column="1" Margin="0,0,0,0" />
+                <Label Foreground="White" Grid.Row="3">Maiden Name :</Label>
+                <TextBox Grid.Row="3"  x:Name="textBoxMaiName" Width="120" HorizontalAlignment="Left" Grid.Column="1" Margin="0,0,0,0" />
+                <Label Foreground="White" Grid.Row="4">Fathers Name :</Label>
+                <TextBox Grid.Row="4"   x:Name="textBoxFthName" Width="120" HorizontalAlignment="Left" Grid.Column="1" Margin="0,0,0,0" />
+                <Label Foreground="White" Grid.Row="5">Mothers Name :</Label>
+                <TextBox Grid.Row="5"  x:Name="textBoxMthName"  Width="120" HorizontalAlignment="Left" Grid.Column="1" Margin="0,0,0,0" />
+                <Label Foreground="White" Grid.Row="6">Birth Date :</Label>
+                <DatePicker x:Name="datePickerBirthDate" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left" Width="90"/>
+                <Label Foreground="White" Grid.Row="7">Pesel :</Label>
+                <TextBox MaxLength="11" Grid.Row="7"  x:Name="textBoxPesel"  Width="120" HorizontalAlignment="Left" Grid.Column="1" Margin="0,0,0,0" />
+                <Label Foreground="White" Grid.Row="8">Gender :</Label>
+                <ComboBox  x:Name="comboBoxGender"  Grid.Row="8" Grid.Column="1"  HorizontalAlignment="Left"  Width="90">
+                    <ComboBoxItem>Male</ComboBoxItem>
+                    <ComboBoxItem>Female</ComboBoxItem>
+                </ComboBox>
+             
+
+                <Label Foreground="White" x:Name="classTutorLabel" Visibility="Hidden" Height="28" VerticalAlignment="Top" Grid.Row="10">Select class of tutor :</Label>
+                <TextBox  x:Name="textBoxTutor"  Visibility="Hidden" Grid.Row="10" VerticalAlignment="Top" Width="120" HorizontalAlignment="Left" Height="28" Grid.Column="1" Margin="0,0,0,0" />
+                <Label Foreground="White" x:Name="tDateOfEmploymentLabel" Visibility="Hidden" Height="28" Margin="0,25"  VerticalAlignment="Top" Grid.Row="10">Date of employment :</Label>
+                <DatePicker x:Name="TdatePickerEmployment" Visibility="Hidden" Grid.Row="10" Margin="0,25" VerticalAlignment="Top"   Width="120" HorizontalAlignment="Left" Height="28" Grid.Column="1"  />
+                <DockPanel x:Name="teacherForm"  Visibility="Hidden" Grid.Row="10" Grid.Column="2"  >
+                    <DatePicker x:Name="datepickerLesson" Width="30" Height="28" HorizontalAlignment="Left" VerticalAlignment="Top"></DatePicker>
+                    <TextBox x:Name="textboxLesson"   Width="90" Height="28"  HorizontalAlignment="Left" VerticalAlignment="Top"></TextBox>
+                    <ListView x:Name="lessonsListView" Height="80" VerticalAlignment="Bottom" Margin="-120,0,0,0" Width="140">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="name" DisplayMemberBinding="{Binding name}"/>
+                                <GridViewColumn Header="lessonTime" DisplayMemberBinding="{Binding lessonTime}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Button Foreground="White" Padding="0,-8,0,-2" Content="+" FontSize="22" Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Width="25" Height="25" HorizontalAlignment="Right" Margin="0,0,0,-5" Click="AddLessonBtn_Click" >
+                        
+                    </Button>
+                    <Button Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Width="25" Height="25" HorizontalAlignment="Right" Margin="-40,55,12,0"  Click="DeleteLessonBtn_Click">
+                        <Image Source="/assets/images/cross.png" VerticalAlignment="Center" HorizontalAlignment="Center" Height="25" Width="25"></Image>
+                    </Button>
+                </DockPanel>
+
+                <Label Foreground="White" x:Name="jobPositionLabel"   Visibility="Hidden" Height="28" VerticalAlignment="Top" Grid.Row="10">Job position :</Label>
+                <TextBox  x:Name="textBoxJobPosition"  Visibility="Hidden"  Grid.Row="10" VerticalAlignment="Top" Width="120" HorizontalAlignment="Left" Height="28" Grid.Column="1" Margin="0,0,0,0" />
+                <Label Foreground="White" x:Name="jobDescriptionLabel" Visibility="Hidden" Height="28" VerticalAlignment="Top" Margin="0,25,0,0" Grid.Row="10">Job description :</Label>
+                <TextBox  x:Name="textBoxJobDescription" Visibility="Hidden" Grid.Row="10" Margin="0,25,0,0" VerticalAlignment="Top" Width="120" HorizontalAlignment="Left" Height="28" Grid.Column="1"  />
+                <Label Foreground="White" x:Name="tenureLabel" Visibility="Hidden" Height="28" VerticalAlignment="Top" Margin="0,50,0,0" Grid.Row="10">Monthly hours:</Label>
+                <TextBox  Visibility="Hidden"  x:Name="textBoxTenure" Grid.Row="10" Margin="0,50,0,0" VerticalAlignment="Top" Width="120" HorizontalAlignment="Left" Height="28" Grid.Column="1"  />
+                <Label Foreground="White" x:Name="eDateOfEmploymentLabel"  Visibility="Hidden"  Height="28"   Grid.Row="11">Date of emloployment:</Label>
+                <DatePicker x:Name="eDatePickerEmployment"   Visibility="Hidden"  Grid.Row="11" Width="120" HorizontalAlignment="Left" Height="28" Grid.Column="1"  />
+
+                <Label Foreground="White"  x:Name="groupsLabel"  Visibility="Hidden"  HorizontalAlignment="Left" Grid.Row="9" Grid.Column="2"  >Groups :    </Label>
+                <ComboBox x:Name= "comboBoxCurrentGroup"   Visibility="Hidden"   Grid.Row="9" Grid.Column="2" Height="28" Width="90"></ComboBox>
+                <DockPanel x:Name="studentDockpanel" Visibility="Hidden" Grid.Row="10" Grid.Column="2"  >
+
+                    <Button Foreground="White" Padding="0,-8,0,-2" Content="+" FontSize="22" Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Width="25" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Click="addGroupBtn_Click">
+                        
+                    </Button>
+                    <Button Background="#574B90" Style="{DynamicResource ButtonBasicStyle}"  Width="25" Height="25" VerticalAlignment="Bottom" Margin="-25,-20,0,30" HorizontalAlignment="Left" Click="deleteGroupBtn_Click">
+                        <Image Source="/assets/images/cross.png" VerticalAlignment="Center" HorizontalAlignment="Center" Height="25" Width="25"></Image>
+                    </Button>
+                
+                    <ListBox x:Name="groupsListView" Width="200" Height="100" VerticalAlignment="Bottom"></ListBox>
+                </DockPanel>
+                <Label Foreground="White" x:Name="studentClassesLabel" Visibility="Hidden" HorizontalAlignment="Left" Grid.Row="11"   >Classes :</Label>
+                <ComboBox x:Name="comboBoxCurrentClass"  Visibility="Hidden" HorizontalAlignment="Left"  Grid.Row="11" Grid.Column="1" Height="28" Width="90"></ComboBox>
+                <Button Foreground="White" Background="#574B90" Click="SubmitPersonBtn_Click"   Style="{DynamicResource ButtonBasicStyle}"  Grid.Row="13" Grid.Column="2" HorizontalAlignment="Right" Width="90" Content="Add"></Button>
             </Grid>
         </Expander>
     </Grid>

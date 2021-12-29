@@ -120,7 +120,9 @@ namespace Secretary
                 }
                 counter++;
             }
-
+          //  var isShiftKey = Keyboard.Modifiers == ModifierKeys.Shift ? true : false;
+          // var isAltKey = Keyboard.Modifiers = ModifierKeys.Alt ? true : false;
+          // var isCtrlKey = Keyboard.Modifiers = ModifierKeys.Alt ? true : false;
             if (e.Key.ToString() == bindMain)
             {
                 DataContext = new MainViewModel();

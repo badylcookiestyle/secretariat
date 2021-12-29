@@ -119,5 +119,11 @@ sixteenth test 28.12.2021 20:41
 - checking if form cleaner works
 - checking if raports are being saved as txt
 - checking if checking if db is exported as txt
-=== test goals ===
+=== test results ===
 -  everything works
+
+seventeenth test 29.12.2021 19:50
+=== test goals ===
+- checking if form after rework works
+=== test results ===
+- everything works
