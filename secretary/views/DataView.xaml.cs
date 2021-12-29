@@ -9,7 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
+
 using Microsoft.Win32;
 using System.IO;
 using secretary.dbHelper;
@@ -29,12 +29,12 @@ namespace secretary.views
         {
             InitializeComponent();
         }
+
         private string generateTableString(DataTable curTable)
         {
             string curTableString = "";
             foreach (DataRow row in curTable.Rows)
             {
-                
                 for (int i = 0; i < curTable.Columns.Count; i++)
                 {
                     curTableString +=row[i].ToString();
@@ -44,6 +44,7 @@ namespace secretary.views
             }
             return curTableString;
         }
+
         private void saveDataBtn_Click(object sender, RoutedEventArgs e)
         {
             string dbDump = "";
@@ -51,9 +52,32 @@ namespace secretary.views
             dbDump += generateTableString(DbHelper.basicSelect("teachers"));
             dbDump += generateTableString(DbHelper.basicSelect("employees"));
 
-            SaveFileDialog saveDialog = new SaveFileDialog();
-            if (saveDialog.ShowDialog() == true)
-                File.WriteAllText(saveDialog.FileName,dbDump);
+            SaveFileDialog dialog = new SaveFileDialog();
+        
+            if (dialog.ShowDialog() == true)
+                File.WriteAllText(dialog+".txt",dbDump);
+            MessageBox.Show("Data has been exported ");
+        }
+
+        private void uploadImgBtn_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "Image Files(*.jpg; *.jpeg)|*.jpg";
+            dialog.Multiselect = true;
+            dialog.ShowDialog();
+            try
+            {
+                foreach (String file in dialog.FileNames)
+                {
+                    var newPath = Environment.CurrentDirectory + "/images/" + Path.GetFileName(file);
+                    File.Copy(Path.GetFullPath(file), newPath);
+                }
+                MessageBox.Show("Images have/Image has been uploaded");
+            }
+            catch(Exception er)
+            {
+                MessageBox.Show("File already exists :c");
+            }
         }
 
         private void uploadDataBtn_Click(object sender, RoutedEventArgs e)
@@ -79,7 +103,7 @@ namespace secretary.views
                     if (counter == 14)
                         insertType = "employee";
                     
-                    lll.Content = counter.ToString();
+             
                     string[] columns = line.Split(',');
                 foreach (string column in columns)
                 {
@@ -147,6 +171,7 @@ namespace secretary.views
 
                         DbHelper.insertEmployee(newEmployee);
                     }
+                    MessageBox.Show("Data have been uploaded :)");
                 }
             }
         }
