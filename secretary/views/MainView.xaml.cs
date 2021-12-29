@@ -22,7 +22,7 @@ namespace secretary.views
         string currentForm = "Student";
         string currentTable = "students";
         string selectedFilePath;
-        string raportDataString = "";
+       
         List<String> imagesPaths = new List<String>();
         List<String> groups = new List<String>();
         List<String> eGroups = new List<String>();
@@ -53,22 +53,7 @@ namespace secretary.views
             initializeTableFieldsCombobox();
         
         }
-        private string serializeLessons(List<Lesson> lessons)
-        {
-            string text="";
-            lessons.ForEach(delegate(Lesson lesson){
-                text +="name: "+lesson.name + " time: " + lesson.lessonTime+"\n";
-            });
-            return text;
-        }
-        private string serializeGroups(List<String> groups)
-        {
-            string text = "";
-            groups.ForEach(delegate (string group) {
-                text +=group+"\n";
-            });
-            return text;
-        }
+   
         private void initializeGroupCombobox()
         {
             var rows = DbHelper.basicSelect("groups").DefaultView;
@@ -83,12 +68,10 @@ namespace secretary.views
         }
        
         private void initializeClassesCombobox()
-        {
-            
+        {   
                 comboBoxCurrentClass.Items.Clear();
                 eComboBoxCurrentClass.Items.Clear();
                 var rows = DbHelper.basicSelect("classes").DefaultView;
-
             for (int i = 0; i < rows.Count; i++)
             {
                 var row = rows[i];
@@ -177,7 +160,6 @@ namespace secretary.views
             jobDescriptionLabel.Visibility = Visibility.Visible;
             jobPositionLabel.Visibility = Visibility.Visible;
             eDatePickerEmployment.Visibility = Visibility.Visible;
-         
         }
         private void showTeacherForm() {
             textboxLesson.Visibility = Visibility.Visible;
@@ -193,17 +175,14 @@ namespace secretary.views
             studentDockpanel.Visibility = Visibility.Visible;
             groupsLabel.Visibility = Visibility.Visible;
             studentClassesLabel.Visibility = Visibility.Visible;
-
-
         }
 
         private void addTeacher()
         {
-
             string gender = comboBoxGender.SelectedItem.ToString() == "Male" ? "Male" : "Female";
-            string taughtSubjectsJson = serializeLessons(lessons);
+            string taughtSubjectsJson = Serializers.serializeLessons(lessons);
 
-             var newPath = Environment.CurrentDirectory + "/images/" + textBoxPesel.Text +DateTime.Now.Ticks+ ".png";
+            var newPath = Environment.CurrentDirectory + "/images/" + textBoxPesel.Text +DateTime.Now.Ticks+ ".png";
 
             if (textBoxPesel.Text != null)
             {
@@ -260,17 +239,17 @@ namespace secretary.views
             newStudent.mothersName = textBoxMthName.Text;
             newStudent.birthDate = datePickerBirthDate.SelectedDate.Value.Date;
             newStudent.pesel = textBoxPesel.Text;
-           newStudent.groups=serializeGroups(groups);
+            newStudent.groups= Serializers.serializeGroups(groups);
             newStudent.imagePath = newPath;
             newStudent.gender = gender;
             newStudent.currentClass = comboBoxCurrentClass.SelectedItem.ToString();
-
 
             DbHelper.insertStudent(newStudent);
             currentTable = "students";
             studentRadio.IsChecked = true;
             reloadData();
         }
+
         private void addEmployee()
         {
             string gender = comboBoxGender.SelectedItem.ToString() == "Male" ? "Male" : "Female";
@@ -307,8 +286,8 @@ namespace secretary.views
             employeeRadio.IsChecked = true;
             reloadData();
         }
-        void clearForm(DependencyObject obj)
 
+        void clearForm(DependencyObject obj)
         {
             for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
             {
@@ -317,10 +296,9 @@ namespace secretary.views
                 if (obj is ListView)
                     ((ListView)obj).Items.Clear();
                 clearForm(VisualTreeHelper.GetChild(obj, i));
-
             }
-
         }
+
         private void SubmitPersonBtn_Click(object sender, RoutedEventArgs e)
         {
             if (isBeingEdited == false)
@@ -357,18 +335,16 @@ namespace secretary.views
         }
         private void removeDataPathColumn(DataTable gridData)  {
             reloadImagePaths();
-            if (gridData.Columns.Contains("image_path"))
-                gridData.Columns.Remove("image_path");
+            if (gridData.Columns.Contains(gridData.Columns[9].ColumnName))
+                gridData.Columns.Remove(gridData.Columns[9].ColumnName);
         }
         private void reloadData()
         {
-            DataGrid1.ItemsSource = DbHelper.basicSelect(currentTable).DefaultView;
-            initializeTableFieldsCombobox();
-
             var gridData = raportData = DbHelper.basicSelect(currentTable);
        
-            DataGrid1.ItemsSource = gridData.DefaultView;
+            initializeTableFieldsCombobox();
             removeDataPathColumn(gridData);
+            DataGrid1.ItemsSource = gridData.DefaultView;
         }
          
         private void TeacherRadioBtn_Click(object sender, RoutedEventArgs e)
@@ -430,7 +406,6 @@ namespace secretary.views
                             removeDataPathColumn(raportData);
                             DataGrid1.ItemsSource = raportData.DefaultView;
                         }
-
                     }
                     else
                     {
@@ -482,7 +457,6 @@ namespace secretary.views
                     raportData = DbHelper.youngerThanSelect(currentTable, youngerThan.ToString());
                     removeDataPathColumn(raportData);
                     DataGrid1.ItemsSource = raportData.DefaultView;
-                   
                 }
 
                 if (datePickerYoungerThan.SelectedDate == null && datePickerOlderThan.SelectedDate != null)
@@ -491,7 +465,6 @@ namespace secretary.views
                     raportData = DbHelper.olderThanSelect(currentTable, olderThan.ToString());
                     removeDataPathColumn(raportData);
                     DataGrid1.ItemsSource = raportData.DefaultView;
-                   
                 }
 
                 if (datePickerYoungerThan.SelectedDate != null && datePickerOlderThan.SelectedDate != null)
@@ -501,7 +474,6 @@ namespace secretary.views
                     raportData = DbHelper.olderAndYoungerThanSelect(currentTable, olderThan.ToString(), youngerThan.ToString());
                     removeDataPathColumn(raportData);
                     DataGrid1.ItemsSource = raportData.DefaultView;
-               
                 }
             }
         }
@@ -577,26 +549,10 @@ namespace secretary.views
 
             reloadData();
         }
-
+     
         private void GenerateRaportBtn_Click(object sender, RoutedEventArgs e)
         {
-            foreach (DataRow row in raportData.Rows)
-            {
-                for (int i = 0; i < raportData.Columns.Count; i++)
-                {
-                    raportDataString += "|" + (row[i].ToString());
-                    raportDataString += (i == raportData.Columns.Count - 1 ? "\n" : "|");
-                }
-                raportDataString += "| \n";
-            }
-
-            SaveFileDialog saveDialog = new SaveFileDialog();
-
-            if (saveDialog.ShowDialog() == true)
-                File.WriteAllText(saveDialog.FileName+".txt", raportDataString);
-
-            MessageBox.Show("Your raport has already been saved" + raportDataString);
-        
+            Raport.GenerateRaport(raportData);
         }
 
         private void DataGrid1_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -664,10 +620,7 @@ namespace secretary.views
             }
         }
 
-        private void DataGrid1_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
-        {
-
-        }
+       
 
         private void EditRowBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -686,7 +639,7 @@ namespace secretary.views
                 curStudent.mothersName = eTextBoxMthName.Text;
                 curStudent.birthDate = eDatePickerBirthDate.SelectedDate.Value.Date;
                 curStudent.pesel = eTextBoxPesel.Text;
-                curStudent.groups = serializeGroups(eGroups);
+                curStudent.groups = Serializers.serializeGroups(eGroups);
                 curStudent.imagePath = newPath;
                 curStudent.gender = gender;
                 curStudent.currentClass = eComboBoxCurrentClass.SelectedItem.ToString();
@@ -697,7 +650,7 @@ namespace secretary.views
             }
             if (currentTable == "teachers")
             {
-                string taughtSubjectsJson = serializeLessons(eLessons);
+                string taughtSubjectsJson = Serializers.serializeLessons(eLessons);
 
                 string gender = comboBoxGender.SelectedItem.ToString() == "Male" ? "Male" : "Female";
                 var newPath = Environment.CurrentDirectory + "/images/" + eTextBoxPesel.Text + ".png";
@@ -766,20 +719,12 @@ namespace secretary.views
             editFormExpander.IsExpanded = false;
         }
 
-        private void datePickerYoungerThan_CalendarClosed(object sender, RoutedEventArgs e)
-        {
-
-        }
-
+    
         private void closeEditModalBtn(object sender, RoutedEventArgs e)
         {
             editFormExpander.IsExpanded = false;
         }
-        class Item
-        {
-         public   string name="gfs";
-        }
-
+ 
         private void addGroupBtn_Click(object sender, RoutedEventArgs e)
         {
             isEditing = editFormExpander.IsExpanded == true ? true : false;
@@ -812,9 +757,6 @@ namespace secretary.views
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-           
-        }
+  
     }
 }

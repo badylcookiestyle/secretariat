@@ -64,7 +64,7 @@
         </Style>
     </UserControl.Resources>
     <Grid x:Name="MainViewGrid" Margin="90,0,0,0" Background="Transparent">
-        <DataGrid IsReadOnly="True" HorizontalAlignment="Left" Width="1750" Margin="30,90,30,30" Height="600" x:Name="DataGrid1" GridLinesVisibility="Horizontal" Focusable="False" RowBackground="#00B41616" Background="#00F0F0F0" Foreground="White" HorizontalGridLinesBrush="White" VerticalGridLinesBrush="White" HeadersVisibility="Column" RowHeight="64" ColumnHeaderHeight="64" ScrollViewer.HorizontalScrollBarVisibility="Visible" AutomationProperties.IsRowHeader="True" RowHeaderWidth="29" CellEditEnding="DataGrid1_CellEditEnding" SelectionChanged="DataGrid1_SelectionChanged" Grid.Column="0">
+        <DataGrid IsReadOnly="True" HorizontalAlignment="Left" Width="1750" Margin="30,90,30,30" Height="600" x:Name="DataGrid1" GridLinesVisibility="Horizontal" Focusable="False" RowBackground="#00B41616" Background="#00F0F0F0" Foreground="White" HorizontalGridLinesBrush="White" VerticalGridLinesBrush="White" HeadersVisibility="Column" RowHeight="64" ColumnHeaderHeight="64" ScrollViewer.HorizontalScrollBarVisibility="Visible" AutomationProperties.IsRowHeader="True" RowHeaderWidth="29"  SelectionChanged="DataGrid1_SelectionChanged" Grid.Column="0">
             <DataGrid.ColumnHeaderStyle>
                 <Style TargetType="DataGridColumnHeader">
                     <Setter Property="Background" Value="#574B90"></Setter>
@@ -92,14 +92,12 @@
             <RadioButton x:Name="studentRadio" Click="StudentRadioBtn_Click" Foreground="White">Students</RadioButton>
             <RadioButton x:Name="employeeRadio" Click="EmployeeRadioBtn_Click"  Foreground="White">Employees</RadioButton>
             <Button Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Top" Width="30" Height="30"   Margin="0,-10,-30,30" Click="DeleteEverythingBtn_Click" BorderBrush="#00000000">
-                <Image  Margin="3,3,3,3" Source="/assets/images/trash.png" ></Image>
+                <Image Source="/assets/images/trash.png" />
             </Button>
         </StackPanel>
-        <Expander x:Name="formExpander" Padding="-200,-5,0,0"  Foreground="White" Header="add new persons" HorizontalAlignment="Left" Height="460" Width="460" Margin="468,53,0,0" VerticalAlignment="Top" Expanded="FormExpander_Expanded"  >
-           
-        </Expander>
+       
         <DatePicker x:Name="datePickerOlderThan" HorizontalAlignment="Left" Margin="860,58,0,0" VerticalAlignment="Top"/>
-        <DatePicker x:Name="datePickerYoungerThan" HorizontalAlignment="Left" Margin="860,35,0,0" VerticalAlignment="Top" CalendarClosed="datePickerYoungerThan_CalendarClosed"/>
+        <DatePicker x:Name="datePickerYoungerThan" HorizontalAlignment="Left" Margin="860,35,0,0" VerticalAlignment="Top" />
         <Label Content="Older than" Foreground="White" HorizontalAlignment="Left" Margin="784,55,0,0" VerticalAlignment="Top"/>
         <Label Content="Younger than" Foreground="White" HorizontalAlignment="Left" Margin="770,32,0,0" VerticalAlignment="Top"/>
         <Label Content="Search by" Foreground="White" HorizontalAlignment="Left" Margin="982,56,0,0" VerticalAlignment="Top"/>
@@ -220,7 +218,7 @@
                 </StackPanel>
             </Grid>
         </Expander>
-        <Expander HorizontalAlignment="Left" Height="520"  Margin="1160,25,0,0" VerticalAlignment="Top" Width="600" ExpandDirection="Left">
+        <Expander x:Name="formExpander" HorizontalAlignment="Left" Height="520"  Margin="1160,30,0,0" VerticalAlignment="Top" Width="600" ExpandDirection="Left">
             <Grid   Margin="10"    Background="#39315e">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -280,7 +278,8 @@
                         </Button.Template>
                     </Button>
                 </DockPanel>
-                <Image   x:Name="imgPhoto" Grid.Column="3" Width="64" Height="64" HorizontalAlignment="Right"  Source="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png"></Image>
+                <Image   x:Name="imgPhoto" Grid.Column="3" Width="64" Height="64" HorizontalAlignment="Right"  Source="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.
+                         "></Image>
                 <Button Foreground="White" Style="{DynamicResource ButtonBasicStyle}" Background="#574B90"    Grid.Row="1" Grid.Column="3" Width="64" Content="Load Img"  HorizontalAlignment="Right" Click="LoadImgBtn_Click"  ></Button>
                 <Label Foreground="White"  VerticalAlignment="Bottom">Name:</Label>
                 <TextBox Width="120" x:Name="textBoxFname" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Column="1" Height="28" Margin="0,0,0,0" />
