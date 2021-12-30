@@ -41,7 +41,6 @@ namespace secretary.views
                 if (counter == 1)
                 {
                     textBoxDataView.Text = line;
-
                 }
                 if (counter == 2)
                 {
@@ -53,7 +52,6 @@ namespace secretary.views
 
         private void saveBtn_Click(object sender, RoutedEventArgs e)
         {
-          
             File.Delete(path);
             using (StreamWriter writer = File.CreateText(path))
             {
@@ -62,8 +60,5 @@ namespace secretary.views
                 writer.WriteLine(textBoxOptionView.Text);
             }
         }
-         
-
-
     }
 }

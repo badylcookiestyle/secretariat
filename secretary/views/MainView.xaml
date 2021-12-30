@@ -95,7 +95,7 @@
                 <Image Source="/assets/images/trash.png" />
             </Button>
         </StackPanel>
-       
+
         <DatePicker x:Name="datePickerOlderThan" HorizontalAlignment="Left" Margin="860,58,0,0" VerticalAlignment="Top"/>
         <DatePicker x:Name="datePickerYoungerThan" HorizontalAlignment="Left" Margin="860,35,0,0" VerticalAlignment="Top" />
         <Label Content="Older than" Foreground="White" HorizontalAlignment="Left" Margin="784,55,0,0" VerticalAlignment="Top"/>
@@ -108,9 +108,9 @@
         <ComboBox x:Name="comboBoxSelectField"  Margin="728,-520,292,142" Height="25"  Width="90"/>
         <Button Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Foreground="White" x:Name="generateRaportBtn"  HorizontalAlignment="Left" Content="Generate raport" Height="30" Width="90" Margin="30,735,0,0" VerticalAlignment="Top" Click="GenerateRaportBtn_Click"/>
         <Expander Style="{DynamicResource ExpanderStyle1}" x:Name="editFormExpander" Header="" HorizontalAlignment="Left" Height="100" Margin="1660,-37,0,0"  VerticalAlignment="Top" Width="100" AutomationProperties.IsOffscreenBehavior="Default" Expanded="EditFormExpander_Expanded">
-            <Grid Margin="-1300,80,600,-600" Width="400" Height="400" Background="#222831">
+            <Grid Margin="-1300,80,600,-600" Width="400" Height="500" Background="#222831">
                 <Border BorderThickness="1" BorderBrush="#574B90" />
-                <StackPanel Background="Transparent" Height="250" Margin="0,0,0,150" >
+                <StackPanel Margin="5,0,0,0" Background="Transparent" Height="500"  >
                     <Button Background="#574B90"  Style="{DynamicResource ButtonBasicStyle}" Margin="3,3,3,3" Foreground="White" Width="25" Height="25"  HorizontalAlignment="Right"   Click="closeEditModalBtn">
                         <Image Source="/assets/images/cross.png" VerticalAlignment="Center" HorizontalAlignment="Center" Height="25" Width="25"></Image>
                     </Button>
@@ -137,7 +137,7 @@
                     </Grid>
                     <Grid Height="26">
                         <Label Foreground="White" Margin="90,-5,0,0">Mothers Name</Label>
-                        <TextBox  MaxLength="16"  x:Name="eTextBoxMthName"  HorizontalAlignment="Left"  Width="90"/>
+                        <TextBox  MaxLength="16"   x:Name="eTextBoxMthName"  HorizontalAlignment="Left"  Width="90"/>
                     </Grid>
                     <Grid Height="26">
                         <Label Foreground="White" Margin="90,-5,0,0">Birth Date</Label>
@@ -155,33 +155,33 @@
                         </ComboBox>
                     </Grid>
                 </StackPanel>
-                <StackPanel   Background="Transparent" Height="150" Margin="0,250,0,0">
+                <StackPanel   Background="Transparent" Height="150" Margin="0,350,0,0">
                     <Button Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Foreground="White" Content="Edit" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,125,5,0" Click="EditRowBtn_Click"></Button>
                     <Button Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Foreground="White" Content="Delete" Width="40" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,-225,5,25" Click="DeleteChoosenRowBtn_Click"></Button>
                 </StackPanel>
-                <StackPanel x:Name="eStudentForm"    Background="Transparent" Height="100" Margin="0,0,0,-190"  Visibility="Hidden">
+                <StackPanel x:Name="eStudentForm"    Background="Transparent" Height="100" Margin="5,0,0,-300"  Visibility="Hidden">
                     <Grid Height="26">
                         <Label Foreground="White" Margin="90,-5,0,0">class</Label>
                         <ComboBox  x:Name="eComboBoxCurrentClass"   HorizontalAlignment="Left"  Width="90"/>
                     </Grid>
                     <Grid Height="26">
-                        <Label Foreground="White" Margin="90,-5,0,0">group</Label>
+                        <Label Foreground="White" Margin="240,-50,0,0">group</Label>
                         <ComboBox  x:Name="eComboBoxCurrentGroup" Margin="150,-70,0,70"  HorizontalAlignment="Left"  Width="90"/>
-                        
-                        <Button Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Foreground="White" Content="+"    Height="25" Width="25"  Margin="0,-80,190,0" HorizontalAlignment="Right" Click="addGroupBtn_Click"  />
-                        <Button Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Foreground="White" Content="-"  Height="25" Width="25"  Margin="0,-20,190,0" HorizontalAlignment="Right" Click="deleteGroupBtn_Click"   />
-                        <ListBox x:Name="eGroupsListView" Width="90" HorizontalAlignment="Right" Margin="0,-40,220,-40">
-                         
+
+                        <Button Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Foreground="White" Content="+"    Height="25" Width="25"  Margin="0,-250,-110,-200"  Click="addGroupBtn_Click"  />
+                        <Button Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Foreground="White" Content="-"  Height="25" Width="25"  Margin="0,0,-110,0"   Click="deleteGroupBtn_Click"   />
+                        <ListBox x:Name="eGroupsListView" Width="90" HorizontalAlignment="Right" Margin="0,-40,155,-40">
+
                         </ListBox>
                     </Grid>
                 </StackPanel>
-                <StackPanel x:Name="eTeacherForm"   Background="Transparent" Height="100" Margin="0,0,0,-190" Visibility="Hidden">
+                <StackPanel x:Name="eTeacherForm"   Background="Transparent" Height="100" Margin="5,0,0,-300" Visibility="Hidden">
                     <Grid Height="26">
-                        <Label Foreground="White" Margin="89,0,0,0">tutor?</Label>
+                        <Label Foreground="White" Margin="89,0,0,0">Tutor</Label>
                         <TextBox   MaxLength="16" x:Name="eTextBoxTutor"   HorizontalAlignment="Left"  Width="90"/>
                     </Grid>
                     <Grid Height="26">
-                        <Label Foreground="White"  Margin="89,0,0,0">Date of Employment</Label>
+                        <Label Foreground="White"  Margin="89,0,0,0">Employment Date</Label>
                         <DatePicker  x:Name="eTdatePickerEmployment"   HorizontalAlignment="Left"  Width="90"/>
                     </Grid>
                     <Label Foreground="White" Margin="0,-90,30,0" HorizontalAlignment="Right">Add new subject to timetable</Label>
@@ -198,10 +198,10 @@
                         </ListView.View>
                     </ListView>
                 </StackPanel>
-                <StackPanel x:Name="eEmployeeForm"    Background="Transparent" Height="100" Margin="0,0,0,-160"  Visibility="Hidden">
+                <StackPanel x:Name="eEmployeeForm"    Background="Transparent" Height="100" Margin="5,0,0,-300"  Visibility="Hidden">
                     <Grid Height="26">
                         <Label  Foreground="White" Margin="90,-5,0,0">Monthly working hours</Label>
-                        <TextBox   Margin="90,-5,0,0" x:Name="eTextBoxTenure"    HorizontalAlignment="Left"  Width="90"></TextBox>
+                        <TextBox   Margin="0,-5,0,0" x:Name="eTextBoxTenure"    HorizontalAlignment="Left"  Width="90"></TextBox>
                     </Grid>
                     <Grid Height="26">
                         <Label Foreground="White" Margin="90,-5,0,0">Date of Employment</Label>
@@ -219,14 +219,14 @@
             </Grid>
         </Expander>
         <Expander x:Name="formExpander" HorizontalAlignment="Left" Height="520"  Margin="1160,30,0,0" VerticalAlignment="Top" Width="600" ExpandDirection="Left">
-            <Grid   Margin="10"    Background="#39315e">
+            <Grid    Margin="10"    Background="#39315e">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="210"/>
                     <ColumnDefinition Width="64"/>
                     <ColumnDefinition Width="8"/>
-                    
+
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto" />
@@ -239,38 +239,36 @@
                     <RowDefinition Height="28" />
                     <RowDefinition Height="28" />
                     <RowDefinition Height="28" />
-                    
-                   
-                    <RowDefinition Height="80" />
+                    <RowDefinition Height="105" />
                     <RowDefinition Height="28" />
                     <RowDefinition Height="28" />
                     <RowDefinition Height="28" />
                 </Grid.RowDefinitions>
-                <DockPanel Grid.Row="0" Margin="5,5,0,0" Grid.Column="0" Background="Transparent">
-                    <Button Foreground="White" Content="T" x:Name="TeacherFormBtn" Height="25" Width="25" VerticalAlignment="Top" HorizontalAlignment="Left" Click="TeacherFormBtn_Click">
+                <DockPanel Grid.Row="0" Margin="-5,5,0,0" Grid.Column="2" Background="Transparent">
+                    <Button Foreground="White" Content="Teacher" x:Name="TeacherFormBtn" Height="25" Width="70" VerticalAlignment="Top" HorizontalAlignment="Left" Click="TeacherFormBtn_Click">
                         <Button.Template>
                             <ControlTemplate TargetType="{x:Type Button}">
-                                <Grid Height="20" Width="20">
+                                <Grid Height="20" Width="70">
                                     <Ellipse  />
                                     <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Grid>
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
-                    <Button Foreground="Purple"  Content="S" x:Name="StudentFormBtn"  Height="25" Width="25" VerticalAlignment="Top" HorizontalAlignment="Left" Click="StudentFormBtn_Click">
+                    <Button Foreground="Pink"  Content="Student" x:Name="StudentFormBtn"  Height="25" Width="70" VerticalAlignment="Top" HorizontalAlignment="Left" Click="StudentFormBtn_Click">
                         <Button.Template>
                             <ControlTemplate TargetType="{x:Type Button}">
-                                <Grid Height="20" Width="20">
+                                <Grid Height="20" Width="70">
                                     <Ellipse  />
                                     <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Grid>
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
-                    <Button Foreground="White" Content="E" x:Name="EmployeeFormBtn"  Height="25" Width="25" VerticalAlignment="Top" HorizontalAlignment="Left" Click="EmployeeFormBtn_Click">
+                    <Button Foreground="White" Content="Employee" x:Name="EmployeeFormBtn"  Height="25" Width="70" VerticalAlignment="Top" HorizontalAlignment="Left" Click="EmployeeFormBtn_Click">
                         <Button.Template>
                             <ControlTemplate TargetType="{x:Type Button}">
-                                <Grid Height="20" Width="20">
+                                <Grid Height="20" Width="70">
                                     <Ellipse  />
                                     <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Grid>
@@ -278,7 +276,7 @@
                         </Button.Template>
                     </Button>
                 </DockPanel>
-                <Image   x:Name="imgPhoto" Grid.Column="3" Width="64" Height="64" HorizontalAlignment="Right"  Source="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.
+                <Image   Margin="0,5"  x:Name="imgPhoto" Grid.Column="3" Width="64" Height="64" HorizontalAlignment="Right"  Source="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.
                          "></Image>
                 <Button Foreground="White" Style="{DynamicResource ButtonBasicStyle}" Background="#574B90"    Grid.Row="1" Grid.Column="3" Width="64" Content="Load Img"  HorizontalAlignment="Right" Click="LoadImgBtn_Click"  ></Button>
                 <Label Foreground="White"  VerticalAlignment="Bottom">Name:</Label>
@@ -302,7 +300,7 @@
                     <ComboBoxItem>Male</ComboBoxItem>
                     <ComboBoxItem>Female</ComboBoxItem>
                 </ComboBox>
-             
+
 
                 <Label Foreground="White" x:Name="classTutorLabel" Visibility="Hidden" Height="28" VerticalAlignment="Top" Grid.Row="10">Select class of tutor :</Label>
                 <TextBox  x:Name="textBoxTutor"  Visibility="Hidden" Grid.Row="10" VerticalAlignment="Top" Width="120" HorizontalAlignment="Left" Height="28" Grid.Column="1" Margin="0,0,0,0" />
@@ -320,9 +318,9 @@
                         </ListView.View>
                     </ListView>
                     <Button Foreground="White" Padding="0,-8,0,-2" Content="+" FontSize="22" Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Width="25" Height="25" HorizontalAlignment="Right" Margin="0,0,0,-5" Click="AddLessonBtn_Click" >
-                        
+
                     </Button>
-                    <Button Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Width="25" Height="25" HorizontalAlignment="Right" Margin="-40,55,12,0"  Click="DeleteLessonBtn_Click">
+                    <Button Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Width="25" Height="25" HorizontalAlignment="Right" Margin="-40,55,45,0"  Click="DeleteLessonBtn_Click">
                         <Image Source="/assets/images/cross.png" VerticalAlignment="Center" HorizontalAlignment="Center" Height="25" Width="25"></Image>
                     </Button>
                 </DockPanel>
@@ -336,22 +334,21 @@
                 <Label Foreground="White" x:Name="eDateOfEmploymentLabel"  Visibility="Hidden"  Height="28"   Grid.Row="11">Date of emloployment:</Label>
                 <DatePicker x:Name="eDatePickerEmployment"   Visibility="Hidden"  Grid.Row="11" Width="120" HorizontalAlignment="Left" Height="28" Grid.Column="1"  />
 
-                <Label Foreground="White"  x:Name="groupsLabel"  Visibility="Hidden"  HorizontalAlignment="Left" Grid.Row="9" Grid.Column="2"  >Groups :    </Label>
+                <Label Foreground="White"  x:Name="groupsLabel"  Visibility="Hidden"  HorizontalAlignment="Left" Grid.Row="9" Grid.Column="2"  >Groups :</Label>
                 <ComboBox x:Name= "comboBoxCurrentGroup"   Visibility="Hidden"   Grid.Row="9" Grid.Column="2" Height="28" Width="90"></ComboBox>
                 <DockPanel x:Name="studentDockpanel" Visibility="Hidden" Grid.Row="10" Grid.Column="2"  >
 
-                    <Button Foreground="White" Padding="0,-8,0,-2" Content="+" FontSize="22" Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Width="25" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Click="addGroupBtn_Click">
-                        
+                    <Button Margin="0,4" Foreground="White" Padding="0,-8,0,-2" Content="+" FontSize="22" Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Width="25" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Click="addGroupBtn_Click">
                     </Button>
-                    <Button Background="#574B90" Style="{DynamicResource ButtonBasicStyle}"  Width="25" Height="25" VerticalAlignment="Bottom" Margin="-25,-20,0,30" HorizontalAlignment="Left" Click="deleteGroupBtn_Click">
+                    <Button Background="#574B90" Style="{DynamicResource ButtonBasicStyle}"  Width="25" Height="25" VerticalAlignment="Bottom" Margin="-25,-20,0,52" HorizontalAlignment="Left" Click="deleteGroupBtn_Click">
                         <Image Source="/assets/images/cross.png" VerticalAlignment="Center" HorizontalAlignment="Center" Height="25" Width="25"></Image>
                     </Button>
-                
+
                     <ListBox x:Name="groupsListView" Width="200" Height="100" VerticalAlignment="Bottom"></ListBox>
                 </DockPanel>
-                <Label Foreground="White" x:Name="studentClassesLabel" Visibility="Hidden" HorizontalAlignment="Left" Grid.Row="11"   >Classes :</Label>
-                <ComboBox x:Name="comboBoxCurrentClass"  Visibility="Hidden" HorizontalAlignment="Left"  Grid.Row="11" Grid.Column="1" Height="28" Width="90"></ComboBox>
-                <Button Foreground="White" Background="#574B90" Click="SubmitPersonBtn_Click"   Style="{DynamicResource ButtonBasicStyle}"  Grid.Row="13" Grid.Column="2" HorizontalAlignment="Right" Width="90" Content="Add"></Button>
+                <Label Foreground="White" x:Name="studentClassesLabel" Visibility="Hidden" HorizontalAlignment="Left" Grid.Row="10"   >Classes :</Label>
+                <ComboBox x:Name="comboBoxCurrentClass"  Visibility="Hidden" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="10" Grid.Column="1" Height="28" Width="90"></ComboBox>
+                <Button Foreground="White" Background="#574B90" Click="SubmitPersonBtn_Click"   Style="{DynamicResource ButtonBasicStyle}"  Grid.Row="12" Grid.Column="2" HorizontalAlignment="Right" Width="90" Content="Add"></Button>
             </Grid>
         </Expander>
     </Grid>

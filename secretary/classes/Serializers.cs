@@ -8,7 +8,7 @@ using secretary;
         {
             string text = "";
             lessons.ForEach(delegate (Lesson lesson) {
-                text += "name: " + lesson.name + " time: " + lesson.lessonTime + "\n";
+                text += "name: " + lesson.name + " time: " + lesson.lessonTime + "; ";
             });
             return text;
         }
@@ -16,7 +16,7 @@ using secretary;
         {
             string text = "";
             groups.ForEach(delegate (string group) {
-                text += group + "\n";
+                text += group + "; ";
             });
             return text;
         }

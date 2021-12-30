@@ -127,3 +127,10 @@ seventeenth test 29.12.2021 19:50
 - checking if form after rework works
 === test results ===
 - everything works
+
+eightteents test 32.12.2021 00:01
+=== test goals ===
+- checking if editing form works after rework
+- cheking if keyBinding works after rework
+=== test results ===
+- everything works

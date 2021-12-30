@@ -55,7 +55,7 @@ namespace secretary.views
             SaveFileDialog dialog = new SaveFileDialog();
         
             if (dialog.ShowDialog() == true)
-                File.WriteAllText(dialog+".txt",dbDump);
+                File.WriteAllText(dialog.FileName,dbDump);
             MessageBox.Show("Data has been exported ");
         }
 

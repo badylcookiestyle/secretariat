@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Controls.Primitives;
 using System.IO;
- 
+using System.ComponentModel;
 using secretary.viewModels;
 
 namespace Secretary
@@ -16,19 +16,22 @@ namespace Secretary
         public MainWindow()
         {
             InitializeComponent();
-      //      DataContext = new MainViewModel();
+            //      DataContext = new MainViewModel();
 
 
         }
 
         //  SQLiteConnection sql;
         public string[] binds;
-       
+
         public string bindMain = "F1";
         public string bindUpload = "F2";
         public string bindOptions = "F3";
+        public string bindMainModifier = "";
+        public string bindUploadModifier = "";
+        public string bindOptionsModifier = "";
 
-        private void displayCloud(string btnDesc,System.Windows.UIElement curView) 
+        private void displayCloud(string btnDesc, System.Windows.UIElement curView)
         {
             hoverCloud.PlacementTarget = curView;
             hoverCloud.Placement = PlacementMode.Right;
@@ -36,7 +39,7 @@ namespace Secretary
             Header.PopupText.Text = btnDesc;
         }
 
-      
+
         private void MainViewMouse_Entr(object sender, MouseEventArgs e)
         {
             displayCloud("Home", MainViewBtn);
@@ -55,7 +58,7 @@ namespace Secretary
             hoverCloud.Visibility = Visibility.Collapsed;
             hoverCloud.IsOpen = false;
         }
-        
+
         private void DataViewMouse_Lv(object sender, MouseEventArgs e)
         {
             hoverCloud.Visibility = Visibility.Collapsed;
@@ -68,13 +71,13 @@ namespace Secretary
             hoverCloud.IsOpen = false;
         }
         //Navbar btns listeners
-        private void MainViewBtn_Click(object sender,RoutedEventArgs e)
+        private void MainViewBtn_Click(object sender, RoutedEventArgs e)
         {
-           DataContext = new MainViewModel();
+            DataContext = new MainViewModel();
         }
         private void DataViewBtn_Click(object sender, RoutedEventArgs e)
         {
-            DataContext = new DataViewModel();    
+            DataContext = new DataViewModel();
         }
         private void OptionsViewBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -94,6 +97,39 @@ namespace Secretary
         {
             DragMove();
         }
+        private void initializeUploadBind(KeyEventArgs e)
+        {
+            if (e.Key.ToString() == bindUpload && bindUploadModifier == "")
+                DataContext = new DataViewModel();
+            if (e.Key.ToString() == bindUpload && bindUploadModifier.ToLower() == "alt" && (Keyboard.IsKeyDown(Key.RightAlt) || Keyboard.IsKeyDown(Key.LeftAlt)))
+                DataContext = new DataViewModel();
+            if (e.Key.ToString() == bindUpload && bindUploadModifier.ToLower() == "ctrl" && (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)))
+                DataContext = new DataViewModel();
+            if (e.Key.ToString() == bindUpload && bindUploadModifier.ToLower() == "shift" && (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift)))
+                DataContext = new DataViewModel();
+        }
+        private void initializeOptionsBind(KeyEventArgs e)
+        {
+            if (e.Key.ToString() == bindOptions && bindOptionsModifier == "")
+                DataContext = new OptionsViewModel();
+            if (e.Key.ToString() == bindOptions && bindOptionsModifier.ToLower() == "alt" && (Keyboard.IsKeyDown(Key.RightAlt) || Keyboard.IsKeyDown(Key.LeftAlt)))
+                DataContext = new OptionsViewModel();
+            if (e.Key.ToString() == bindOptions && bindOptionsModifier.ToLower() == "ctrl" && (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)))
+                DataContext = new OptionsViewModel();
+            if (e.Key.ToString() == bindOptions && bindOptionsModifier.ToLower() == "shift" && (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift)))
+                DataContext = new OptionsViewModel();
+        }
+        private void initializeMainBind(KeyEventArgs e)
+        {
+            if (e.Key.ToString() == bindMain && bindMainModifier == "")
+                DataContext = new MainViewModel();
+            if (e.Key.ToString() == bindMain && bindMainModifier.ToLower() == "alt" && (Keyboard.IsKeyDown(Key.RightAlt) || Keyboard.IsKeyDown(Key.LeftAlt)))
+                DataContext = new MainViewModel();
+            if (e.Key.ToString() == bindMain && bindMainModifier.ToLower() == "ctrl" && (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)))
+                DataContext = new MainViewModel();
+            if (e.Key.ToString() == bindMain && bindMainModifier.ToLower() == "shift" && (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift)))
+                DataContext = new MainViewModel();
+        }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
@@ -102,40 +138,67 @@ namespace Secretary
             string text = File.ReadAllText(path);
             string[] lines = text.Split(Environment.NewLine);
 
+            bindMainModifier = "";
+            bindUploadModifier = "";
+            bindOptionsModifier = "";
+
             foreach (string line in lines)
             {
-              
                 if (counter == 0)
                 {
-                    bindMain = line;
+                    if (!line.Contains("+"))
+                    {
+                        bindMain = line;
+                    }
+                    else
+                    {
+                        string[] hotkeys = line.Split('+');
+                        if (hotkeys[0].Length > 2)
+                            (hotkeys[0], hotkeys[1]) = (hotkeys[1], hotkeys[0]);
+                        bindMain = hotkeys[0];
+                        bindMainModifier = hotkeys[1];
+
+                    }
                 }
                 if (counter == 1)
                 {
-                    bindUpload = line;
+                    if (!line.Contains("+"))
+                    {
+                        bindUpload = line;
+                    }
+                    else
+                    {
+                        string[] hotkeys = line.Split('+');
+                        if (hotkeys[0].Length > 2)
+                            (hotkeys[0], hotkeys[1]) = (hotkeys[1], hotkeys[0]);
+                        bindUpload = hotkeys[0];
+                        bindUploadModifier = hotkeys[1];
+                    }
+
 
                 }
-                if(counter == 2)
+                if (counter == 2)
                 {
-                    bindOptions = line;
+                    if (!line.Contains("+"))
+                    {
+                        bindOptions = line;
+                    }
+                    else
+                    {
+                        string[] hotkeys = line.Split('+');
+                        if (hotkeys[0].Length > 2)
+                            (hotkeys[0], hotkeys[1]) = (hotkeys[1], hotkeys[0]);
+                        bindOptions = hotkeys[0];
+                        bindOptionsModifier = hotkeys[1];
+                    }
+
                 }
                 counter++;
             }
-          //  var isShiftKey = Keyboard.Modifiers == ModifierKeys.Shift ? true : false;
-          // var isAltKey = Keyboard.Modifiers = ModifierKeys.Alt ? true : false;
-          // var isCtrlKey = Keyboard.Modifiers = ModifierKeys.Alt ? true : false;
-            if (e.Key.ToString() == bindMain)
-            {
-                DataContext = new MainViewModel();
-            }
-            if (e.Key.ToString() == bindUpload)
-            {
-                DataContext = new DataViewModel();
 
-            }
-            if (e.Key.ToString() == bindOptions)
-            {
-                DataContext = new OptionsViewModel();
-            }
+            initializeUploadBind(e);
+            initializeMainBind(e);
+            initializeOptionsBind(e);
         }
     }
 }

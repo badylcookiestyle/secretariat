@@ -22,7 +22,7 @@ namespace secretary.views
         string currentForm = "Student";
         string currentTable = "students";
         string selectedFilePath;
-       
+
         List<String> imagesPaths = new List<String>();
         List<String> groups = new List<String>();
         List<String> eGroups = new List<String>();
@@ -50,7 +50,9 @@ namespace secretary.views
             initializeGroupCombobox();
             initializeClassesCombobox();
             initializeTableFieldsCombobox();
-        
+            
+            showStudentForm();
+            reloadData();
         }
 
         private void TeacherRadioBtn_Click(object sender, RoutedEventArgs e)
@@ -83,12 +85,12 @@ namespace secretary.views
                 comboBoxCurrentGroup.Items.Add(row["name"]);
             }
         }
-       
+
         private void initializeClassesCombobox()
-        {   
-                comboBoxCurrentClass.Items.Clear();
-                eComboBoxCurrentClass.Items.Clear();
-                var rows = DbHelper.basicSelect("classes").DefaultView;
+        {
+            comboBoxCurrentClass.Items.Clear();
+            eComboBoxCurrentClass.Items.Clear();
+            var rows = DbHelper.basicSelect("classes").DefaultView;
             for (int i = 0; i < rows.Count; i++)
             {
                 var row = rows[i];
@@ -109,7 +111,7 @@ namespace secretary.views
 
         private void TeacherFormBtn_Click(object sender, RoutedEventArgs e)
         {
-            TeacherFormBtn.Foreground = new SolidColorBrush(Colors.Purple);
+            TeacherFormBtn.Foreground = new SolidColorBrush(Colors.Pink);
             StudentFormBtn.Foreground = new SolidColorBrush(Colors.White);
             EmployeeFormBtn.Foreground = new SolidColorBrush(Colors.White);
 
@@ -121,7 +123,7 @@ namespace secretary.views
         private void StudentFormBtn_Click(object sender, RoutedEventArgs e)
         {
             TeacherFormBtn.Foreground = new SolidColorBrush(Colors.White);
-            StudentFormBtn.Foreground = new SolidColorBrush(Colors.Purple);
+            StudentFormBtn.Foreground = new SolidColorBrush(Colors.Pink);
             EmployeeFormBtn.Foreground = new SolidColorBrush(Colors.White);
 
             hideForms();
@@ -133,22 +135,22 @@ namespace secretary.views
         {
             TeacherFormBtn.Foreground = new SolidColorBrush(Colors.White);
             StudentFormBtn.Foreground = new SolidColorBrush(Colors.White);
-            EmployeeFormBtn.Foreground = new SolidColorBrush(Colors.Purple);
-            
+            EmployeeFormBtn.Foreground = new SolidColorBrush(Colors.Pink);
+
             hideForms();
             showEmployeeForm();
             currentForm = "Employee";
         }
-      
+
         private void addTeacher()
         {
-            string gender = comboBoxGender.SelectedItem.ToString() == "Male" ? "Male" : "Female";
+            string gender = comboBoxGender.SelectionBoxItem.ToString() == "Male" ? "Male" : "Female";
             string taughtSubjectsJson = Serializers.serializeLessons(lessons);
 
-            var newPath = Environment.CurrentDirectory + "/images/" + textBoxPesel.Text +DateTime.Now.Ticks+Path.GetExtension(selectedFilePath);
+            var newPath = Environment.CurrentDirectory + "/images/" + textBoxPesel.Text + DateTime.Now.Ticks + Path.GetExtension(selectedFilePath);
 
             File.Copy(selectedFilePath, newPath);
-       
+
             Teacher newTeacher = new Teacher();
 
             newTeacher.firstName = textBoxFname.Text;
@@ -173,13 +175,13 @@ namespace secretary.views
         }
         private void addStudent()
         {
-            string gender = comboBoxGender.SelectedItem.ToString() == "Male" ? "Male" : "Female";
+            string gender = comboBoxGender.SelectionBoxItem.ToString() == "Male" ? "Male" : "Female";
             Student newStudent = new Student();
 
-             var newPath = Environment.CurrentDirectory + "/images/" + textBoxPesel.Text +DateTime.Now.Ticks+Path.GetExtension(selectedFilePath);
+            var newPath = Environment.CurrentDirectory + "/images/" + textBoxPesel.Text + DateTime.Now.Ticks + Path.GetExtension(selectedFilePath);
 
             File.Copy(selectedFilePath, newPath);
-            
+
             newStudent.firstName = textBoxFname.Text;
             newStudent.secondName = textBoxFname.Text;
             newStudent.lastname = textBoxLname.Text;
@@ -188,10 +190,10 @@ namespace secretary.views
             newStudent.mothersName = textBoxMthName.Text;
             newStudent.birthDate = datePickerBirthDate.SelectedDate.Value.Date;
             newStudent.pesel = textBoxPesel.Text;
-            newStudent.groups= Serializers.serializeGroups(groups);
+            newStudent.groups = Serializers.serializeGroups(groups);
             newStudent.imagePath = newPath;
             newStudent.gender = gender;
-            newStudent.currentClass = comboBoxCurrentClass.SelectedItem.ToString();
+            newStudent.currentClass = comboBoxCurrentClass.SelectionBoxItem.ToString();
 
             DbHelper.insertStudent(newStudent);
             currentTable = "students";
@@ -200,11 +202,11 @@ namespace secretary.views
         }
         private void addEmployee()
         {
-            string gender = comboBoxGender.SelectedItem.ToString() == "Male" ? "Male" : "Female";
-            var newPath = Environment.CurrentDirectory + "/images/" + textBoxPesel.Text +DateTime.Now.Ticks+Path.GetExtension(selectedFilePath);
+            string gender = comboBoxGender.SelectionBoxItem.ToString() == "Male" ? "Male" : "Female";
+            var newPath = Environment.CurrentDirectory + "/images/" + textBoxPesel.Text + DateTime.Now.Ticks + Path.GetExtension(selectedFilePath);
 
             File.Copy(selectedFilePath, newPath);
-        
+
             Employee newEmployee = new Employee();
 
             newEmployee.firstName = textBoxFname.Text;
@@ -243,19 +245,19 @@ namespace secretary.views
         private void SubmitPersonBtn_Click(object sender, RoutedEventArgs e)
         {
             if (isBeingEdited == false)
-            {       
-                    switch (currentForm)
-                    {
-                        case "Student":
-                            addStudent();
-                            break;
-                        case "Teacher":
-                            addTeacher();
-                            break;
-                        case "Employee":
-                            addEmployee();
-                            break;
-                    }
+            {
+                switch (currentForm)
+                {
+                    case "Student":
+                        addStudent();
+                        break;
+                    case "Teacher":
+                        addTeacher();
+                        break;
+                    case "Employee":
+                        addEmployee();
+                        break;
+                }
                 clearForm(MainViewGrid);
             }
         }
@@ -266,63 +268,67 @@ namespace secretary.views
             {
                 try
                 {
-                    imagesPaths.Add(row["image_path"].ToString());
+                    imagesPaths.Add(row[9].ToString());
                 }
                 catch (Exception er) { }
             }
         }
-        private void removeDataPathColumn(DataTable gridData)  {
+        private void removeDataPathColumn(DataTable gridData)
+        {
             reloadImagePaths();
-            if (gridData.Columns.Contains(gridData.Columns[9].ColumnName))
-                gridData.Columns.Remove(gridData.Columns[9].ColumnName);
+        
+           
+            try
+            {
+                DataGrid1.Columns.Remove(DataGrid1.Columns[9]);
+            }
+            catch(Exception er) { }
         }
         private void reloadData()
         {
             var gridData = raportData = DbHelper.basicSelect(currentTable);
-       
-            initializeTableFieldsCombobox();
-            removeDataPathColumn(gridData);
             DataGrid1.ItemsSource = gridData.DefaultView;
+            initializeTableFieldsCombobox();
+            removeDataPathColumn(gridData);         
         }
 
 
         private void SearchBtn_Click(object sender, RoutedEventArgs e)
         {
-
             if (textBoxSearcher.Text != "")
             {
                 try
                 {
-                    if (comboBoxSelectField.SelectedItem.ToString() != "id")
+                    if (comboBoxSelectField.SelectionBoxItem.ToString() != "id")
                     {
                         if (datePickerYoungerThan.SelectedDate == null && datePickerOlderThan.SelectedDate == null)
                         {
-                            raportData = DbHelper.likeSelect(currentTable, textBoxSearcher.Text, comboBoxSelectField.SelectedItem.ToString());
+                            raportData = DbHelper.likeSelect(currentTable, textBoxSearcher.Text, comboBoxSelectField.SelectionBoxItem.ToString());
                             removeDataPathColumn(raportData);
                             DataGrid1.ItemsSource = raportData.DefaultView;
                         }
-                        
+
                         if (datePickerYoungerThan.SelectedDate != null && datePickerOlderThan.SelectedDate == null)
                         {
                             youngerThan = datePickerYoungerThan.SelectedDate.Value.Date;
-                            raportData = DbHelper.advancedSelectYoungerThan(currentTable, youngerThan.ToString(), textBoxSearcher.Text, comboBoxSelectField.SelectedItem.ToString());
+                            raportData = DbHelper.advancedSelectYoungerThan(currentTable, youngerThan.ToString(), textBoxSearcher.Text, comboBoxSelectField.SelectionBoxItem.ToString());
                             removeDataPathColumn(raportData);
                             DataGrid1.ItemsSource = raportData.DefaultView;
                         }
-                        
+
                         if (datePickerYoungerThan.SelectedDate == null && datePickerOlderThan.SelectedDate != null)
                         {
                             olderThan = datePickerOlderThan.SelectedDate.Value.Date;
-                            raportData = DbHelper.advancedSelectOlderThan(currentTable, olderThan.ToString(), textBoxSearcher.Text, comboBoxSelectField.SelectedItem.ToString());
+                            raportData = DbHelper.advancedSelectOlderThan(currentTable, olderThan.ToString(), textBoxSearcher.Text, comboBoxSelectField.SelectionBoxItem.ToString());
                             removeDataPathColumn(raportData);
                             DataGrid1.ItemsSource = raportData.DefaultView;
                         }
-                        
+
                         if (datePickerYoungerThan.SelectedDate == null && datePickerOlderThan.SelectedDate != null)
                         {
                             olderThan = datePickerOlderThan.SelectedDate.Value.Date;
                             youngerThan = datePickerYoungerThan.SelectedDate.Value.Date;
-                            raportData = DbHelper.advancedSelectOlderAndYoungerThan(currentTable, olderThan.ToString(), youngerThan.ToString(), textBoxSearcher.Text, comboBoxSelectField.SelectedItem.ToString());
+                            raportData = DbHelper.advancedSelectOlderAndYoungerThan(currentTable, olderThan.ToString(), youngerThan.ToString(), textBoxSearcher.Text, comboBoxSelectField.SelectionBoxItem.ToString());
                             removeDataPathColumn(raportData);
                             DataGrid1.ItemsSource = raportData.DefaultView;
                         }
@@ -336,7 +342,7 @@ namespace secretary.views
                             removeDataPathColumn(raportData);
                             DataGrid1.ItemsSource = raportData.DefaultView;
                         }
-                        
+
                         if (datePickerYoungerThan.SelectedDate != null && datePickerOlderThan.SelectedDate == null)
                         {
                             youngerThan = datePickerYoungerThan.SelectedDate.Value.Date;
@@ -344,7 +350,7 @@ namespace secretary.views
                             removeDataPathColumn(raportData);
                             DataGrid1.ItemsSource = raportData.DefaultView;
                         }
-                        
+
                         if (datePickerYoungerThan.SelectedDate == null && datePickerOlderThan.SelectedDate != null)
                         {
                             olderThan = datePickerOlderThan.SelectedDate.Value.Date;
@@ -352,7 +358,7 @@ namespace secretary.views
                             removeDataPathColumn(raportData);
                             DataGrid1.ItemsSource = raportData.DefaultView;
                         }
-                       
+
                         if (datePickerYoungerThan.SelectedDate == null && datePickerOlderThan.SelectedDate != null)
                         {
                             olderThan = datePickerOlderThan.SelectedDate.Value.Date;
@@ -441,7 +447,7 @@ namespace secretary.views
                 else
                     lessonsListView.Items.RemoveAt(lessonsListView.Items.Count - 1);
             }
-            catch (Exception er) {}; 
+            catch (Exception er) { };
         }
 
         private void LoadImgBtn_Click(object sender, RoutedEventArgs e)
@@ -466,7 +472,7 @@ namespace secretary.views
 
             reloadData();
         }
-     
+
         private void GenerateRaportBtn_Click(object sender, RoutedEventArgs e)
         {
             Raport.GenerateRaport(raportData);
@@ -478,12 +484,12 @@ namespace secretary.views
             DataRowView row = datagrid.SelectedItem as DataRowView;
 
             var rowIndex = DataGrid1.SelectedIndex;
-          
+
             if (row != null)
             {
                 editFormExpander.IsExpanded = true;
                 selectedRow = Int32.Parse(row[0].ToString());
-                
+
                 if (currentTable == "students")
                 {
                     eStudentForm.Visibility = Visibility.Visible;
@@ -538,9 +544,10 @@ namespace secretary.views
             }
         }
 
-       
-        private void editStudent() {
-            string gender = comboBoxGender.SelectedItem.ToString() == "Male" ? "Male" : "Female";
+
+        private void editStudent()
+        {
+          
             var newPath = Environment.CurrentDirectory + "/images/" + eTextBoxPesel.Text + ".png";
 
             Student curStudent = new Student();
@@ -555,15 +562,16 @@ namespace secretary.views
             curStudent.pesel = eTextBoxPesel.Text;
             curStudent.groups = Serializers.serializeGroups(eGroups);
             curStudent.imagePath = newPath;
-            curStudent.gender = gender;
-            curStudent.currentClass = eComboBoxCurrentClass.SelectedItem.ToString();
+            curStudent.gender = eComboBoxGender.SelectionBoxItem.ToString();
+            curStudent.currentClass = eComboBoxCurrentClass.SelectionBoxItem.ToString();
 
             DbHelper.updateStudent(curStudent, selectedRow);
         }
-        private void editTeacher() {
+        private void editTeacher()
+        {
             string taughtSubjectsJson = Serializers.serializeLessons(eLessons);
 
-            string gender = comboBoxGender.SelectedItem.ToString() == "Male" ? "Male" : "Female";
+       
             var newPath = Environment.CurrentDirectory + "/images/" + eTextBoxPesel.Text + ".png";
 
             Teacher curTeacher = new Teacher();
@@ -576,7 +584,7 @@ namespace secretary.views
             curTeacher.mothersName = eTextBoxMthName.Text;
             curTeacher.birthDate = eDatePickerBirthDate.SelectedDate.Value.Date;
             curTeacher.pesel = eTextBoxPesel.Text;
-            curTeacher.gender = gender;
+            curTeacher.gender = eComboBoxGender.SelectionBoxItem.ToString();
             curTeacher.imagePath = newPath;
             curTeacher.classTutor = eTextBoxTutor.Text;
             curTeacher.taughtSubjects = taughtSubjectsJson;
@@ -584,8 +592,9 @@ namespace secretary.views
 
             DbHelper.updateTeacher(curTeacher, selectedRow);
         }
-        private void editEmployee() {
-            string gender = comboBoxGender.SelectedItem.ToString() == "Male" ? "Male" : "Female";
+        private void editEmployee()
+        {
+      
             var newPath = Environment.CurrentDirectory + "/images/" + eTextBoxPesel.Text + ".png";
 
             Employee curEmployee = new Employee();
@@ -599,7 +608,7 @@ namespace secretary.views
             curEmployee.tenure = eTextBoxTenure.Text;
             curEmployee.birthDate = eDatePickerBirthDate.SelectedDate.Value.Date;
             curEmployee.pesel = eTextBoxPesel.Text;
-            curEmployee.gender = gender;
+            curEmployee.gender = eComboBoxGender.SelectionBoxItem.ToString();
             curEmployee.jobPosition = eTextBoxJobPosition.Text;
             curEmployee.jobDescription = eTextBoxJobPosition.Text;
             curEmployee.dateOfEmployment = eEdatePickerEmployment.SelectedDate.Value.Date;
@@ -648,19 +657,19 @@ namespace secretary.views
         {
             editFormExpander.IsExpanded = false;
         }
- 
+
         private void addGroupBtn_Click(object sender, RoutedEventArgs e)
         {
             isEditing = editFormExpander.IsExpanded == true ? true : false;
             if (isEditing != true)
             {
-                groupsListView.Items.Add(comboBoxCurrentGroup.SelectedItem.ToString());
-                groups.Add(comboBoxCurrentGroup.SelectedItem.ToString());
+                groupsListView.Items.Add(comboBoxCurrentGroup.SelectionBoxItem.ToString());
+                groups.Add(comboBoxCurrentGroup.SelectionBoxItem.ToString());
             }
             else
             {
-                eGroupsListView.Items.Add(eComboBoxCurrentGroup.SelectedItem.ToString());
-                eGroups.Add(comboBoxCurrentGroup.SelectedItem.ToString());
+                eGroupsListView.Items.Add(eComboBoxCurrentGroup.SelectionBoxItem.ToString());
+                eGroups.Add(comboBoxCurrentGroup.SelectionBoxItem.ToString());
             }
         }
 
