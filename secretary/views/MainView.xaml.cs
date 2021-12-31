@@ -423,7 +423,7 @@ namespace secretary.views
             }
             else
             {
-                if (datepickerLesson.SelectedDate.Value.Date != null)
+                if (datepickerLesson.SelectedDate.Value.Date.ToString() != "")
                 {
                     lessonsListView.Items.Add(new Lesson
                     {
@@ -704,7 +704,7 @@ namespace secretary.views
             }
             else
             {
-                if (groupsListView.Items.Count>0)
+                if (groups.Count-1>0)
                 {
                     groupsListView.Items.RemoveAt(groupsListView.Items.Count - 1);
                     groups.RemoveAt(groupsListView.Items.Count - 1);

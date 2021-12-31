@@ -67,7 +67,7 @@
     <Grid Margin="130,0,0,0" Background="Transparent">
         <Label Content="Upload data" HorizontalAlignment="Left" Margin="131,116,0,0" VerticalAlignment="Top" Foreground="#FFF9F9F9"/>
         <Label   Content="Upload images" HorizontalAlignment="Left" Margin="274,116,0,0" VerticalAlignment="Top" Foreground="#FFF9F9F9"/>
-        <Label x:Name="lll" Content="Save data" HorizontalAlignment="Left" Margin="0,116,0,0" VerticalAlignment="Top" Foreground="#FFF9F9F9"/>
+        <Label x:Name="lll" Content="Export data" HorizontalAlignment="Left" Margin="0,116,0,0" VerticalAlignment="Top" Foreground="#FFF9F9F9"/>
         <Button Background="#574B90"  Style="{DynamicResource ButtonBasicStyle}" x:Name="uploadDataBtn"  HorizontalAlignment="Left" Width="64" Margin="131,147,0,0" VerticalAlignment="Top" Click="uploadDataBtn_Click">
             <Image Source="/assets/images/upload.png" Margin="15,15,15,15"  />
         </Button>

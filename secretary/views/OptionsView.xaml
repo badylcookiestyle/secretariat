@@ -76,13 +76,13 @@
                     <RowDefinition Height="30" />
                     <RowDefinition Height="30" />
                 </Grid.RowDefinitions>
-                <Label Foreground="White">Main view bind</Label>
+                <Label  Margin="0,5,0,0"  Foreground="White">Main view bind</Label>
                 <TextBox Grid.Column="1" Margin="0,5,0,0" x:Name="textBoxMainView" />
                 <Label Foreground="White" Grid.Row="1">Data view bind</Label>
                 <TextBox Grid.Row="1" Grid.Column="1" Margin="0,5,0,0" x:Name="textBoxDataView" />
                 <Label Foreground="White" Grid.Row="2">Option view bind</Label>
                 <TextBox Grid.Row="2" Grid.Column="1" x:Name="textBoxOptionView" Margin="0,5,0,0" />
-                <Button Foreground="White"  Style="{DynamicResource ButtonBasicStyle}" Background="#574B90" Grid.Row="3" Content="Save" x:Name="saveBtn" Margin="0,2,30,0" Click="saveBtn_Click"></Button>
+                <Button  Width="90"   Margin="0,5,0,0"  Foreground="White"  Style="{DynamicResource ButtonBasicStyle}" Background="#574B90" Grid.Row="3" Content="Save" x:Name="saveBtn"  Click="saveBtn_Click"></Button>
             </Grid>
         </GroupBox>
     </Grid>
