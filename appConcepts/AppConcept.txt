@@ -1,0 +1,56 @@
+﻿http://wklejto.pl/927337
+
+//////////Colour Pallette//////////////////////
+# I don't need it anymore
+//////////////////////////////////////////////
+
+I'll create 4 classes 1 abstract class 3 inheritative classes
+teacher,student,employee
+I'll make uploading/exporting txt file
+
+Probably I'll export txt file into db
+DB solution is simpler to implement, but I'm not sure if I'll make it that way it could be to easy ;-;.
+
+There'll be a sidebar with 3 options which will make user able
+to switch between app views
+
+
+///////////////////////////////////////////////////////
+Edititing and deleting rows
+selecting row will display a special modal and this modal will make user able to edit/delete row :3
+///////////////////////////////////////////////////////
+
+$more -btn will open additional window with informations
+***** remember about validation *****
+---------- Main view ---------------------
+It'll be divided into 2 sections
+
+data section and form section
+
+		<--- data section --->
+		<--- filters --->
+		<-- ??? data from db/file??? 
+		<-- record -- ><-- record --><-- edit btn --><-- delete btn --><--$more btn --> 
+		
+		-- >
+		<--- Raport button ---> It'll open additional window with raport generator
+		<--- /data section --->
+		<--- form section --->
+			User will be able to switch between 3 forms
+			-Student
+			-Teacher
+			-Employee
+		</--- form section --->
+
+
+---------- Upload view -------------------
+I think that there'll be a simple form 
+
+---------- Options view ------------------
+I'll add here simple groupbox with simple form
+this form will let user change the binding 
+
+
+
+
+!!! Remember about lesson struct then list of lessons then option to add another lesson!!!

@@ -266,7 +266,7 @@ namespace secretary.dbHelper
 
             string newEmployeeString = "INSERT INTO employees(first_name,second_name,last_name,maiden_name,fathers_name,mothers_name,birth_date,pesel,image_path,gender,date_of_employment,job_description,job_position,tenure) VALUES('" 
             + newEmployee.firstName + "','" + newEmployee.secondName + "','" + newEmployee.lastname + "','" + newEmployee.maidenName + "','" + newEmployee.fathersName + "','" + newEmployee.mothersName + "','" + newEmployee.birthDate.ToString() 
-            + "','" + newEmployee.pesel + "','" + newEmployee.imagePath + "','" + newEmployee.gender + "','" + newEmployee.dateOfEmployment + "','" + newEmployee.jobDescription + "','" + newEmployee.jobPosition + "','tenure');";
+            + "','" + newEmployee.pesel + "','" + newEmployee.imagePath + "','" + newEmployee.gender + "','" + newEmployee.dateOfEmployment + "','" + newEmployee.jobDescription + "','" + newEmployee.jobPosition + "','"+newEmployee.tenure+"');";
 
             sendQuery(newEmployeeString);
         }

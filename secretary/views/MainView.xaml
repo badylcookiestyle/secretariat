@@ -5,7 +5,7 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:local="clr-namespace:secretary.views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="1200">
+             d:DesignHeight="450" d:DesignWidth="1200" Initialized="UserControl_Initialized">
     <UserControl.Resources>
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
@@ -64,7 +64,7 @@
         </Style>
     </UserControl.Resources>
     <Grid x:Name="MainViewGrid" Margin="90,0,0,0" Background="Transparent">
-        <DataGrid IsReadOnly="True" HorizontalAlignment="Left" Width="1750" Margin="30,90,30,30" Height="600" x:Name="DataGrid1" GridLinesVisibility="Horizontal" Focusable="False" RowBackground="#00B41616" Background="#00F0F0F0" Foreground="White" HorizontalGridLinesBrush="White" VerticalGridLinesBrush="White" HeadersVisibility="Column" RowHeight="64" ColumnHeaderHeight="64" ScrollViewer.HorizontalScrollBarVisibility="Visible" AutomationProperties.IsRowHeader="True" RowHeaderWidth="29"  SelectionChanged="DataGrid1_SelectionChanged" Grid.Column="0">
+        <DataGrid IsReadOnly="True" HorizontalAlignment="Left" Width="1750" Margin="30,90,30,30" Height="600" x:Name="DataGrid1" GridLinesVisibility="Horizontal" Focusable="False" RowBackground="#00B41616" Background="#00F0F0F0" Foreground="White" HorizontalGridLinesBrush="White" VerticalGridLinesBrush="White" HeadersVisibility="Column" RowHeight="64" ColumnHeaderHeight="64" ScrollViewer.HorizontalScrollBarVisibility="Visible" AutomationProperties.IsRowHeader="True" RowHeaderWidth="29"  SelectionChanged="DataGrid1_SelectionChanged" Grid.Column="0"   Loaded="DataGrid1_Loaded">
             <DataGrid.ColumnHeaderStyle>
                 <Style TargetType="DataGridColumnHeader">
                     <Setter Property="Background" Value="#574B90"></Setter>
@@ -162,7 +162,7 @@
                 <StackPanel x:Name="eStudentForm"    Background="Transparent" Height="100" Margin="5,0,0,-300"  Visibility="Hidden">
                     <Grid Height="26">
                         <Label Foreground="White" Margin="90,-5,0,0">class</Label>
-                        <ComboBox  x:Name="eComboBoxCurrentClass"   HorizontalAlignment="Left"  Width="90"/>
+                        <TextBox  x:Name="eComboBoxCurrentClass"   HorizontalAlignment="Left"  Width="90"/>
                     </Grid>
                     <Grid Height="26">
                         <Label Foreground="White" Margin="240,-50,0,0">group</Label>
@@ -329,9 +329,9 @@
                 <TextBox  x:Name="textBoxJobPosition"  Visibility="Hidden"  Grid.Row="10" VerticalAlignment="Top" Width="120" HorizontalAlignment="Left" Height="28" Grid.Column="1" Margin="0,0,0,0" />
                 <Label Foreground="White" x:Name="jobDescriptionLabel" Visibility="Hidden" Height="28" VerticalAlignment="Top" Margin="0,25,0,0" Grid.Row="10">Job description :</Label>
                 <TextBox  x:Name="textBoxJobDescription" Visibility="Hidden" Grid.Row="10" Margin="0,25,0,0" VerticalAlignment="Top" Width="120" HorizontalAlignment="Left" Height="28" Grid.Column="1"  />
-                <Label Foreground="White" x:Name="tenureLabel" Visibility="Hidden" Height="28" VerticalAlignment="Top" Margin="0,50,0,0" Grid.Row="10">Monthly hours:</Label>
-                <TextBox  Visibility="Hidden"  x:Name="textBoxTenure" Grid.Row="10" Margin="0,50,0,0" VerticalAlignment="Top" Width="120" HorizontalAlignment="Left" Height="28" Grid.Column="1"  />
-                <Label Foreground="White" x:Name="eDateOfEmploymentLabel"  Visibility="Hidden"  Height="28"   Grid.Row="11">Date of emloployment:</Label>
+                <Label Foreground="White" x:Name="tenureLabel" Visibility="Hidden" Height="28" VerticalAlignment="Top" Margin="0,50,0,0" Grid.Row="10">Monthly hours :</Label>
+                <TextBox  Visibility="Hidden"  x:Name="textBoxTenure"   Text="" Grid.Row="10" Margin="0,50,0,0" VerticalAlignment="Top" Width="120" HorizontalAlignment="Left" Height="28" Grid.Column="1"  />
+                <Label Foreground="White" x:Name="eDateOfEmploymentLabel"  Visibility="Hidden"  Height="28"   Grid.Row="11">Date of emloployment :</Label>
                 <DatePicker x:Name="eDatePickerEmployment"   Visibility="Hidden"  Grid.Row="11" Width="120" HorizontalAlignment="Left" Height="28" Grid.Column="1"  />
 
                 <Label Foreground="White"  x:Name="groupsLabel"  Visibility="Hidden"  HorizontalAlignment="Left" Grid.Row="9" Grid.Column="2"  >Groups :</Label>
@@ -346,8 +346,8 @@
 
                     <ListBox x:Name="groupsListView" Width="200" Height="100" VerticalAlignment="Bottom"></ListBox>
                 </DockPanel>
-                <Label Foreground="White" x:Name="studentClassesLabel" Visibility="Hidden" HorizontalAlignment="Left" Grid.Row="10"   >Classes :</Label>
-                <ComboBox x:Name="comboBoxCurrentClass"  Visibility="Hidden" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="10" Grid.Column="1" Height="28" Width="90"></ComboBox>
+                <Label Foreground="White" x:Name="studentClassesLabel" Visibility="Hidden" HorizontalAlignment="Left" Grid.Row="10"   >Class :</Label>
+                <TextBox x:Name="comboBoxCurrentClass"  Visibility="Hidden" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="10" Grid.Column="1" Height="28" Width="90"></TextBox>
                 <Button Foreground="White" Background="#574B90" Click="SubmitPersonBtn_Click"   Style="{DynamicResource ButtonBasicStyle}"  Grid.Row="12" Grid.Column="2" HorizontalAlignment="Right" Width="90" Content="Add"></Button>
             </Grid>
         </Expander>

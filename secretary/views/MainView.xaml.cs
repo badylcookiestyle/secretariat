@@ -43,15 +43,14 @@ namespace secretary.views
         public MainView()
         {
             InitializeComponent();
+          
 
-            DataGrid1.ItemsSource = DbHelper.basicSelect(currentTable).DefaultView;
             studentRadio.IsChecked = true;
-            reloadData();
+
+     
+         
             initializeGroupCombobox();
-            initializeClassesCombobox();
-            initializeTableFieldsCombobox();
-            
-            showStudentForm();
+
             reloadData();
         }
 
@@ -70,7 +69,7 @@ namespace secretary.views
 
         private void EmployeeRadioBtn_Click(object sender, RoutedEventArgs e)
         {
-            currentTable = "employees";
+            currentTable = "employees";        
             reloadData();
         }
         private void initializeGroupCombobox()
@@ -78,6 +77,7 @@ namespace secretary.views
             var rows = DbHelper.basicSelect("groups").DefaultView;
             eComboBoxCurrentGroup.Items.Clear();
             comboBoxCurrentGroup.Items.Clear();
+
             for (int i = 0; i < rows.Count; i++)
             {
                 var row = rows[i];
@@ -86,18 +86,7 @@ namespace secretary.views
             }
         }
 
-        private void initializeClassesCombobox()
-        {
-            comboBoxCurrentClass.Items.Clear();
-            eComboBoxCurrentClass.Items.Clear();
-            var rows = DbHelper.basicSelect("classes").DefaultView;
-            for (int i = 0; i < rows.Count; i++)
-            {
-                var row = rows[i];
-                eComboBoxCurrentClass.Items.Add(row["name"]);
-                comboBoxCurrentClass.Items.Add(row["name"]);
-            }
-        }
+      
 
         private void initializeTableFieldsCombobox()
         {
@@ -144,7 +133,7 @@ namespace secretary.views
 
         private void addTeacher()
         {
-            string gender = comboBoxGender.SelectionBoxItem.ToString() == "Male" ? "Male" : "Female";
+            
             string taughtSubjectsJson = Serializers.serializeLessons(lessons);
 
             var newPath = Environment.CurrentDirectory + "/images/" + textBoxPesel.Text + DateTime.Now.Ticks + Path.GetExtension(selectedFilePath);
@@ -164,7 +153,7 @@ namespace secretary.views
             newTeacher.imagePath = newPath;
             newTeacher.classTutor = textBoxTutor.Text;
             newTeacher.taughtSubjects = taughtSubjectsJson;
-            newTeacher.gender = gender;
+            newTeacher.gender = comboBoxGender.SelectionBoxItem.ToString();
             newTeacher.dateOfEmployment = TdatePickerEmployment.SelectedDate.Value.Date;
 
             DbHelper.insertTeacher(newTeacher);
@@ -175,7 +164,7 @@ namespace secretary.views
         }
         private void addStudent()
         {
-            string gender = comboBoxGender.SelectionBoxItem.ToString() == "Male" ? "Male" : "Female";
+           
             Student newStudent = new Student();
 
             var newPath = Environment.CurrentDirectory + "/images/" + textBoxPesel.Text + DateTime.Now.Ticks + Path.GetExtension(selectedFilePath);
@@ -192,8 +181,8 @@ namespace secretary.views
             newStudent.pesel = textBoxPesel.Text;
             newStudent.groups = Serializers.serializeGroups(groups);
             newStudent.imagePath = newPath;
-            newStudent.gender = gender;
-            newStudent.currentClass = comboBoxCurrentClass.SelectionBoxItem.ToString();
+            newStudent.gender = comboBoxGender.SelectionBoxItem.ToString();
+            newStudent.currentClass = comboBoxCurrentClass.Text;
 
             DbHelper.insertStudent(newStudent);
             currentTable = "students";
@@ -202,7 +191,7 @@ namespace secretary.views
         }
         private void addEmployee()
         {
-            string gender = comboBoxGender.SelectionBoxItem.ToString() == "Male" ? "Male" : "Female";
+        
             var newPath = Environment.CurrentDirectory + "/images/" + textBoxPesel.Text + DateTime.Now.Ticks + Path.GetExtension(selectedFilePath);
 
             File.Copy(selectedFilePath, newPath);
@@ -219,7 +208,7 @@ namespace secretary.views
             newEmployee.birthDate = datePickerBirthDate.SelectedDate.Value.Date;
             newEmployee.pesel = textBoxPesel.Text;
             newEmployee.imagePath = newPath;
-            newEmployee.gender = gender;
+            newEmployee.gender = comboBoxGender.SelectionBoxItem.ToString();
             newEmployee.jobPosition = textBoxJobPosition.Text;
             newEmployee.jobDescription = textBoxJobPosition.Text;
             newEmployee.dateOfEmployment = eDatePickerEmployment.SelectedDate.Value.Date;
@@ -244,21 +233,28 @@ namespace secretary.views
 
         private void SubmitPersonBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (isBeingEdited == false)
+            try
             {
-                switch (currentForm)
+                if (isBeingEdited == false)
                 {
-                    case "Student":
-                        addStudent();
-                        break;
-                    case "Teacher":
-                        addTeacher();
-                        break;
-                    case "Employee":
-                        addEmployee();
-                        break;
+                    switch (currentForm)
+                    {
+                        case "Student":
+                            addStudent();
+                            break;
+                        case "Teacher":
+                            addTeacher();
+                            break;
+                        case "Employee":
+                            addEmployee();
+                            break;
+                    }
+                    clearForm(MainViewGrid);
                 }
-                clearForm(MainViewGrid);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("The form is completed incorrectly ");
             }
         }
 
@@ -277,10 +273,9 @@ namespace secretary.views
         {
             reloadImagePaths();
         
-           
             try
             {
-                DataGrid1.Columns.Remove(DataGrid1.Columns[9]);
+                    DataGrid1.Columns.Remove(DataGrid1.Columns[9]);
             }
             catch(Exception er) { }
         }
@@ -289,12 +284,16 @@ namespace secretary.views
             var gridData = raportData = DbHelper.basicSelect(currentTable);
             DataGrid1.ItemsSource = gridData.DefaultView;
             initializeTableFieldsCombobox();
-            removeDataPathColumn(gridData);         
+            removeDataPathColumn(gridData);
+       
+           
         }
 
 
         private void SearchBtn_Click(object sender, RoutedEventArgs e)
         {
+            if (comboBoxSelectField.SelectionBoxItem.ToString() == "")
+                MessageBox.Show("I think, that you should select any column");
             if (textBoxSearcher.Text != "")
             {
                 try
@@ -304,7 +303,7 @@ namespace secretary.views
                         if (datePickerYoungerThan.SelectedDate == null && datePickerOlderThan.SelectedDate == null)
                         {
                             raportData = DbHelper.likeSelect(currentTable, textBoxSearcher.Text, comboBoxSelectField.SelectionBoxItem.ToString());
-                            removeDataPathColumn(raportData);
+                   
                             DataGrid1.ItemsSource = raportData.DefaultView;
                         }
 
@@ -312,7 +311,7 @@ namespace secretary.views
                         {
                             youngerThan = datePickerYoungerThan.SelectedDate.Value.Date;
                             raportData = DbHelper.advancedSelectYoungerThan(currentTable, youngerThan.ToString(), textBoxSearcher.Text, comboBoxSelectField.SelectionBoxItem.ToString());
-                            removeDataPathColumn(raportData);
+                      
                             DataGrid1.ItemsSource = raportData.DefaultView;
                         }
 
@@ -320,7 +319,7 @@ namespace secretary.views
                         {
                             olderThan = datePickerOlderThan.SelectedDate.Value.Date;
                             raportData = DbHelper.advancedSelectOlderThan(currentTable, olderThan.ToString(), textBoxSearcher.Text, comboBoxSelectField.SelectionBoxItem.ToString());
-                            removeDataPathColumn(raportData);
+                     
                             DataGrid1.ItemsSource = raportData.DefaultView;
                         }
 
@@ -329,7 +328,7 @@ namespace secretary.views
                             olderThan = datePickerOlderThan.SelectedDate.Value.Date;
                             youngerThan = datePickerYoungerThan.SelectedDate.Value.Date;
                             raportData = DbHelper.advancedSelectOlderAndYoungerThan(currentTable, olderThan.ToString(), youngerThan.ToString(), textBoxSearcher.Text, comboBoxSelectField.SelectionBoxItem.ToString());
-                            removeDataPathColumn(raportData);
+                        
                             DataGrid1.ItemsSource = raportData.DefaultView;
                         }
                     }
@@ -338,8 +337,9 @@ namespace secretary.views
                         if (datePickerYoungerThan.SelectedDate == null && datePickerOlderThan.SelectedDate == null)
                         {
                             raportData = DbHelper.idSelect(currentTable, textBoxSearcher.Text);
-                            raportData = DbHelper.idSelect(currentTable, textBoxSearcher.Text);
-                            removeDataPathColumn(raportData);
+                         
+                         
+
                             DataGrid1.ItemsSource = raportData.DefaultView;
                         }
 
@@ -347,7 +347,7 @@ namespace secretary.views
                         {
                             youngerThan = datePickerYoungerThan.SelectedDate.Value.Date;
                             raportData = DbHelper.advancedSelectYoungerThanId(currentTable, youngerThan.ToString(), textBoxSearcher.Text);
-                            removeDataPathColumn(raportData);
+                           
                             DataGrid1.ItemsSource = raportData.DefaultView;
                         }
 
@@ -355,7 +355,7 @@ namespace secretary.views
                         {
                             olderThan = datePickerOlderThan.SelectedDate.Value.Date;
                             raportData = DbHelper.advancedSelectOlderThanId(currentTable, olderThan.ToString(), textBoxSearcher.Text);
-                            removeDataPathColumn(raportData);
+                      
                             DataGrid1.ItemsSource = raportData.DefaultView;
                         }
 
@@ -364,7 +364,7 @@ namespace secretary.views
                             olderThan = datePickerOlderThan.SelectedDate.Value.Date;
                             youngerThan = datePickerYoungerThan.SelectedDate.Value.Date;
                             raportData = DbHelper.advancedSelectOlderAndYoungerThanId(currentTable, olderThan.ToString(), youngerThan.ToString(), textBoxSearcher.Text);
-                            removeDataPathColumn(raportData);
+                           
                             DataGrid1.ItemsSource = raportData.DefaultView;
                         }
                     }
@@ -373,6 +373,7 @@ namespace secretary.views
                 {
 
                 }
+                
             }
             else
             {
@@ -380,7 +381,7 @@ namespace secretary.views
                 {
                     youngerThan = datePickerYoungerThan.SelectedDate.Value.Date;
                     raportData = DbHelper.youngerThanSelect(currentTable, youngerThan.ToString());
-                    removeDataPathColumn(raportData);
+                 
                     DataGrid1.ItemsSource = raportData.DefaultView;
                 }
 
@@ -388,7 +389,7 @@ namespace secretary.views
                 {
                     olderThan = datePickerOlderThan.SelectedDate.Value.Date;
                     raportData = DbHelper.olderThanSelect(currentTable, olderThan.ToString());
-                    removeDataPathColumn(raportData);
+             
                     DataGrid1.ItemsSource = raportData.DefaultView;
                 }
 
@@ -397,10 +398,11 @@ namespace secretary.views
                     olderThan = datePickerOlderThan.SelectedDate.Value.Date;
                     youngerThan = datePickerYoungerThan.SelectedDate.Value.Date;
                     raportData = DbHelper.olderAndYoungerThanSelect(currentTable, olderThan.ToString(), youngerThan.ToString());
-                    removeDataPathColumn(raportData);
+                  
                     DataGrid1.ItemsSource = raportData.DefaultView;
                 }
             }
+            removeDataPathColumn(raportData);
         }
 
         private void AddLessonBtn_Click(object sender, RoutedEventArgs e)
@@ -442,6 +444,7 @@ namespace secretary.views
             isEditing = editFormExpander.IsExpanded == true ? true : false;
             try
             {
+
                 if (isEditing == true)
                     eLessonsListView.Items.RemoveAt(lessonsListView.Items.Count - 1);
                 else
@@ -478,6 +481,17 @@ namespace secretary.views
             Raport.GenerateRaport(raportData);
         }
 
+        private void setEditedImage(int index)
+        {
+            try
+            {
+                eImage.Source = new BitmapImage(new Uri(imagesPaths[index].ToString()));
+            }
+            catch(Exception er)
+            {
+                 eImage.Source = new BitmapImage(new Uri("https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"));
+            }
+        }
         private void DataGrid1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             DataGrid datagrid = sender as DataGrid;
@@ -504,7 +518,7 @@ namespace secretary.views
                     eTextBoxMthName.Text = row[6].ToString();
                     eDatePickerBirthDate.SelectedDate = DateTime.Parse(row[7].ToString());
                     eTextBoxPesel.Text = row[8].ToString();
-                    eImage.Source = new BitmapImage(new Uri(imagesPaths[rowIndex].ToString()));
+                    setEditedImage(rowIndex);
                     eComboBoxCurrentGroup.SelectedItem = row[11].ToString();
                 }
 
@@ -520,7 +534,7 @@ namespace secretary.views
                     eTextBoxMaiName.Text = row[4].ToString();
                     eTextBoxFthName.Text = row[5].ToString();
                     eTextBoxMthName.Text = row[6].ToString();
-                    eImage.Source = new BitmapImage(new Uri(imagesPaths[rowIndex].ToString()));
+                    setEditedImage(rowIndex);
                     eDatePickerBirthDate.SelectedDate = DateTime.Parse(row[7].ToString());
                     eTextBoxPesel.Text = row[8].ToString();
                 }
@@ -538,7 +552,7 @@ namespace secretary.views
                     eTextBoxFthName.Text = row[5].ToString();
                     eTextBoxMthName.Text = row[6].ToString();
                     eDatePickerBirthDate.SelectedDate = DateTime.Parse(row[7].ToString());
-                    eImage.Source = new BitmapImage(new Uri(imagesPaths[rowIndex].ToString()));
+                    setEditedImage(rowIndex);
                     eTextBoxPesel.Text = row[8].ToString();
                 }
             }
@@ -563,7 +577,7 @@ namespace secretary.views
             curStudent.groups = Serializers.serializeGroups(eGroups);
             curStudent.imagePath = newPath;
             curStudent.gender = eComboBoxGender.SelectionBoxItem.ToString();
-            curStudent.currentClass = eComboBoxCurrentClass.SelectionBoxItem.ToString();
+            curStudent.currentClass = eComboBoxCurrentClass.Text;
 
             DbHelper.updateStudent(curStudent, selectedRow);
         }
@@ -571,7 +585,6 @@ namespace secretary.views
         {
             string taughtSubjectsJson = Serializers.serializeLessons(eLessons);
 
-       
             var newPath = Environment.CurrentDirectory + "/images/" + eTextBoxPesel.Text + ".png";
 
             Teacher curTeacher = new Teacher();
@@ -618,22 +631,29 @@ namespace secretary.views
         }
         private void EditRowBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (currentTable == "students")
+            try
             {
-                editStudent();
-                reloadData();
+                if (currentTable == "students")
+                {
+                    editStudent();
+                    reloadData();
+                }
+                if (currentTable == "teachers")
+                {
+                    editTeacher();
+                    reloadData();
+                }
+                if (currentTable == "employees")
+                {
+                    editEmployee();
+                    reloadData();
+                }
+                editFormExpander.IsExpanded = false;
             }
-            if (currentTable == "teachers")
+            catch (Exception)
             {
-                editTeacher();
-                reloadData();
+                MessageBox.Show("The form is completed incorrectly ");
             }
-            if (currentTable == "employees")
-            {
-                editEmployee();
-                reloadData();
-            }
-            editFormExpander.IsExpanded = false;
         }
 
         private void EditFormExpander_Expanded(object sender, RoutedEventArgs e)
@@ -684,8 +704,11 @@ namespace secretary.views
             }
             else
             {
-                groupsListView.Items.RemoveAt(groupsListView.Items.Count - 1);
-                groups.RemoveAt(groupsListView.Items.Count - 1);
+                if (groupsListView.Items.Count>0)
+                {
+                    groupsListView.Items.RemoveAt(groupsListView.Items.Count - 1);
+                    groups.RemoveAt(groupsListView.Items.Count - 1);
+                }
             }
         }
 
@@ -745,6 +768,21 @@ namespace secretary.views
             studentClassesLabel.Visibility = Visibility.Visible;
         }
 
+        private void comboBoxSelectField_ContextMenuOpening(object sender, ContextMenuEventArgs e)
+        {
+            initializeTableFieldsCombobox();
+        }
+
+        private void UserControl_Initialized(object sender, EventArgs e)
+        {
+            DataGrid1.ItemsSource = DbHelper.basicSelect("students").DefaultView;
+            showStudentForm();  
+        }
+
+        private void DataGrid1_Loaded(object sender, RoutedEventArgs e)
+        {
+             DataGrid1.Columns.Remove(DataGrid1.Columns[9]);
+        }
     }
 
 }
