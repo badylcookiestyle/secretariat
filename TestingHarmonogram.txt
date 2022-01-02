@@ -1,148 +1,154 @@
 ﻿First test 28.11.2021 20:00
 === test goals === 
-- checking if mvvc is working
-- checking if navbar is working
-- checking if form switcher is working
-- checking if form switcher is working
-- detecting some bugs
+~ checking if mvvc is working
+~ checking if navbar is working
+~ checking if form switcher is working
+~ checking if form switcher is working
+~ detecting some bugs
 === test results === 
 28.11.2021 20:10
-- everything is working, I should make form validation in the future
+~ everything is working, I should make form validation in the future
 
 Second test 28.11.2021 21:25
 === test goals ===
-- checking if functions responsible for adding elements to persons list works
+~ checking if functions responsible for adding elements to persons list works
 === test results ===
-- everything is working, I haven't implement form validation yet
+~ everything is working, I haven't implement form validation yet
 
 Third test 30.11.2021 21:35
 === test goals ===
-- checking if Sqlitedb is workings
-- checking if insert methods in dbHelper class are working
+~ checking if Sqlitedb is workings
+~ checking if insert methods in dbHelper class are working
 === test results ===
-- everything is working, I haven't implement form validation yet
+~ everything is working, I haven't implement form validation yet
 
 Fourth test 01.12.2021 20:15
 === test goals ===
-- checking if form is working after rework
-- checking if db is working 
-- checking if dbHelper is working
+~ checking if form is working after rework
+~ checking if db is working 
+~ checking if dbHelper is working
 === test results ===
--db+db Helper are working, I haven't implement form validation yet
+~db+db Helper are working, I haven't implement form validation yet
 Idk why form switcher stopped working :c
 
 Fifth test 02.12.2021 11:37
 === test goals ===
-- checking if form switcher is working
-- checking if searcher is working
+~ checking if form switcher is working
+~ checking if searcher is working
 
 === test results ===
-- everything is working, I haven't implement form validation yet, I should implement form cleaner :o
+~ everything is working, I haven't implement form validation yet, I should implement form cleaner :o
 
 Sixth test 04.12.2021 12:00
 === test goals ===
-- checking if file uploader works
-- cheking if db dumper works 
+~ checking if file uploader works
+~ cheking if db dumper works 
 === test results ===
-- file uploader works 
-- db dumper isn't able to dump more than 1 table :e
--  I haven't implement form validation yet, I should implement form cleaner :o
+~ file uploader works 
+~ db dumper isn't able to dump more than 1 table :e
+~  I haven't implement form validation yet, I should implement form cleaner :o
 
 Seventh test 05.12.2021 10:52
 === test goals ===
-- checking if raport generator works :o
-- checking if db dumper started working magically without my intervention
+~ checking if raport generator works :o
+~ checking if db dumper started working magically without my intervention
 === test results ===
-- raport generator works
-- btw  db dumper isn't able to dump more than 1 table :e
-- btw  I haven't implement form validation yet, I should implement form cleaner :o
+~ raport generator works
+~ btw  db dumper isn't able to dump more than 1 table :e
+~ btw  I haven't implement form validation yet, I should implement form cleaner :o
 
 eighth test 05.12.2021 18:01
 === test goals ===
-- checking if new db dumper works
-- checking if db uploader works
+~ checking if new db dumper works
+~ checking if db uploader works
 === tests results ===
-- both functions works
-- btw  I haven't implement form validation yet, I should implement form cleaner :o
+~ both functions works
+~ btw  I haven't implement form validation yet, I should implement form cleaner :o
 
 nineth test 11.12.2021
 === test goals ===
-- checking if prototype of studentUpdate method work
+~ checking if prototype of studentUpdate method work
 === tests results ===
-- it's working
-- btw  I haven't implement form validation  and  form cleaner yet
+~ it's working
+~ btw  I haven't implement form validation  and  form cleaner yet
 
 tenth test 12.12.2021 13:31
 === test goals ===
-- checking if row modify/delete pop up works
-- checking if user can modify row
-- checking if methods updateEmployee/updateTeacher/updateTeacher in DbHelperClass works
+~ checking if row modify/delete pop up works
+~ checking if user can modify row
+~ checking if methods updateEmployee/updateTeacher/updateTeacher in DbHelperClass works
 === test results ===
-- everything is working
--  btw  I haven't implement form validation yet, I should implement form cleaner :o
+~ everything is working
+~  btw  I haven't implement form validation yet, I should implement form cleaner :o
 
 eleventh test 12.12.2021 13:35
 === test goals ===
-- checking if user can delete row
-- checking if method deleteById in DbHelperClass works
+~ checking if user can delete row
+~ checking if method deleteById in DbHelperClass works
 === test results ===
-- everything is working
--  btw  I haven't implement form validation yet, I should implement form cleaner :o
+~ everything is working
+~  btw  I haven't implement form validation yet, I should implement form cleaner :o
 
 twelfth test 12.12.2021 20:00
 === test goals ===
-- checking if databinding works
-- checking if options view works
-- checking if user is able to change binding
-- checking if layout works properly :3
+~ checking if databinding works
+~ checking if options view works
+~ checking if user is able to change binding
+~ checking if layout works properly :3
 === test results ===
-- everything is working
--  btw  I haven't implement form validation yet, I should implement form cleaner :o
+~ everything is working
+~  btw  I haven't implement form validation yet, I should implement form cleaner :o
 
 thirteenth test 20.12.2021 10:00
 === test goals ===
-- checking if filtering by older than/younger than works
-- checking if image_path column is being deleted (I'm deleting in manually, because I'll need it to implement somethin awesome in the future)
+~ checking if filtering by older than/younger than works
+~ checking if image_path column is being deleted (I'm deleting in manually, because I'll need it to implement somethin awesome in the future)
 === tests results ===
-- everything is working
--  btw  I haven't implement form validation yet, I should implement form cleaner :o
+~ everything is working
+~  btw  I haven't implement form validation yet, I should implement form cleaner :o
 
 fourteenth test 28.12.2021 16:00
 === test goals ===
-- checking if app is working properly after removing image_path column
+~ checking if app is working properly after removing image_path column
 === test results ===
-- everything is working 
-- btw  I haven't implemented form validation yet, I should implement form cleaner :o
+~ everything is working 
+~ btw  I haven't implemented form validation yet, I should implement form cleaner :o
 
 sixteenth test 28.12.2021 20:41
 === test goals ===
-- checking if form cleaner works
-- checking if raports are being saved as txt
-- checking if checking if db is exported as txt
+~ checking if form cleaner works
+~ checking if raports are being saved as txt
+~ checking if checking if db is exported as txt
 === test results ===
--  everything works
+~  everything works
 
 seventeenth test 29.12.2021 19:50
 === test goals ===
-- checking if form after rework works
+~ checking if form after rework works
 === test results ===
-- everything works
+~ everything works
 
 eightteenth test 31.12.2021 00:01
 === test goals ===
-- checking if editing form works after rework
-- cheking if keyBinding works after rework
+~ checking if editing form works after rework
+~ cheking if keyBinding works after rework
 === test results ===
-- everything works
+~ everything works
 nineteenth test   31.12.2021 17:01
 === test goals ===
-- checking if validation works
+~ checking if validation works
 === test results ===
-- it works
+~ it works
 
 twentyth test 31.12.2021 18:01
 === test goals ===
-- checking my friend's opinion about my app
+~ checking my friend's opinion about my app
 === test results ===
-- my app is acceptable, but I should implement a guide
-- I've just implemented it and it works 
+~ my app is acceptable, but I should implement a guide
+~ I've just implemented it and it works 
+
+Final test 02.01.2021 23:30
+=== test goals ===
+~ checking if my final validation implementation works perfectly
+=== test results ===
+it works perfectly

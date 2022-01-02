@@ -105,7 +105,20 @@
             <Image   Source="/assets/images/search.png" Margin="3,3,3,3"></Image>
         </Button>
         <TextBox Text="Search" x:Name="textBoxSearcher" TextWrapping="Wrap"  Margin="728,-540,292,168" Height="25" Width="90" />
-        <ComboBox x:Name="comboBoxSelectField"  Margin="728,-520,292,142" Height="25"  Width="90"/>
+        <ComboBox x:Name="comboBoxSelectField"  Margin="728,-520,292,142" Height="25"  Width="90">
+            <ComboBoxItem>id</ComboBoxItem>
+            <ComboBoxItem>first_name</ComboBoxItem>
+            <ComboBoxItem>second_name</ComboBoxItem>
+            <ComboBoxItem>last_name</ComboBoxItem>
+            <ComboBoxItem>maiden_name</ComboBoxItem>
+            <ComboBoxItem>fathers_name</ComboBoxItem>
+            <ComboBoxItem>mothers_name</ComboBoxItem>
+            <ComboBoxItem>birth_date</ComboBoxItem>
+            <ComboBoxItem>pesel</ComboBoxItem>
+            <ComboBoxItem>gender</ComboBoxItem>
+            <ComboBoxItem>current_class</ComboBoxItem>
+            <ComboBoxItem>groups</ComboBoxItem>
+        </ComboBox>
         <Button Background="#574B90" Style="{DynamicResource ButtonBasicStyle}" Foreground="White" x:Name="generateRaportBtn"  HorizontalAlignment="Left" Content="Generate raport" Height="30" Width="90" Margin="30,735,0,0" VerticalAlignment="Top" Click="GenerateRaportBtn_Click"/>
         <Expander Style="{DynamicResource ExpanderStyle1}" x:Name="editFormExpander" Header="" HorizontalAlignment="Left" Height="100" Margin="1660,-37,0,0"  VerticalAlignment="Top" Width="100" AutomationProperties.IsOffscreenBehavior="Default" Expanded="EditFormExpander_Expanded">
             <Grid Margin="-1300,80,600,-600" Width="400" Height="500" Background="#222831">
@@ -132,11 +145,11 @@
                         <TextBox   MaxLength="16" x:Name="eTextBoxMaiName"  HorizontalAlignment="Left"  Width="90"/>
                     </Grid>
                     <Grid Height="26">
-                        <Label Foreground="White" Margin="90,-5,0,0">Fathers Name</Label>
+                        <Label Foreground="White" Margin="90,-5,0,0">Father's Name</Label>
                         <TextBox   MaxLength="16" x:Name="eTextBoxFthName"  HorizontalAlignment="Left"  Width="90"/>
                     </Grid>
                     <Grid Height="26">
-                        <Label Foreground="White" Margin="90,-5,0,0">Mothers Name</Label>
+                        <Label Foreground="White" Margin="90,-5,0,0">Mother's Name</Label>
                         <TextBox  MaxLength="16"   x:Name="eTextBoxMthName"  HorizontalAlignment="Left"  Width="90"/>
                     </Grid>
                     <Grid Height="26">
@@ -287,9 +300,9 @@
                 <TextBox Grid.Row="2"  x:Name="textBoxLname" Width="120" HorizontalAlignment="Left" Grid.Column="1" Margin="0,0,0,0" />
                 <Label Foreground="White" Grid.Row="3">Maiden Name :</Label>
                 <TextBox Grid.Row="3"  x:Name="textBoxMaiName" Width="120" HorizontalAlignment="Left" Grid.Column="1" Margin="0,0,0,0" />
-                <Label Foreground="White" Grid.Row="4">Fathers Name :</Label>
+                <Label Foreground="White" Grid.Row="4">Father's Name :</Label>
                 <TextBox Grid.Row="4"   x:Name="textBoxFthName" Width="120" HorizontalAlignment="Left" Grid.Column="1" Margin="0,0,0,0" />
-                <Label Foreground="White" Grid.Row="5">Mothers Name :</Label>
+                <Label Foreground="White" Grid.Row="5">Mother's Name :</Label>
                 <TextBox Grid.Row="5"  x:Name="textBoxMthName"  Width="120" HorizontalAlignment="Left" Grid.Column="1" Margin="0,0,0,0" />
                 <Label Foreground="White" Grid.Row="6">Birth Date :</Label>
                 <DatePicker x:Name="datePickerBirthDate" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left" Width="90"/>

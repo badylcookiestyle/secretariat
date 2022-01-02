@@ -21,7 +21,8 @@ namespace secretary.views
     {
         string currentForm = "Student";
         string currentTable = "students";
-        string selectedFilePath = "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png";
+        string selectedFilePath = "";
+       
 
         List<String> imagesPaths = new List<String>();
         List<String> groups = new List<String>();
@@ -29,6 +30,7 @@ namespace secretary.views
 
         bool isBeingEdited = false;
         bool isEditing = false;
+        bool canAdd = true;
 
         int selectedRow;
 
@@ -43,12 +45,7 @@ namespace secretary.views
         public MainView()
         {
             InitializeComponent();
-          
-
             studentRadio.IsChecked = true;
-
-     
-         
             initializeGroupCombobox();
 
             reloadData();
@@ -86,7 +83,7 @@ namespace secretary.views
             }
         }
 
-      
+       
 
         private void initializeTableFieldsCombobox()
         {
@@ -143,7 +140,7 @@ namespace secretary.views
             Teacher newTeacher = new Teacher();
 
             newTeacher.firstName = textBoxFname.Text;
-            newTeacher.secondName = textBoxFname.Text;
+            newTeacher.secondName = textBoxSname.Text;
             newTeacher.lastname = textBoxLname.Text;
             newTeacher.maidenName = textBoxMaiName.Text;
             newTeacher.fathersName = textBoxFthName.Text;
@@ -160,9 +157,6 @@ namespace secretary.views
             currentTable = "teachers";
             teacherRadio.IsChecked = true;
             reloadData();
-
-
-          //  removeDataPathColumn();
         }
         private void addStudent()
         {
@@ -174,7 +168,7 @@ namespace secretary.views
             File.Copy(selectedFilePath, newPath);
 
             newStudent.firstName = textBoxFname.Text;
-            newStudent.secondName = textBoxFname.Text;
+            newStudent.secondName = textBoxSname.Text;
             newStudent.lastname = textBoxLname.Text;
             newStudent.maidenName = textBoxMaiName.Text;
             newStudent.fathersName = textBoxFthName.Text;
@@ -190,9 +184,6 @@ namespace secretary.views
             currentTable = "students";
             studentRadio.IsChecked = true;
             reloadData();
-
-
-            //removeDataPathColumn();
         }
         private void addEmployee()
         {
@@ -204,7 +195,7 @@ namespace secretary.views
             Employee newEmployee = new Employee();
 
             newEmployee.firstName = textBoxFname.Text;
-            newEmployee.secondName = textBoxFname.Text;
+            newEmployee.secondName = textBoxSname.Text;
             newEmployee.lastname = textBoxLname.Text;
             newEmployee.maidenName = textBoxMaiName.Text;
             newEmployee.fathersName = textBoxFthName.Text;
@@ -222,8 +213,6 @@ namespace secretary.views
             currentTable = "employees";
             employeeRadio.IsChecked = true;
             reloadData();
-
-        //    removeDataPathColumn();
         }
 
         void clearForm(DependencyObject obj)
@@ -242,7 +231,8 @@ namespace secretary.views
         {
             try
             {
-                if (isBeingEdited == false)
+                validate();
+                if (isBeingEdited == false && canAdd==true)
                 {
                     switch (currentForm)
                     {
@@ -257,12 +247,17 @@ namespace secretary.views
                             break;
                     }
                     clearForm(MainViewGrid);
+
+                  
+                    imgPhoto.Source = null;
+                    selectedFilePath = "";
                 }
             }
             catch (Exception)
             {
                 MessageBox.Show("The form is completed incorrectly ");
             }
+            canAdd = true;
         }
 
         private void reloadImagePaths()
@@ -292,10 +287,7 @@ namespace secretary.views
             DataGrid1.ItemsSource = gridData.DefaultView;
             initializeTableFieldsCombobox();
             removeDataPathColumn();
-       
-           
         }
-
 
         private void SearchBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -380,7 +372,6 @@ namespace secretary.views
                 {
 
                 }
-                
             }
             else
             {
@@ -451,7 +442,6 @@ namespace secretary.views
             isEditing = editFormExpander.IsExpanded == true ? true : false;
             try
             {
-
                 if (isEditing == true)
                     eLessonsListView.Items.RemoveAt(lessonsListView.Items.Count - 1);
                 else
@@ -574,7 +564,7 @@ namespace secretary.views
             Student curStudent = new Student();
 
             curStudent.firstName = eTextBoxFname.Text;
-            curStudent.secondName = eTextBoxFname.Text;
+            curStudent.secondName = eTextBoxSname.Text;
             curStudent.lastname = eTextBoxLname.Text;
             curStudent.maidenName = eTextBoxMaiName.Text;
             curStudent.fathersName = eTextBoxFthName.Text;
@@ -597,7 +587,7 @@ namespace secretary.views
             Teacher curTeacher = new Teacher();
 
             curTeacher.firstName = eTextBoxFname.Text;
-            curTeacher.secondName = eTextBoxFname.Text;
+            curTeacher.secondName = eTextBoxSname.Text;
             curTeacher.lastname = eTextBoxLname.Text;
             curTeacher.maidenName = eTextBoxMaiName.Text;
             curTeacher.fathersName = eTextBoxFthName.Text;
@@ -620,7 +610,7 @@ namespace secretary.views
             Employee curEmployee = new Employee();
 
             curEmployee.firstName = eTextBoxFname.Text;
-            curEmployee.secondName = eTextBoxFname.Text;
+            curEmployee.secondName = eTextBoxSname.Text;
             curEmployee.lastname = eTextBoxLname.Text;
             curEmployee.maidenName = eTextBoxMaiName.Text;
             curEmployee.fathersName = eTextBoxFthName.Text;
@@ -737,6 +727,59 @@ namespace secretary.views
         {
              DataGrid1.Columns.Remove(DataGrid1.Columns[9]);
         }
+
+        private void validate()
+        {
+            var text = "";
+            if (textBoxFname.Text == "")
+            {
+                text += "Incorrect name \n";
+                canAdd = false;
+            }
+            if (textBoxSname.Text == "")
+            {
+                text += "Incorrect second name \n";
+                canAdd = false;
+            }
+            if (textBoxLname.Text == "")
+            {
+                text += "Incorrect last name \n";
+                canAdd = false;
+            }
+            if (textBoxMaiName.Text == "")
+            {
+                text += "Incorrect father's name \n";
+                canAdd = false;
+            }
+            if (textBoxFthName.Text == "")
+            {
+                text += "Incorrect mother's name \n";
+                canAdd = false;
+            }
+            if (textBoxPesel.Text == "" || textBoxPesel.Text.Length<11)
+            {
+                text += "Incorrect pesel \n";
+                canAdd = false;
+            }
+            if (datePickerBirthDate.SelectedDate == null)
+            {
+                text += "Incorrect birthday date \n";
+                canAdd = false;
+            }
+            if (comboBoxGender.SelectionBoxItem.ToString() == null)
+            {
+                text += "Incorrect incorrect gender date \n"; ;
+                canAdd = false;
+            }
+            if (selectedFilePath == "")
+            {
+                text += "I think that u should upload an image \n"; 
+                canAdd = false;
+            }
+            if (canAdd == false)
+                MessageBox.Show(text);
+        }
+
         private void hideForms()
         {
             textBoxJobDescription.Visibility = Visibility.Hidden;
