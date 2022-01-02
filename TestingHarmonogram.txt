@@ -139,3 +139,10 @@ nineteenth test   31.12.2021 17:01
 - checking if validation works
 === test results ===
 - it works
+
+twentyth test 31.12.2021 18:01
+=== test goals ===
+- checking my friend's opinion about my app
+=== test results ===
+- my app is acceptable, but I should implement a guide
+- I've just implemented it and it works 

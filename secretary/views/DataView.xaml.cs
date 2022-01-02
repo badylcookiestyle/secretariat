@@ -85,6 +85,7 @@ namespace secretary.views
             OpenFileDialog openFileDialog = new OpenFileDialog();
             if (openFileDialog.ShowDialog() == true) { 
                 string[] lines = File.ReadAllLines(openFileDialog.FileName);
+ 
             foreach (string line in lines)
                 {
                     string insertType = "";
@@ -171,9 +172,10 @@ namespace secretary.views
 
                         DbHelper.insertEmployee(newEmployee);
                     }
-                    MessageBox.Show("Data have been uploaded :)");
+            
                 }
             }
+            MessageBox.Show("Data have been uploaded :)");
         }
     }
 }

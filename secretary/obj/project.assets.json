@@ -1162,11 +1162,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Badyleusz z Nazaretu\\Source\\Repos\\mmorawski520\\secretariat3\\secretary\\secretary.csproj",
+      "projectUniqueName": "C:\\Users\\Badyleusz z Nazaretu\\Source\\Repos\\mmorawski520\\secretariat77\\secretary\\secretary.csproj",
       "projectName": "secretary",
-      "projectPath": "C:\\Users\\Badyleusz z Nazaretu\\Source\\Repos\\mmorawski520\\secretariat3\\secretary\\secretary.csproj",
+      "projectPath": "C:\\Users\\Badyleusz z Nazaretu\\Source\\Repos\\mmorawski520\\secretariat77\\secretary\\secretary.csproj",
       "packagesPath": "C:\\Users\\Badyleusz z Nazaretu\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Badyleusz z Nazaretu\\Source\\Repos\\mmorawski520\\secretariat3\\secretary\\obj\\",
+      "outputPath": "C:\\Users\\Badyleusz z Nazaretu\\Source\\Repos\\mmorawski520\\secretariat77\\secretary\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Badyleusz z Nazaretu\\AppData\\Roaming\\NuGet\\NuGet.Config",

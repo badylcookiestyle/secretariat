@@ -218,7 +218,7 @@
                 </StackPanel>
             </Grid>
         </Expander>
-        <Expander x:Name="formExpander" HorizontalAlignment="Left" Height="520"  Margin="1160,30,0,0" VerticalAlignment="Top" Width="600" ExpandDirection="Left">
+        <Expander x:Name="formExpander"  HorizontalAlignment="Left" Height="520"  Margin="1160,30,0,0" VerticalAlignment="Top" Width="600" ExpandDirection="Left" Expanded="FormExpander_Expanded">
             <Grid    Margin="10"    Background="#39315e">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -351,5 +351,6 @@
                 <Button Foreground="White" Background="#574B90" Click="SubmitPersonBtn_Click"   Style="{DynamicResource ButtonBasicStyle}"  Grid.Row="12" Grid.Column="2" HorizontalAlignment="Right" Width="90" Content="Add"></Button>
             </Grid>
         </Expander>
+        <Button Foreground="White" Background="#574B90" x:Name="guideBtn"  Style="{DynamicResource ButtonBasicStyle}"   HorizontalAlignment="Left" Width="90" Height="30" Content="Guide" Margin="490,-126,0,546" Click="guideBtn_Click"></Button>
     </Grid>
 </UserControl>

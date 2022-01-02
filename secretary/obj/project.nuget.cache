@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "zcvEX/i2Op64JgBjk0oNMrQKhuAXiIV00EFaegvYkSiii03tqlKSZR+59jDatWbf3FjT/WaCTVYxCxx/kmiYAQ==",
+  "dgSpecHash": "eNCQXcKV7em7YHWcoE57jN11N//gqB95N+FBOtKqjeHU5RT7zLqJSrYLRW/QahhA2Y53yNh34nFPXKYjzqwmMw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Badyleusz z Nazaretu\\Source\\Repos\\mmorawski520\\secretariat3\\secretary\\secretary.csproj",
+  "projectFilePath": "C:\\Users\\Badyleusz z Nazaretu\\Source\\Repos\\mmorawski520\\secretariat77\\secretary\\secretary.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Badyleusz z Nazaretu\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
     "C:\\Users\\Badyleusz z Nazaretu\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

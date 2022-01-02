@@ -21,7 +21,7 @@ namespace secretary.views
     {
         string currentForm = "Student";
         string currentTable = "students";
-        string selectedFilePath;
+        string selectedFilePath = "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png";
 
         List<String> imagesPaths = new List<String>();
         List<String> groups = new List<String>();
@@ -137,9 +137,9 @@ namespace secretary.views
             string taughtSubjectsJson = Serializers.serializeLessons(lessons);
 
             var newPath = Environment.CurrentDirectory + "/images/" + textBoxPesel.Text + DateTime.Now.Ticks + Path.GetExtension(selectedFilePath);
-
-            File.Copy(selectedFilePath, newPath);
-
+          
+                File.Copy(selectedFilePath, newPath);
+            
             Teacher newTeacher = new Teacher();
 
             newTeacher.firstName = textBoxFname.Text;
@@ -161,6 +161,8 @@ namespace secretary.views
             teacherRadio.IsChecked = true;
             reloadData();
 
+
+          //  removeDataPathColumn();
         }
         private void addStudent()
         {
@@ -188,6 +190,9 @@ namespace secretary.views
             currentTable = "students";
             studentRadio.IsChecked = true;
             reloadData();
+
+
+            //removeDataPathColumn();
         }
         private void addEmployee()
         {
@@ -217,6 +222,8 @@ namespace secretary.views
             currentTable = "employees";
             employeeRadio.IsChecked = true;
             reloadData();
+
+        //    removeDataPathColumn();
         }
 
         void clearForm(DependencyObject obj)
@@ -269,7 +276,7 @@ namespace secretary.views
                 catch (Exception er) { }
             }
         }
-        private void removeDataPathColumn(DataTable gridData)
+        private void removeDataPathColumn()
         {
             reloadImagePaths();
         
@@ -284,7 +291,7 @@ namespace secretary.views
             var gridData = raportData = DbHelper.basicSelect(currentTable);
             DataGrid1.ItemsSource = gridData.DefaultView;
             initializeTableFieldsCombobox();
-            removeDataPathColumn(gridData);
+            removeDataPathColumn();
        
            
         }
@@ -402,7 +409,7 @@ namespace secretary.views
                     DataGrid1.ItemsSource = raportData.DefaultView;
                 }
             }
-            removeDataPathColumn(raportData);
+            removeDataPathColumn();
         }
 
         private void AddLessonBtn_Click(object sender, RoutedEventArgs e)
@@ -423,7 +430,7 @@ namespace secretary.views
             }
             else
             {
-                if (datepickerLesson.SelectedDate.Value.Date.ToString() != "")
+                if (datepickerLesson.SelectedDate != null)
                 {
                     lessonsListView.Items.Add(new Lesson
                     {
@@ -671,6 +678,7 @@ namespace secretary.views
             DbHelper.deleteById(currentTable, selectedRow);
             DataGrid1.ItemsSource = DbHelper.basicSelect(currentTable).DefaultView;
             editFormExpander.IsExpanded = false;
+            removeDataPathColumn();
         }
 
         private void closeEditModalBtn(object sender, RoutedEventArgs e)
@@ -697,21 +705,38 @@ namespace secretary.views
         {
             isEditing = editFormExpander.IsExpanded == true ? true : false;
 
-            if (isEditing == true)
+            if (isEditing == true && eGroups.Count>0)
             {
-                eGroupsListView.Items.RemoveAt(eGroupsListView.Items.Count - 1);
-                eGroups.RemoveAt(eGroupsListView.Items.Count - 1);
+                eGroupsListView.Items.RemoveAt(eGroups.Count-1);
+                eGroups.RemoveAt(eGroups.Count-1);
             }
             else
             {
-                if (groups.Count-1>0)
+                if (groups.Count>0)
                 {
-                    groupsListView.Items.RemoveAt(groupsListView.Items.Count - 1);
-                    groups.RemoveAt(groupsListView.Items.Count - 1);
+                    groupsListView.Items.RemoveAt(groups.Count - 1);
+                    groups.RemoveAt(groups.Count - 1);
                 }
             }
         }
 
+       
+
+        private void comboBoxSelectField_ContextMenuOpening(object sender, ContextMenuEventArgs e)
+        {
+            initializeTableFieldsCombobox();
+        }
+
+        private void UserControl_Initialized(object sender, EventArgs e)
+        {
+            DataGrid1.ItemsSource = DbHelper.basicSelect("students").DefaultView;
+            showStudentForm();  
+        }
+
+        private void DataGrid1_Loaded(object sender, RoutedEventArgs e)
+        {
+             DataGrid1.Columns.Remove(DataGrid1.Columns[9]);
+        }
         private void hideForms()
         {
             textBoxJobDescription.Visibility = Visibility.Hidden;
@@ -768,21 +793,9 @@ namespace secretary.views
             studentClassesLabel.Visibility = Visibility.Visible;
         }
 
-        private void comboBoxSelectField_ContextMenuOpening(object sender, ContextMenuEventArgs e)
+        private void guideBtn_Click(object sender, RoutedEventArgs e)
         {
-            initializeTableFieldsCombobox();
-        }
-
-        private void UserControl_Initialized(object sender, EventArgs e)
-        {
-            DataGrid1.ItemsSource = DbHelper.basicSelect("students").DefaultView;
-            showStudentForm();  
-        }
-
-        private void DataGrid1_Loaded(object sender, RoutedEventArgs e)
-        {
-             DataGrid1.Columns.Remove(DataGrid1.Columns[9]);
+            MessageBox.Show("If u want to add a person click a button in the right corner\nIf u want to edit or delete a row just double click it\nIf u want to create raport click a raport button\n\n btw, remember about uploading an image during adding person");
         }
     }
-
 }
