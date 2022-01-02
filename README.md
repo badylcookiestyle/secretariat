@@ -1,11 +1,7 @@
 # secretariat
 ## So this is secretariat app, it even works
 
-##  shortcuts
-- [App concepts](#appconcepts)
-- [Testing harmonogram](testingHarmonogram)
-- [Bug fixes](bugFixes)
-
+ 
 ## App concepts
 <h3>first app concept</h3>
 <img src="appConcepts/conceptArt.png"/>
