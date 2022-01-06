@@ -16,7 +16,7 @@ namespace Secretary
         public MainWindow()
         {
             InitializeComponent();
-            //      DataContext = new MainViewModel();
+            DataContext = new DataViewModel();
 
 
         }
